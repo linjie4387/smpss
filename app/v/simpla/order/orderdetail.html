@@ -1,0 +1,132 @@
+{/include file="simpla/common/header.html"/}
+{/include file="simpla/common/left.html"/}
+<style>.promote{display:none;}</style>
+<div id="main-content">
+  <h2>欢迎您 {/$_adminname/}</h2>
+  <p id="page-intro">您可以在这里查询正式订单详情。</p>
+  <div class="clear"></div>
+  <div class="content-box">
+    <div class="content-box-header">
+        <a href="javascript:history.go(-1);" class="btn-back" title="后退"><img src="{/$root_dir/}/assets/simpla/images/icons/back.png" /></a>
+        <h3>正式订单_{/$order.order_id/}&nbsp;详情</h3>
+      <div class="clear"></div>
+    </div>
+    <div class="content-box-content">
+      <div class="tab-content default-tab" id="tab1">
+        <div class="content-box column-left">
+            <div class="content-box-header">
+                <h3 style="cursor: s-resize;">基本信息</h3>
+            </div>
+            <div class="content-box-content" style="display: block;">
+                <div class="tab-content default-tab" style="display: block;">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>正式订单号</td>
+                                <td>{/if $orderList[i].is_valid neq 1 /}<span style="text-decoration:line-through;">{//if/}{/$order.order_id/}{/if $orderList[i].is_valid neq 1 /}</span>{//if/}</td>
+                            </tr>
+                            <tr>
+                                <td>是否是废单</td>
+                                {/if $order.is_valid eq 1/}
+                                <td>否</td>
+                                {/else /}
+                                <td>是</td>
+                                {//if/}
+                            </tr>
+                            <tr>
+                                <td>医院</td>
+                                <td>{/$order.hospital_name/}</td>
+                            </tr>
+                            <tr>
+                                <td>科室</td>
+                                <td>{/$order.office_name/}</td>
+                            </tr>
+                            <tr>
+                                <td>提交人</td>
+                                <td>{/$order.name/}({/$order.mobile/})</td>
+                            </tr>
+                            <tr>
+                                <td>接单公司</td>
+                                <td>{/$order.order_company_name/}</td>
+                            </tr>
+                            <tr>
+                                <td>发货单号</td>
+                                <td>{/$order.delivery_no/}</td>
+                            </tr>
+                            <tr>
+                                <td>发票单号</td>
+                                <td>{/$order.invoice_no/}</td>
+                            </tr>
+                            <tr>
+                                <td>下单凭证</td>
+                                <td><a href="{/get_url rule='/order/tradeprint' data='oid='|cat:$order.order_id/}" title="下单凭证">
+                                    下单凭证照片
+                                </a></td>
+                            </tr>
+                            <tr>
+                                <td>出库单凭证</td>
+                                <td><a href="{/get_url rule='/order/deliveryprint' data='oid='|cat:$order.order_id/}" title="出库单凭证">
+                                    出库单凭证照片
+                                </a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-box column-right">
+            <div class="content-box-header">
+                <h3 style="cursor: s-resize;">流程信息</h3>
+            </div>
+            <div class="content-box-content" style="display: block;">
+                <div class="tab-content default-tab" style="display: block;">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>状态</td>
+                                <td>{/$order.status_name/}</td>
+                            </tr>
+                            <tr>
+                                <td>创建时间</td>
+                                <td>{/$order.create_time/}</td>
+                            </tr>
+                            <tr>
+                                <td>确认时间</td>
+                                <td>{/$order.verify_time/}</td>
+                            </tr>
+                            <tr>
+                                <td>确认人</td>
+                                <td>{/$order.verify_admin_name/}</td>
+                            </tr>
+                            <tr>
+                                <td>出库时间</td>
+                                <td>{/$order.delivery_time/}</td>
+                            </tr>
+                            <tr>
+                                <td>出库人</td>
+                                <td>{/$order.delivery_admin_name/}</td>
+                            </tr>
+                            {/if $order.is_valid eq 0/}
+                            <tr>
+                                <td>废单时间</td>
+                                <td>{/$order.delete_time/}</td>
+                            </tr>
+                            <tr>
+                                <td>废单人</td>
+                                <td>{/$order.delete_admin_name/}</td>
+                            </tr>
+                            {//if/}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <!-- End #tab1 -->
+    </div>
+    <!-- End .content-box-content -->
+  </div>
+  <!-- End .content-box --> 
+  {/include file="simpla/common/copy.html"/} </div>
+{/include file="simpla/common/footer.html"/}

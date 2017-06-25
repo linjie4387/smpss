@@ -1,0 +1,70 @@
+{/include file="simpla/common/header.html"/}
+{/include file="simpla/common/left.html"/}
+<div id="main-content">
+    <h2>欢迎您 {/$_adminname/}</h2>
+    <p id="page-intro">查看和管理所有安全库存预测单。</p>
+    <div class="clear"></div>
+    <div class="content-box">
+      <div class="content-box-header">
+        <h3>安全库存预测查询</h3>
+        <ul class="content-box-tabs">
+            <li><a href="#tab1" class="default-tab">历史预测</a></li>
+            <li><a href="{/get_url rule='/hospital/forecast' data='oid='|cat:$office_id/}" >添加安全库存预测</a></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+            <form action="{/get_url rule='/hospital/officeindex'/}" method="post" id="js-form">
+        <div class="form">
+            <fieldset>
+                    <p>创建日期： <span>
+                    <input type="text" value="{/$stime/}" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="text-input min-input" name="stime" id="stime" />
+                    -<input type="text" value="{/$etime/}" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="text-input min-input" name="etime" id="etime" />
+                </span><small>(格式：2012-01-01)</small>
+                    <input type="submit" name="" id="btnQry" class="button" value="查询" />
+                    <input type="button" onclick="add_forecast();" id="btnAdd" class="button" value="添加安全库存预测" /> 
+            </fieldset>
+        </div>
+        <hr />
+          <table>
+            <thead>
+              <tr>
+                <th>单据编号</th>
+                <th>创建管理员</th>
+                <th>创建时间</th>
+                <th>管理</th>
+              </tr>
+            </thead>
+            <tbody>
+                {/section name=i loop=$forecastList/}
+                <tr>
+                  <td>{/$forecastList[i].bill_no/}</td>
+                  <td>{/$forecastList[i].admin_name/}</td>
+                  <td>{/$forecastList[i].create_time/}</td>
+                  <td>
+                  	<a href="{/get_url rule='/hospital/forecastdetail' data='sid='|cat:$forecastList[i].id/}" title="查看详情">
+                  		<i class="icon-external-link">查看详情</i>
+                  	</a>
+                  </td>
+                </tr>
+                {//section/}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="4">{/$pagebar/}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      </form>
+    </div>
+    <script>
+		function add_forecast(){
+			window.location.href = "{/get_url rule='/hospital/forecast' data='oid='|cat:$office_id/}";
+		}
+	</script>
+    {/include file="simpla/common/copy.html"/}
+  </div>
+{/include file="simpla/common/footer.html"/}

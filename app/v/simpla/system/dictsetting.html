@@ -1,0 +1,66 @@
+{/include file="simpla/common/header.html"/}
+{/include file="simpla/common/left.html"/}
+<div id="main-content">
+  <h2>欢迎您 {/$_adminname/}</h2>
+  <p id="page-intro">字典数据配置, 已经增加的值不可以删除!</p>
+  <div class="clear"></div>
+  <div class="content-box">
+    <div class="content-box-header">
+      <h3>字典配置</h3>
+      <ul class="content-box-tabs">
+        <li><a href="{/get_url rule="/system/log" data="key_id=1005"/}" {/if $key_id eq 1005/}class="default-tab"{//if/}>接单公司配置</a></li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+    <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+            <div class="form">
+                <form action="{/get_url rule='/system/dictsetting'/}" method="post" id="js-form">
+                    <fieldset class="clearfix">
+                        <input type="hidden" value="{/$key_id/}" name="key_id" />
+                        <ul>
+                            <table id="myTable">
+                                <thead>
+                                    <tr>
+                                        <th>值</th>
+                                        <th>名称</th>
+                                        <th>描述</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {/section name=i loop=$datalist/}
+                                    <tr>
+                                        <td><input type="text" value="{/$datalist[i].value/}" class="text-input small-input" name="companylist[value][]" readonly="true" /></td>
+                                        <td><input type="text" value="{/$datalist[i].name/}" class="text-input medium-input" name="companylist[name][]" /></td>
+                                        <td><input type="text" value="{/$datalist[i].key_desc/}" class="text-input medium-input" name="companylist[key_desc][]" /></td>
+                                    </tr>
+                                    {//section/}
+                                </tbody>
+                            </table>
+                        </ul>
+                        <dt>
+                            <a href="#" name="addRow">新增接单公司</a><br/><br/>
+                            <input type="submit" name="" id="button" class="button" value="保存" />
+                        </dt>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <!-- End #tab1 --> 
+    </div>
+    <!-- End .content-box-content --> 
+  </div>
+  <script type="text/javascript">
+      <!-- jQuery Code will go underneath this -->
+      $(document).ready(function () {
+                        // Code between here will only run when the document is ready
+                        $("a[name=addRow]").click(function() {
+                                                  // Code between here will only run
+                                                  //when the a link is clicked and has a name of addRow
+                                                  $("table#myTable tr:last").after("<tr><td><input type='text' value='' class='text-input small-input' name=\"companylist[value][]\" /></td><td><input type='text' value='' class='text-input medium-input' name=\"companylist[name][]\" /></td><td><input type='text' value='' class='text-input medium-input' name=\"companylist[key_desc][]\" /></td></tr>");
+                                                  return false;
+                                                  });
+                        });
+  </script>
+  {/include file="simpla/common/copy.html"/} </div>
+{/include file="simpla/common/footer.html"/}

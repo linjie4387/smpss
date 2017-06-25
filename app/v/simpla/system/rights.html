@@ -1,0 +1,59 @@
+{/include file="simpla/common/header.html"/}
+{/include file="simpla/common/left.html"/}
+<div id="main-content">
+  <h2>欢迎您 {/$_adminname/}</h2>
+  <p id="page-intro">查看和管理所有管理员账号权限。</p>
+  <div class="clear"></div>
+  <div class="content-box">
+    <div class="content-box-header">
+      <h3>权限管理</h3>
+      <div class="clear"></div>
+    </div>
+    <div class="content-box-content">
+      <div class="tab-content default-tab" id="tab1">
+        <table>
+          <thead>
+            <tr>
+              <th>账号名称</th>
+              <th>管理</th>
+            </tr>
+          </thead>
+          <tbody>
+          {/section name=i loop=$group/}
+          <tr>
+            <td>{/$group[i].group_name/}</td>
+            <td>
+            	<a style="padding:10px;" href="{/get_url rule='/system/rights' data='gid='|cat:$group[i].gid/}" title="编辑权限">
+            		<img src="{/$root_dir/}/assets/simpla/images/icons/edit.png" alt="编辑权限" />
+            	</a>
+            	<a style="margin:10px;" onclick="javascript:delGroup('{/$group[i].group_name/}',{/$group[i].gid/})" title="删除用户组">
+                  	<img src="{/$root_dir/}/assets/simpla/images/icons/delete.png" alt="删除用户组" />
+                </a>
+            </td>
+          </tr>
+          {//section/}
+            </tbody>
+        </table>
+      </div>
+    </div>
+     <script type="text/javascript">
+    function delGroup(uname, id){
+	    if(!confirm("确定要删除用户组["+uname+"]吗？")){
+			return;
+		}
+		$.post("{/get_url rule='/system/delgroup'/}",{
+			gid : id
+		},function(res){
+			console.log(res);
+			if(res.code == 0){
+				alert("操作成功！");
+				window.location.reload();
+			}else{
+				jQuery.facebox(res.msg);
+			}
+		},'json');
+    }
+    </script>
+  </div>
+  {/include file="simpla/common/copy.html"/} </div>
+{/include file="simpla/common/footer.html"/}

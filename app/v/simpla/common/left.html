@@ -1,0 +1,194 @@
+<style>
+    #profile-links .container .column-left a { position:relative;}
+    #profile-links .container .column-left a i span{ position: absolute;top: -20px;right: -4px;font-size: 14px;background: #ff6c60;border-radius: 50%;width: 20px;height: 20px;text-align: center;line-height: 20px;color: #FFFFFF;}
+    #profile-links .container .column-left:first-child a i span { background: #ff6c60;}
+    #profile-links .container .column-left:nth-child(2) a i span { background: #FCB322;}
+    #profile-links .container .column-left:nth-child(3) a i span { background: #57c8f2;}
+    #profile-links .container .column-left:last-child a i span { background: #a9d86e;}
+</style>
+<div id="sidebar">
+  <div id="sidebar-wrapper">
+    <h1 id="sidebar-title"><a href="{/$root_dir/}/">{/$head_title/}</a></h1>
+    <a href="{/$root_dir/}/"><img id="logo" style="max-width: 220px;" src="{/$logo_dir/}" alt="{/$head_title/}" /></a> 
+    <!-- Sidebar Profile links -->
+    <div id="profile-links"> 您好, <a href="#" title="编辑资料">{/$_adminname/}</a><br />
+    <br/>
+    <div class="container" style="width:100%; margin:auto;">
+        <div style="width:25%" class="column-left">
+            {/if $menu.order.tradeindex/}
+            <a href="{/get_url rule='/order/tradeindex' data='status='|cat:1/}"><i id="order_todo" class="icon-list-ol icon-2x">&nbsp;<span id="t_count">0</span></i></a>
+            {/else /}
+            <a href="#"><i id="order_todo" class="icon-list-ol icon-2x">&nbsp;<span id="t_count">0</span></i></a>
+            {//if/}
+        </div>
+        <div style="width:25%" class="column-left">
+	    {/if $menu.order.index/}
+	    	<a href="{/get_url rule='/order/index' data='status='|cat:1/}"><i id="order_todo" class="icon-list-ul icon-2x">&nbsp;<span id="o_count">0</span></i></a>
+	    {/else /}
+	        <a href="#"><i id="order_todo" class="icon-list-ul icon-2x">&nbsp;<span id="o_count">0</span></i></a>
+	    {//if/}
+	    </div>
+	    <div style="width:25%" class="column-left">
+	    	{/if $menu.user.engineerindex/}
+	    		<a href="{/get_url rule='/user/engineerindex' data='status='|cat:1/}"><i id="order_todo" class=" icon-user icon-2x">&nbsp;<span id="e_count">0</span></i></a>
+			{/else/}
+	    		<a href="#"><i id="order_todo" class=" icon-user icon-2x">&nbsp;<span id="e_count">0</span></i></a>
+	    	{//if/}
+	    </div>
+	    <div style="width:25%" class="column-left">
+	    {/if $menu.user.hospitalindex/}
+	    	<a href="{/get_url rule='/user/hospitalindex' data='status='|cat:1/}"><i id="order_todo" class=" icon-user-md icon-2x ">&nbsp;<span id="h_count">0</span></i></a>
+	    {/else/}	
+	    	<a href="#"><i id="order_todo" class=" icon-user-md icon-2x ">&nbsp;<span id="h_count">0</span></i></a>
+	    {//if/}
+	    </div>
+    </div>
+    <br/>
+      <br />
+      <a href="{/get_url rule="/system/index"/}" title="管理首页">管理首页</a> | <a href="{/get_url rule="/main/logout"/}" title="退出系统">退出系统</a> </div>
+    <ul id="main-nav">
+    {/if $menu.district/}
+    <li> <a href="javascript:;" class="nav-top-item {/if $inpath[1] eq "district"/}current{//if/}">区县管理</a>
+        <ul>
+            {/foreach from=$menu.district item=items key=k/}
+            <li><a href="{/get_url rule='/district/'/}{/$k/}" class="{/if $inpath[2] eq $k/}current{//if/}">{/$items/}</a></li>
+            {//foreach/}
+        </ul>
+    </li>
+    {//if/}
+    {/if $menu.hospital/}
+    <li> <a href="javascript:;" class="nav-top-item {/if $inpath[1] eq "hospital"/}current{//if/}">医院管理</a>
+        <ul>
+            {/foreach from=$menu.hospital item=items key=k/}
+            <li><a href="{/get_url rule='/hospital/'/}{/$k/}" class="{/if $inpath[2] eq $k/}current{//if/}">{/$items/}</a></li>
+            {//foreach/}
+        </ul>
+    </li>
+    {//if/}
+    {/if $menu.supplier/}
+    <li> <a href="javascript:;" class="nav-top-item {/if $inpath[1] eq "supplier"/}current{//if/}">供应商管理</a>
+        <ul>
+            {/foreach from=$menu.supplier item=items key=k/}
+            <li><a href="{/get_url rule='/supplier/'/}{/$k/}" class="{/if $inpath[2] eq $k/}current{//if/}">{/$items/}</a></li>
+            {//foreach/}
+        </ul>
+    </li>
+    {//if/}
+    {/if $menu.goods/}
+    <li> <a href="javascript:;" class="nav-top-item {/if $inpath[1] eq "goods"/}current{//if/}">商品管理</a>
+        <ul>
+            {/foreach from=$menu.goods item=items key=k/}
+            <li><a href="{/get_url rule='/goods/'/}{/$k/}" class="{/if $inpath[2] eq $k/}current{//if/}">{/$items/}</a></li>
+            {//foreach/}
+        </ul>
+    </li>
+    {//if/}
+    {/if $menu.order/}
+    <li> <a href="javascript:;" class="nav-top-item {/if $inpath[1] eq "order"/}current{//if/}">医院订单管理</a>
+        <ul>
+            {/foreach from=$menu.order item=items key=k/}
+            <li><a href="{/get_url rule='/order/'/}{/$k/}" class="{/if $inpath[2] eq $k/}current{//if/}">{/$items/}</a></li>
+            {//foreach/}
+        </ul>
+    </li>
+    {//if/}
+    {/if $menu.delivery/}
+    <li> <a href="javascript:;" class="nav-top-item {/if $inpath[1] eq "delivery"/}current{//if/}">配送管理</a>
+        <ul>
+            {/foreach from=$menu.delivery item=items key=k/}
+            <li><a href="{/get_url rule='/delivery/'/}{/$k/}" class="{/if $inpath[2] eq $k/}current{//if/}">{/$items/}</a></li>
+            {//foreach/}
+        </ul>
+    </li>
+    {//if/}
+    {/if $menu.device/}
+    <li> <a href="javascript:;" class="nav-top-item {/if $inpath[1] eq "device"/}current{//if/}">仪器管理</a>
+        <ul>
+            {/foreach from=$menu.device item=items key=k/}
+            <li><a href="{/get_url rule='/device/'/}{/$k/}" class="{/if $inpath[2] eq $k/}current{//if/}">{/$items/}</a></li>
+            {//foreach/}
+        </ul>
+    </li>
+    {//if/}
+    {/if $menu.reagent/}
+    <li> <a href="javascript:;" class="nav-top-item {/if $inpath[1] eq "reagent"/}current{//if/}">试剂管理</a>
+        <ul>
+            {/foreach from=$menu.reagent item=items key=k/}
+            <li><a href="{/get_url rule='/reagent/'/}{/$k/}" class="{/if $inpath[2] eq $k/}current{//if/}">{/$items/}</a></li>
+            {//foreach/}
+        </ul>
+    </li>
+    {//if/}
+    {/if $menu.user/}
+    <li> <a href="javascript:;" class="nav-top-item {/if $inpath[1] eq "user"/}current{//if/}">微信用户管理</a>
+        <ul>
+            {/foreach from=$menu.user item=items key=k/}
+            <li><a href="{/get_url rule='/user/'/}{/$k/}" class="{/if $inpath[2] eq $k/}current{//if/}">{/$items/}</a></li>
+            {//foreach/}
+        </ul>
+    </li>
+    {//if/}
+    
+    
+	{/if $menu.report/}
+      <li> <a href="javascript:;" class="nav-top-item {/if $inpath[1] eq "account"/}current{//if/}">数据报表</a>
+        <ul>
+            {/foreach from=$menu.report item=items key=k/}
+            <li><a href="{/get_url rule='/report/'/}{/$k/}" class="{/if $inpath[2] eq $k/}current{//if/}">{/$items/}</a></li>
+            {//foreach/}
+        </ul>
+      </li>
+	{//if/}
+	
+	{/if $menu.account/}
+      <li> <a href="javascript:;" class="nav-top-item {/if $inpath[1] eq "account"/}current{//if/}">账号管理</a>
+        <ul>
+            {/foreach from=$menu.account item=items key=k/}
+            <li><a href="{/get_url rule='/account/'/}{/$k/}" class="{/if $inpath[2] eq $k/}current{//if/}">{/$items/}</a></li>
+            {//foreach/}
+        </ul>
+      </li>
+	{//if/}
+	
+	{/if $menu.system/}
+      <li> <a href="javascript:;" class="nav-top-item {/if $inpath[1] eq "system"/}current{//if/}">系统</a>
+        <ul>
+            {/foreach from=$menu.system item=items key=k/}
+            <li><a href="{/get_url rule='/system/'/}{/$k/}" class="{/if $inpath[2] eq $k/}current{//if/}">{/$items/}</a></li>
+            {//foreach/}
+        </ul>
+      </li>
+	{//if/}
+    </ul>
+  </div>
+</div>
+<script>
+$(function(){
+	refreshCounter();
+	setTimeout('refreshCounter()',6000);
+});
+
+function refreshCounter(){
+	$.post("{/get_url rule='/system/reminder'/}",{},
+	function(res){
+		if(res.code == 0){
+			$("#t_count").html(res.data.t_count);
+            $("#o_count").html(res.data.o_count);
+            $("#e_count").html(res.data.e_count);
+			$("#h_count").html(res.data.h_count);
+			if(res.data.t_count>0){
+				$("#t_count").addClass("red");
+			}else {
+				$("#t_count").removeClass("red");
+			}
+            if(res.data.o_count>0){
+                $("#o_count").addClass("red");
+            }else {
+                $("#o_count").removeClass("red");
+            }
+           }else{
+			//jQuery.facebox(res.msg);
+		}
+	},'json');
+}
+</script>
