@@ -1,0 +1,97 @@
+{/include file="simpla/common/header.html"/}
+{/include file="simpla/common/left.html"/}
+<div id="main-content">
+    <h2>欢迎您 {/$_adminname/}</h2>
+    <p id="page-intro">待指派任务 > 选择车辆</p>
+    <div class="clear"></div>
+    <div class="content-box">
+      <div class="content-box-header">
+        <h3>选择车辆</h3>
+        <div class="clear"></div>
+      </div>
+      <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">        
+          <form action="{/get_url rule='/delivery/adddeliverystep3'/}" method="post" id="js-form">
+          <div class="form">
+            <fieldset>
+                <p>关键字：<input type="text" value="{/$key/}" class="text-input small-input" id="key" name="key" />
+                <span>（车牌号，型号）<span>
+                    </span><input type="button" name="" id="button" class="button" value="查询" onclick="getCarList(1)" /></span>
+            </fieldset>
+        </div>
+          <hr />
+          <table>
+            <thead>
+              <tr>
+              	<th>选择</th>
+                <th>车牌号</th>
+                <th>准驾车型</th>
+                <th>型号</th>
+                <th>牌照类型</th>
+                <th>容量</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td colspan="6" id="car_list_bar">{/$pagebar/}</td>
+              </tr>
+            </tfoot>
+            <tbody id="car_list">
+                {/section name=i loop=$carList/}
+                <tr>
+                  <td><input class="row-radio" type="radio" data-mold="{/$carList[i].moldKey/}" name="car_id" value="{/$carList[i].car_id/}"></td>
+                  <td>{/$carList[i].car_license/}</td>
+                  <td>{/$carList[i].mold/}</td>
+                  <td>{/$carList[i].model/}</td>
+                  <td>{/$carList[i].license_type_name/}</td>
+                  <td>{/$carList[i].volume/}</td>
+                </tr>
+                {//section/}
+            </tbody>
+          </table>   
+          <div style="padding:10px 0px;">
+            <input type="button" onclick="javascript:history.go(-1);" name="" id="button" class="button" value="上一步" />&nbsp;         
+            <input type="button" onclick="donext();" name="" id="button" class="button" value="下一步" />
+           </div>       
+          <input type="hidden" name="qoids" id="qoids" value="{/$qoids/}" />
+          <input type="hidden" name="mold" id="mold" value="{/$mold/}" />
+          <input type="hidden" name="qoids_for_goods" id="qoids_for_goods" value="{/$qoids_for_goods/}" />
+          <input type="hidden" name="quantity" id="quantity" value="{/$quantity/}" />
+          </form>
+        </div>
+      </div>
+    </div>
+    <script language="JavaScript">
+		function donext(){
+			if($("input:radio[class='row-radio'][checked]").length < 1 ){
+				alert('请选择数据');
+				return;
+			}
+			$('#mold').val($("input:radio[class='row-radio'][checked]").data('mold'));
+			$("#js-form").submit();
+		}	
+		
+		function getCarList(curpage){			
+			getListByAjax({
+				main : "getCarList",
+				url : '{/get_url rule="/delivery/adddeliverystep2"/}',
+				page : curpage,
+				keyid : "key",
+				callback : "getListCallback",
+				listbar : $("#car_list"),
+				pagebar : $("#car_list_bar"),
+				colcount : 5
+			});		
+		}		
+		function getListCallback(row){
+			var htm = '<td><input class="row-radio" type="radio" name="car_id" value="'+row.car_id+'"></td>'+
+					  '<td>'+row.car_license+'</td>'+
+					  '<td>'+row.model+'</td>'+
+					  '<td>'+row.license_type_name+'</td>'+
+					  '<td>'+row.volume+'</td>';
+			return htm;
+		}		
+    </script>
+    {/include file="simpla/common/copy.html"/}
+  </div>
+{/include file="simpla/common/footer.html"/}

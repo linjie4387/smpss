@@ -1,0 +1,42 @@
+{/include file="simpla/common/header.html"/}
+{/include file="simpla/common/left.html"/}
+<style>.promote{display:none;}</style>
+<div id="main-content">
+  <h2>欢迎您 {/$_adminname/}</h2>
+  <p id="page-intro">1.你可以在这里添加新的供应商或者编辑已有的供应商。2.带 <span class="red">*</span> 的项目必填</p>
+  <div class="clear"></div>
+  <div class="content-box">
+    <div class="content-box-header">
+      <h3>添加供应商</h3>
+      <ul class="content-box-tabs">
+        <li><a href="{/get_url rule="/supplier/index"/}">供应商查询</a></li>
+        <li><a href="#tab1" class="default-tab">添加供应商</a></li>
+        <li><a href="{/get_url rule="/supplier/modelindex"/}">型号查询</a></li>
+        <li><a href="{/get_url rule="/supplier/addmodel"/}">添加型号</a></li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+    <div class="content-box-content">
+      <div class="tab-content default-tab" id="tab1">
+        <div class="form">
+          <form action="{/get_url rule='/supplier/addsupplier'/}" method="post" id="js-form">
+            <fieldset class="clearfix">
+              <input type="hidden" value="{/$supplier.supplier_id/}" name="supplier_id" />
+              <p>
+                <label><font class="red"> * </font>供应商编码(唯一)：</label>
+                <input type="text" value="{/$supplier.code/}" class="text-input small-input" name="code" id="code" />
+                <span></span> </p>
+              <dt>
+                <input type="submit" name="" id="button" class="button" value="{/if $supplier.supplier_id/}编辑{/else/}添加{//if/}" />
+              </dt>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <!-- End #tab1 --> 
+    </div>
+    <!-- End .content-box-content --> 
+  </div>
+  <!-- End .content-box --> 
+  {/include file="simpla/common/copy.html"/} </div>
+{/include file="simpla/common/footer.html"/}

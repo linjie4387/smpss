@@ -1,0 +1,99 @@
+{/include file="simpla/common/header.html"/} {/include
+file="simpla/common/left.html"/}
+<style>
+
+</style>
+<div id="main-content">
+	<h2>欢迎您 {/$_adminname/}</h2>
+	<p id="page-intro">1.你可以在这里为科室分配商品。</p>
+	<div class="clear"></div>
+	<div class="content-box">
+		<div class="content-box-header">
+			<h3>添加科室商品</h3>
+			<ul class="content-box-tabs">
+				<li><a href="{/get_url rule='/hospital/setofficegoods-hid'/}-{/$office.hospital_id/}-oid-{/$office.office_id/}">科室商品列表</a></li>
+	            <li><a href="#" class="default-tab">添加科室商品</a></li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+		<div class="content-box-content">
+			<div class="tab-content default-tab" id="tab1">
+				<div class="form">
+					<form action="{/get_url rule='/hospital/setofficegoods'/}" method="post" id="qry-form">
+						<fieldset class="clearfix">
+							<input type="hidden" value="{/$office.office_id/}" name="office_id" /> 
+							<input type="hidden" value="{/$order_id/}" name="order_id" />
+							<p>厂商：
+								<input type="text" class="small-input" id="manu" name="manu" value="{/$manu/}"/>
+								&nbsp;&nbsp;适用机型:
+								<input type="text" class="small-input" id="machine" name="machine" value="{/$machine/}"/> 
+							    &nbsp;&nbsp;商品名称：
+								<input type="text" class="small-input" id="name" name="name" value="{/$name/}"/> 
+								<input type="submit" class="button" formaction="{/get_url rule='/hospital/addofficegoods' data='oid='|cat:$office.office_id|cat:'&orderid='|cat:$order_id/}" value="查询" />
+							</p>
+						</fieldset>
+							<input type="hidden" value="{/$office.office_id/}" name="office_id" /> 
+							<input type="hidden" value="{/$order_id/}" name="order_id" />
+							<table>
+								<thead>
+									<tr>
+										<th><input type="checkbox" name="comfig_all" id="check_all"></th>
+										<th>商品名称</th>
+										<th>商品编号</th>
+										<th>单位</th>
+										<th>规格</th>
+										<th>厂商全名</th>
+										<th>适用机型</th>
+										<th>项目品类</th>
+									</tr>
+								</thead>
+								<hr />
+								<tbody>
+									{/section name=i loop=$goodsList/}
+									<tr>
+									<td><input class="row-check" type="checkbox" name="officegoods[]" value="{/$goodsList[i].goods_id/}"></td>
+										<td>{/$goodsList[i].name/}</td>
+										<td>{/$goodsList[i].goods_no/}</td>
+										<td>{/$goodsList[i].unit/}</td>
+										<td>{/$goodsList[i].specification/}</td>
+										<td>{/$goodsList[i].manu/}</td>
+										<td>{/$goodsList[i].machine/}</td>
+										<td>{/$goodsList[i].category/}</td>
+									</tr>
+									{//section/}
+								</tbody>
+								<tfoot>
+					              <tr>
+					                <td colspan="5">{/$pagebar/}</td>
+					              </tr>
+					            </tfoot>
+							</table>
+						<input type="submit" class="button" onclick="addOfficeGoods();" value="确认添加" />
+					</form>
+				</div>
+			</div>
+			<!-- End #tab1 -->
+		</div>
+		<!-- End .content-box-content -->
+	</div>
+	<script>
+		//全选
+		$(function(){
+			$("#check_all").change(function(){
+				$('.row-check').prop("checked",this.checked); 
+			});
+		});
+		
+		//确认添加
+		function addOfficeGoods(){
+			if($("input:checkbox[class='row-check'][checked]").length<=0){
+				jQuery.facebox("请选择需要添加的科室商品！");
+				return;
+			}
+			return true;
+		}
+	</script>
+	<!-- End .content-box -->
+	{/include file="simpla/common/copy.html"/}
+</div>
+{/include file="simpla/common/footer.html"/}

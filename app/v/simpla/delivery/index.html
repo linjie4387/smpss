@@ -1,0 +1,191 @@
+<style type="text/css">
+
+#main-content table tr{}
+#main-content table td{}
+
+.div_td {
+	font-size: 12px;
+	background-color: #F7F7F7;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #666;
+}
+
+.sub_div_td {
+	font-size: 12px;
+	color: #333;
+	background-color: #FFF;
+}
+.sub_div_th {
+	font-size: 12px;
+	color: #666;
+	background-color: #F7F7F7;
+	font-weight: bold;
+}
+
+</style>
+{/include file="simpla/common/header_new.html"/}
+{/include file="simpla/common/left.html"/}
+<script src="/assets/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/mycommon.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="/assets/css/mycommon.css" type="text/css" />
+<div id="main-content">
+    <h2>欢迎您 {/$_adminname/}</h2>
+    <p id="page-intro">查看和管理所有送货信息。</p>
+    <div class="clear"></div>
+    <div class="content-box">
+      <div class="content-box-header">
+        <h3>已指派任务</h3>
+        <ul class="content-box-tabs">
+            <li><a href="#tab1" class="default-tab">已指派任务</a></li>
+            <li><a href="{/get_url rule="/delivery/adddelivery"/}">待指派任务</a></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+      <form action="{/get_url rule='/delivery/index'/}" method="post" id="js-form">
+        <div class="form">
+            <fieldset>
+                <p>关键字：<input type="text" value="{/$key/}" class="text-input small-input" name="key" />
+                <span>（车牌号，订单号，司机姓名）&nbsp;发货状态： <span>
+                    <select id="one" name="status">
+                        <option value="0">-----选择状态-----</option>
+                        {/section name=i loop=$deliverystatusList/}
+                        <option value="{/$deliverystatusList[i].value/}" {/if $deliverystatusList[i].value eq $status/}selected="selected"{//if/}>{/$deliverystatusList[i].pre/}{/$deliverystatusList[i].name/}</option>
+                        {//section/}
+                    </select></span>&nbsp;&nbsp;<input type="submit" name="" id="btnQry" class="button" value="查询" /></span>
+                    &nbsp;<span><input type="button" class="button" onclick="gotoadd();" value="待指派任务" /></span>
+            </fieldset>
+        </div>
+        <hr />
+        <table id="9999">
+          <thead>
+            <tr>
+              <th width="90" colspan="2">送货单号</th>
+              <th>车牌号</th>
+              <th>司机/电话</th>
+              <th>大包装数量</th>
+              <th>状态</th>
+              <th>创建时间</th>
+              <th>发车时间</th>
+              <th>管理</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <td colspan="8">{/$pagebar/}</td>
+            </tr>
+          </tfoot>
+          <tbody>
+              {/section name=i loop=$deliveryList/}
+              <tr childId="{/$deliveryList[i].delivery_id/}" id="{/$deliveryList[i].delivery_id/}" parentId="-1" status="close" >
+                <td bgcolor="#F3F3F3" style="width:25px; margin-right:-5px; ">
+               	  <img src="/assets/images/f_close.gif" style="width:20px;height:16px;cursor:hand;padding-top:5px; " onClick="viewmytab('9999',this,'{/$deliveryList[i].delivery_id/}')"/>
+                </td>
+                <td align="left" bgcolor="#F3F3F3"  style="padding-left:0px ; margin-left:-5px;">
+                  <span  class="btn btn-danger btn-xs">
+                  {/$deliveryList[i].delivery_id/}
+                  </span>
+                </td>
+                <td bgcolor="#F3F3F3">{/$deliveryList[i].car_license/}</td>
+                <td bgcolor="#F3F3F3">{/$deliveryList[i].driver_name/}<br />
+                {/$deliveryList[i].driver_mobile/}</td>
+                <td bgcolor="#F3F3F3">{/$deliveryList[i].20l_quantity/}</td>
+                <td bgcolor="#F3F3F3">{/$deliveryList[i].status_name/}<br> 
+                备注:<span style="color: #008000;">{/$deliveryList[i].remark/}</span> </td>
+                <td bgcolor="#F3F3F3">{/$deliveryList[i].create_time/}</td>
+                <td bgcolor="#F3F3F3">{/$deliveryList[i].delivery_time/}</td>
+                <td bgcolor="#F3F3F3" style="width:150px;">
+                    <a style="margin:10px;" href="{/get_url rule='/delivery/deliverygoodslist' data='did='|cat:$deliveryList[i].delivery_id/}" title="物品清单">
+                        <img src="{/$root_dir/}/assets/simpla/images/icons/list.png" alt="物品清单" />
+                    </a>
+                  <a style="margin:10px;" href="{/get_url rule='/delivery/deliverymanlist' data='did='|cat:$deliveryList[i].delivery_id/}" title="送货员">
+               		  <img src="{/$root_dir/}/assets/simpla/images/icons/workers.png" alt="送货员" />
+               	  </a>
+               	  <a style="margin:10px;" href="{/get_url rule='/delivery/deliverydmanlist' data='did='|cat:$deliveryList[i].delivery_id/}" title="司机">
+               		  <img src="{/$root_dir/}/assets/simpla/images/drivers.png" alt="司机" />
+               	  </a>
+               	  {/if $deliveryList[i].status neq 3 && $deliveryList[i].status neq 4/}
+               	  <a style="margin:10px;" onclick="javascript:do_del('{/$deliveryList[i].delivery_id/}', this);" title="终止" >
+               		  <img src="{/$root_dir/}/assets/simpla/images/icons/delete.png" alt="终止" />
+               	  </a>
+               	  {//if/}
+                </td>
+          </tr>
+              <tr style="display:none"  class="sub_div_th"childId="-1" id="sub_{/$deliveryList[i].delivery_id/}" parentId="{/$deliveryList[i].delivery_id/}" >
+                <td bgcolor="#FFFFFF" >&nbsp;</td>
+                <td colspan="8" bgcolor="#ffffff">
+                <div id="subdiv">
+                  <table   width="100%" border="0">
+                    	<tr>
+                            <th class="sub_div_th">送货单号</th>
+                            <th class="sub_div_th">正式单号</th>
+                            <th class="sub_div_th">医院名称</th>
+                            <th class="sub_div_th">科室名称</th>
+                            <th class="sub_div_th">货品类型</th>
+                            <th class="sub_div_th">接单备注</th>
+                            <th class="sub_div_th">签收状态</th>
+                            <th class="sub_div_th">签收时间</th>
+                            <th class="sub_div_th">签收备注</th>
+                      </tr>
+                        {/section name=j loop=$deliveryList[i].deliverywithgoods/}
+                        <tr>
+                          <td bgcolor="#FFFFFF" class="sub_div_td">{/$deliveryList[i].deliverywithgoods[j].delivery_id/}</td>
+                          <td bgcolor="#FFFFFF" class="sub_div_td"><a href="{/get_url rule='/order/orderdetail'  data='oid='|cat:$deliveryList[i].deliverywithgoods[j].order_id/}" title="正式单">{/$deliveryList[i].deliverywithgoods[j].order_id/}</td>
+                          <td bgcolor="#FFFFFF" class="sub_div_td">{/$deliveryList[i].deliverywithgoods[j].hospital_name/}</td>
+                          <td bgcolor="#FFFFFF" class="sub_div_td">{/$deliveryList[i].deliverywithgoods[j].office_name/}</td>
+                          <td bgcolor="#FFFFFF" class="sub_div_td">
+                            {/if $deliveryList[i].deliverywithgoods[j].type eq '商品' /}
+                            <a href="{/get_url rule='/order/addrecord'  data='oid='|cat:$deliveryList[i].deliverywithgoods[j].order_id|cat:'&readonly=1'/}" title="商品明细">
+                            {/else/}
+                            {//if/}
+                            {/$deliveryList[i].deliverywithgoods[j].type/}
+                        </td>
+                          <td bgcolor="#FFFFFF" class="sub_div_td" style="color:red;">{/$deliveryList[i].deliverywithgoods[j].order_remark/}</td>
+                          <td bgcolor="#FFFFFF" class="sub_div_td">
+                          {/$deliveryList[i].deliverywithgoods[j].sign_status_name/}
+                        </td>
+                          <td bgcolor="#FFFFFF" class="sub_div_td">{/$deliveryList[i].deliverywithgoods[j].sign_time/}</td>
+                          <td bgcolor="#FFFFFF" class="sub_div_td" style="color:red;">{/$deliveryList[i].deliverywithgoods[j].remark/}</td>
+                    </tr>
+                        {//section/}
+                  </table>
+                </div>
+                </td>
+          </tr>
+              {//section/}
+          </tbody>
+        </table>
+        </div>
+      </div>
+      </form>
+    </div>
+    <script>
+		
+		function do_del(delivery_id, obj){
+			
+			layer.prompt({title:"确定要中止订单号["+delivery_id+"]吗？",success: function(){
+					$('.layui-layer-content').prepend('<p> 请填写备注信息：</p>');
+					$('.layui-layer-content').append('<br>修改状态:<input type="checkbox" style="vertical-align: middle;" /> 无法送达');
+				}},
+				function(val, index){
+					var isUnable = $('.layui-layer-content input[type="checkbox"]').is(':checked')||0;
+					$.post("{/get_url rule='/delivery/cancelDelivery'/}",{
+						delivery_id : delivery_id,isUnable:isUnable,remark:val
+					},function(res){
+						if(res.code == 0){
+							jQuery.facebox("操作成功！");
+							$("#btnQry").click();
+						}else{
+							jQuery.facebox(res.msg);
+						}
+					},'json');
+				  	layer.close(index);
+				}
+			);
+		}
+	</script>
+    {/include file="simpla/common/copy.html"/}
+</div>
+{/include file="simpla/common/footer.html"/}

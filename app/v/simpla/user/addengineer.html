@@ -1,0 +1,67 @@
+{/include file="simpla/common/header.html"/}
+{/include file="simpla/common/left.html"/}
+<style>.promote{display:none;}</style>
+<div id="main-content">
+  <h2>欢迎您 {/$_adminname/}</h2>
+  <p id="page-intro">1.你可以在这里审核新的微信工程部用户或者编辑已有的微信工程部用户。2.带 <span class="red">*</span> 的项目必填</p>
+  <div class="clear"></div>
+  <div class="content-box">
+    <div class="content-box-header">
+      <h3>工程部用户维护</h3>
+      <div class="clear"></div>
+    </div>
+    <div class="content-box-content">
+      <div class="tab-content default-tab" id="tab1">
+        <div class="form">
+          <form action="{/get_url rule='/user/addengineer'/}" method="post" id="js-form">
+            <fieldset class="clearfix">
+              <input type="hidden" value="{/$weichatuser.weichatuser_id/}" name="weichatuser_id" />
+              <input type="hidden" value="{/$weichatuser.is_valid/}" name="is_valid" />
+              <p>
+                <label><font class="red"> * </font>微信OPENID(只读)：</label>
+                <input type="text" value="{/$weichatuser.open_id/}" class="text-input small-input" name="open_id" id="open_id" readOnly="true"/>
+                <span></span> </p>
+              <p>
+                <label><font class="red"> * </font>名称(只读)：</label>
+                <input type="text" value="{/$weichatuser.name/}" class="text-input small-input" name="name" id="name" readOnly="true"/>
+                <span></span> </p>
+              <p>
+                <label><font class="red"> * </font>手机(只读)：</label>
+                <input type="text" value="{/$weichatuser.mobile/}" class="text-input small-input" name="mobile" id="mobile" readOnly="true"/>
+                <span></span> </p>
+              <p>
+                <label><font class="red"> * </font>等级：</label>
+                <select id="one" name="level">
+                    <option value="0">-----选择状态----</option>
+                    {/section name=i loop=$userlevelList/}
+                    <option value="{/$userlevelList[i].value/}" {/if $userlevelList[i].value eq $weichatuser.level/}selected="selected"{//if/}>
+                        {/$userlevelList[i].pre/}{/$userlevelList[i].name/}
+                    </option>
+                    {//section/}
+                </select>
+                <span></span> </p>
+              <p>
+                <label><font class="red"> * </font>状态：</label>
+                <select id="one" name="status">
+                    <option value="0">-----选择状态----</option>
+                    {/section name=i loop=$userstatusList/}
+                    <option value="{/$userstatusList[i].value/}" {/if $userstatusList[i].value eq $weichatuser.status/}selected="selected"{//if/}>
+                        {/$userstatusList[i].pre/}{/$userstatusList[i].name/}
+                    </option>
+                    {//section/}
+                </select>
+                <span></span> </p>
+              <dt>
+                <input type="submit" name="" id="button" class="button" value="编辑" />
+              </dt>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <!-- End #tab1 --> 
+    </div>
+    <!-- End .content-box-content --> 
+  </div>
+  <!-- End .content-box --> 
+  {/include file="simpla/common/copy.html"/} </div>
+{/include file="simpla/common/footer.html"/}

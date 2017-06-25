@@ -1,0 +1,170 @@
+{/include file="simpla/common/header.html"/}
+{/include file="simpla/common/left.html"/}
+<style>
+.tt {
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+</style>
+<div id="main-content">
+    <h2>欢迎您 {/$_adminname/}</h2>
+    <p id="page-intro">查看和管理所有医院预订单。</p>
+    <div class="clear"></div>
+    <div class="content-box">
+      <div class="content-box-header">
+        <h3>医院预订单管理</h3>
+        <ul class="content-box-tabs">
+            <li><a href="#tab1" class="default-tab">医院预订单管理</a></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+            <form action="{/get_url rule='/order/index'/}" method="post" id="js-form">
+        <div class="form">
+            <fieldset>
+                <p>预订单状态： <span>
+                        <select id="one" name="status">
+                            <option value="0">-----选择预订单状态-----</option>
+                            {/section name=i loop=$orderstatusList/}
+                            <option value="{/$orderstatusList[i].value/}" {/if $orderstatusList[i].value eq $status/}selected="selected"{//if/}>{/$orderstatusList[i].pre/}{/$orderstatusList[i].name/}</option>
+                            {//section/}
+                        </select></span>&nbsp;关键字：<input type="text" value="{/$key/}" class="text-input small-input" name="key" />
+                    <span>（预订单号，姓名，手机，医院）
+                    <p>是否代下单： <span>
+                        <select id="is_agent" name="is_agent">
+                            <option value="0">-----选择是否代下单-----</option>
+                            <option value="1" {/if $is_agent eq 1/}selected="selected"{//if/}>否</option>
+                            <option value="2" {/if $is_agent eq 2/}selected="selected"{//if/}>是</option>
+                        </select>
+                    <input type="checkbox" name="showDel" id="showDel"  {/if $showDel/}checked{//if/} />
+                    <label style="display: -webkit-inline-box;font-weight: normal;" for="stockempty">显示已删除预订单</label></span>
+                    <input type="submit" name="" id="button" class="button" value="查询" /></span></p>
+            </fieldset>
+        </div>
+        <hr />
+          <table>
+            <thead>
+              <tr>
+              	<th>预订单号</th>
+                <th>医院</th>
+                <th>科室</th>
+                <th>提交人</th>
+                <th>提交时间</th>
+                <th>状态</th>
+                <th>代下单</th>
+                <th>评分</th>
+                <th>备注</th>
+                <th>操作管理</th>
+                <th>流程管理</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td colspan="6">{/$pagebar/}</td>
+              </tr>
+            </tfoot>
+            <tbody>
+                {/section name=i loop=$hospitalorderList/}
+                <tr>
+                  <td>{/$hospitalorderList[i].hospitalorder_id/}</td>
+                  <td>{/$hospitalorderList[i].hospital_name/}</td>
+                  <td>{/$hospitalorderList[i].office_name/}</td>
+                  <td>{/$hospitalorderList[i].name/}</br>{/$hospitalorderList[i].mobile/}</td>
+                  <td>{/$hospitalorderList[i].preapply_time/}</td>
+                  <td>{/$hospitalorderList[i].status_name/}</td>
+                  {/if $hospitalorderList[i].is_agent eq 1/}
+                  <td>否</td>
+                  {/else /}
+                  <td>是</td>
+                  {//if/}
+                  <td>
+                  	<span title="{/$hospitalorderList[i].appraise_comment/}" {/if $hospitalorderList[i].appraise_comment/}style="color:green;"{//if/}>{/$hospitalorderList[i].appraise_name/}</span>
+                  </td>
+                  <td style="max-width:160px;">
+                      <a title="{/$hospitalorderList[i].remark/}{/if $hospitalorderList[i].admin_remark neq ''/}({/$hospitalorderList[i].admin_remark/}){//if/}" class="tt">{/$hospitalorderList[i].remark/}{/if $hospitalorderList[i].admin_remark neq ''/}</br>({/$hospitalorderList[i].admin_remark/}){//if/}</a>
+                  </td>
+                  <td style="min-width:80px;">
+                      <a href="{/get_url rule='/order/hospitalorderprint' data='oid='|cat:$hospitalorderList[i].hospitalorder_id/}" title="订单照片">
+                          订单照片
+                      </a>
+                      {/if $hospitalorderList[i].status eq 1/}
+                      </br>
+                      <a href="{/get_url rule='/order/hospitalorderremark' data='oid='|cat:$hospitalorderList[i].hospitalorder_id/}" title="备注管理">
+                          备注管理
+                      </a>
+                      {//if/}
+                  </td>
+                  <td style="min-width:80px;">
+                  	{/if $hospitalorderList[i].status eq 1/}
+                  	<a class="btn btn-primary btn-xs" {/ if empty($hospitalorderList[i].admin_remark)/} remaknull='true'{/else/} remaknull='false' {//if/} href="#" onclick="updatehospitalorder(this,{/$hospitalorderList[i].hospitalorder_id/})">
+                  			接收处理
+                  	</a>
+                  	{/elseif $hospitalorderList[i].status eq 3/}
+                  	<a class="btn btn-success btn-xs" href="{/get_url rule='/order/updatehospitalorder' data='oid='|cat:$hospitalorderList[i].hospitalorder_id/}">
+                  			处理完毕
+                  	</a>
+                  		{//if/}
+                  	<!-- 
+	                  <a href="{/get_url rule='/order/addhospitalorder' data='oid='|cat:$hospitalorderList[i].hospitalorder_id/}" title="编辑">
+	                  	<img src="{/$root_dir/}/assets/simpla/images/icons/edit.png" alt="编辑" />
+	                  </a>
+	                 -->
+	                 {/if $button.order_delorder eq 1 && $hospitalorderList[i].status eq 1 /}&nbsp;
+	                 <a class="btn btn-danger btn-xs" onclick="javascript:del_order('{/$hospitalorderList[i].hospitalorder_id /}')">
+                  			删除预订单
+                  	</a>
+                  	{//if/}
+                  </td>
+                </tr>
+                {//section/}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </form>
+    </div>
+    <script>
+    function del_order(orderId){
+    	//$("#button").click();
+    	//return;
+		if(!confirm("确定要删除该预订单吗？")){
+			return;
+		}
+		$.post("{/get_url rule='/order/delhospitalorder'/}",{
+			hospitalorder_id : orderId
+		},function(res){
+			console.log(res);
+			if(res.code == 0){
+				alert("预订单删除成功！");
+				//jQuery.facebox("操作成功！");
+				$("#button").click();
+			}else{
+				jQuery.facebox(res.msg);
+			}
+		},'json');
+	}
+	
+	function updatehospitalorder(obj,hospitalorderid){
+		var url= "{/get_url rule='/order/updatehospitalorder'/}"+"-oid-"+hospitalorderid+".html";
+		var remaknull = obj.getAttribute('remaknull');
+		if(remaknull=='true' || remaknull==true){
+			alert("请先填写备注信息！");
+			var remarkurl = "{/get_url rule='/order/hospitalorderremark'/}"+"-oid-"+hospitalorderid+".html";
+			//alert(remarkurl);
+			window.location.href=remarkurl;
+			return false;
+		}
+		//alert(url);
+		window.location.href=url;
+		// href="{get_url rule='/order/updatehospitalorder' data='oid='|cat:$hospitalorderList[i].hospitalorder_id}"
+		//{get_url rule='/order/hospitalorderremark' data='oid='|cat:$hospitalorderList[i].hospitalorder_id}
+		
+	}
+    </script>
+    {/include file="simpla/common/copy.html"/}
+  </div>
+{/include file="simpla/common/footer.html"/}

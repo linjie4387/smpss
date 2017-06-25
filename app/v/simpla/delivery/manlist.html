@@ -1,0 +1,86 @@
+{/include file="simpla/common/header.html"/}
+{/include file="simpla/common/left.html"/}
+<div id="main-content">
+    <h2>欢迎您 {/$_adminname/}</h2>
+    <p id="page-intro">查看和管理送货单送货员信息</p>
+    <div class="clear"></div>
+    <div class="content-box">
+      <div class="content-box-header">
+        <a href="javascript:history.go(-1);" class="btn-back" title="后退"><img src="{/$root_dir/}/assets/simpla/images/icons/back.png" /></a>
+        <h3>送货单_{/$delivery_id/}&nbsp;送货员管理</h3>
+        <div class="clear"></div>
+      </div>
+      <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+            <div class="form">
+                {/if $delivery_status eq 1/}
+                <fieldset>
+                    <span><input type="button" class="button" onclick="gotoadd();" value="添加送货员" /></span>
+                </fieldset>
+                {//if/}
+            </div>
+          <hr />
+          <table>
+            <thead>
+              <tr>
+                <th>送货单号</th>
+                <th>送货员姓名</th>
+                <th>送货员手机号码</th>
+                {/if $delivery_status eq 1/}
+                <th>管理</th>
+                {//if/}
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td colspan="8">{/$pagebar/}</td>
+              </tr>
+            </tfoot>
+            <tbody>
+                {/section name=i loop=$manList/}
+                <tr>
+                  <td>{/$delivery_id/}</td>
+                  <td>{/$manList[i].deliveryman_name/}</td>
+                  <td>{/$manList[i].deliveryman_mobile/}</td>
+                  {/if $delivery_status eq 1/}
+                  <td>
+                      <a style="margin:10px;" title="删除" onclick="javascript:del_man('{/$manList[i].withman_id /}')">
+                          <img src="{/$root_dir/}/assets/simpla/images/icons/delete.png" alt="删除" />
+                      </a>
+                  </td>
+                  {//if/}
+                </tr>
+                {//section/}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script>
+        function del_man(withmanId){
+            //$("#button").click();
+            //return;
+            if(!confirm("确定要删除该送货员吗？")){
+                return;
+            }
+            $.post("{/get_url rule='/delivery/deletewithman'/}",{
+                   withman_id : withmanId
+                   },function(res){
+                   console.log(res);
+                   if(res.code == 0){
+                   alert("送货员删除成功！");
+                   //jQuery.facebox("操作成功！");
+                   //$("#button").click();
+                   window.location.reload();
+                   }else{
+                   jQuery.facebox(res.msg);
+                   }
+                   },'json');
+        }
+        function gotoadd(){
+            window.location.href = "{/get_url rule='/delivery/addwithman' data='did='|cat:$delivery_id/}";
+        }
+        </script>
+    {/include file="simpla/common/copy.html"/}
+  </div>
+{/include file="simpla/common/footer.html"/}

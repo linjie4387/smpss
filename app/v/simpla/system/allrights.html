@@ -1,0 +1,181 @@
+<div class="rights">
+	<p>
+		<a href="javascript:void(0)">医院管理权限</a>
+	</p>
+	<ul>
+		<li><input type="checkbox" name="hospital[]" value="医院管理:index"
+			{/if $action.menu.hospital.index/}checked="checked" {//if/} /> 医院管理</li>
+		<li><input type="checkbox" name="hospital[]"
+			value="科室管理:officeindex"
+			{/if $action.menu.hospital.officeindex/}checked="checked" {//if/} />
+			科室管理</li>
+		<li><input type="checkbox" name="hospital[]"
+			value="一键同步数据:syncdata:button"
+			{/if $action.btn.hospital_syncdata/}checked="checked" {//if/} /> 一键同步工程部数据</li>
+        <li><input type="checkbox" name="hospital[]"
+            value="预订单打印:preorderprint:button"
+            {/if $action.btn.hospital_preorderprint/}checked="checked" {//if/} />预订单打印</li>
+	</ul>
+</div>
+<!--  
+<div class="rights">
+    <p><a href="javascript:void(0)">供应商管理权限</a></p>
+    <ul>
+        <li>
+            <input type="checkbox" name="supplier[]" value="供应商管理:index" {/if $action.menu.supplier.index/}checked="checked"{//if/} />
+            供应商管理</li>
+        <li>
+            <input type="checkbox" name="supplier[]" value="型号管理:modelindex" {/if $action.menu.supplier.modelindex/}checked="checked"{//if/} />
+            型号管理</li>
+    </ul>
+</div>
+-->
+<div class="rights">
+	<p>
+		<a href="javascript:void(0)">微信用户管理权限</a>
+	</p>
+	<ul>
+		<li><input type="checkbox" name="user[]"
+			value="医院用户管理:hospitalindex"
+			{/if $action.menu.user.hospitalindex/}checked="checked" {//if/} />
+			医院用户管理</li>
+		<li><input type="checkbox" name="user[]"
+			value="工程部用户管理:engineerindex"
+			{/if $action.menu.user.engineerindex/}checked="checked" {//if/} />
+			工程部用户管理</li>
+		<li><input type="checkbox" name="user[]"
+			value="删除用户:deluser:button"
+			{/if $action.btn.user_deluser/}checked="checked" {//if/} /> 删除用户</li>
+	</ul>
+</div>
+<div class="rights">
+	<p>
+		<a href="javascript:void(0)">医院订单管理权限</a>
+	</p>
+	<ul>
+		<li><input type="checkbox" name="order[]" value="预订单管理:index"
+			{/if $action.menu.order.index/}checked="checked" {//if/} /> 预订单管理</li>
+		<li><input type="checkbox" name="order[]"
+			value="删除预订单:delorder:button"
+			{/if $action.btn.order_delorder/}checked="checked" {//if/} /> 删除预订单</li>
+        <li><input type="checkbox" name="order[]" value="修改预订单备注:editremark:button"
+			{/if $action.btn.order_editremark/}checked="checked" {//if/} /> 修改预订单备注</li>
+        <li><input type="checkbox" name="order[]" value="正式订单管理:tradeindex"
+            {/if $action.menu.order.tradeindex/}checked="checked" {//if/} /> 正式订单管理</li>
+        <li><input type="checkbox" name="order[]" value="新增订单:addorder"
+            {/if $action.menu.order.addorder/}checked="checked" {//if/} /> 新增订单</li>
+	</ul>
+</div>
+<div class="rights">
+	<p>
+		<a href="javascript:void(0)">仪器管理权限</a>
+	</p>
+	<ul>
+		<li><input type="checkbox" name="device[]" value="仪器查询:index"
+			{/if $action.menu.device.index/}checked="checked" {//if/} /> 仪器查询</li>
+		<li><input type="checkbox" name="device[]" value="导入仪器:adddevice"
+			{/if $action.menu.device.adddevice/}checked="checked" {//if/} /> 导入仪器</li>
+		<li><input type="checkbox" name="device[]" value="更新记录:logindex"
+			{/if $action.menu.device.logindex/}checked="checked" {//if/} /> 更新记录</li>
+	</ul>
+</div>
+<div class="rights">
+	<p>
+		<a href="javascript:void(0)">试剂管理权限</a>
+	</p>
+	<ul>
+		<li><input type="checkbox" name="reagent[]" value="试剂查询:index"
+			{/if $action.menu.reagent.index/}checked="checked" {//if/} /> 试剂查询</li>
+		<li><input type="checkbox" name="reagent[]"
+			value="导入试剂:addreagent"
+			{/if $action.menu.reagent.addreagent/}checked="checked" {//if/} />
+			导入试剂</li>
+		<li><input type="checkbox" name="reagent[]" value="更新记录:logindex"
+			{/if $action.menu.reagent.logindex/}checked="checked" {//if/} /> 更新记录</li>
+	</ul>
+</div>
+<div class="rights">
+    <p>
+    <a href="javascript:void(0)">商品管理权限</a>
+    </p>
+    <ul>
+        <li><input type="checkbox" name="goods[]" value="商品管理:index"
+            {/if $action.menu.goods.index/}checked="checked" {//if/} /> 商品管理</li>
+        <li><input type="checkbox" name="goods[]"
+            value="新增商品:addgoods"
+            {/if $action.menu.goods.addgoods/}checked="checked" {//if/} />
+            新增商品</li>
+    </ul>
+</div>
+<div class="rights">
+    <p>
+    <a href="javascript:void(0)">配送管理权限</a>
+    </p>
+    <ul>
+    	<li><input type="checkbox" name="delivery[]"
+            value="任务池:adddelivery"
+            {/if $action.menu.delivery.adddelivery/}checked="checked" {//if/} />
+            任务池</li>
+        <li><input type="checkbox" name="delivery[]"
+            value="任务管理:hasdeliverylist"
+            {/if $action.menu.delivery.hasdeliverylist/}checked="checked" {//if/} />
+            任务管理</li>
+        <li><input type="checkbox" name="delivery[]" value="车辆管理:caradm"
+            {/if $action.menu.delivery.caradm/}checked="checked" {//if/} /> 车辆管理</li>
+        <li><input type="checkbox" name="delivery[]"
+            value="送货员管理:manadm"
+            {/if $action.menu.delivery.manadm/}checked="checked" {//if/} />
+            送货员管理</li>        
+    </ul>
+</div>
+
+<div class="rights">
+	<p>
+		<a href="javascript:void(0)">数据报表管理权限</a>
+	</p>
+	<ul>
+		<li><input type="checkbox" name="report[]" value="运输统计:order"
+			{/if $action.menu.report.order/}checked="checked" {//if/} /> 运输统计
+		</li>
+	</ul>
+</div>
+
+<div class="rights">
+	<p>
+		<a href="javascript:void(0)">账号权限</a>
+	</p>
+	<ul>
+		<li><input type="checkbox" name="account[]" value="账号管理:index"
+			{/if $action.menu.account.index/}checked="checked" {//if/} /> 账号管理</li>
+		<li><input type="checkbox" name="account[]"
+			value="添加账号:addaccount"
+			{/if $action.menu.account.addaccount/}checked="checked" {//if/} />
+			添加账号</li>
+		<li><input type="checkbox" name="account[]"
+			value="密码修改:modifypwd"
+			{/if $action.menu.account.modifypwd/}checked="checked" {//if/} />
+			密码修改</li>
+	</ul>
+</div>
+<div class="rights">
+	<p>
+		<a href="javascript:void(0)">系统权限</a>
+	</p>
+	<ul>
+		<li><input type="checkbox" name="system[]" value="系统信息:index"
+			checked="checked" /> 系统信息</li>
+		<li><input type="checkbox" name="system[]" value="系统配置:setting"
+			{/if $action.menu.system.setting/}checked="checked" {//if/} /> 系统配置</li>
+        <li><input type="checkbox" name="system[]" value="字典配置:dictsetting"
+            {/if $action.menu.system.dictsetting/}checked="checked" {//if/} /> 字典配置</li>
+		<li><input type="checkbox" name="system[]" value="权限管理:rights"
+			{/if $action.menu.system.rights/}checked="checked" {//if/} /> 权限管理</li>
+		<li><input type="checkbox" name="system[]"
+			value="添加用户组:addrights"
+			{/if $action.menu.system.addrights/}checked="checked" {//if/} />
+			添加用户组</li>
+		<li><input type="checkbox" name="system[]" value="系统日志:log"
+			{/if $action.menu.system.log/}checked="checked" {//if/} /> 日志管理</li>
+	</ul>
+</div>
+

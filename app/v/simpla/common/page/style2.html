@@ -1,0 +1,18 @@
+<div class="pagination">
+<button type="submit" formaction="{/$first/}">首页</button>
+{/if $prepg eq null/}
+<button type="button" >上一页</button>
+{/else/}
+<button type="submit" formaction="{/$prepg/}">上一页</button>
+{//if/}
+{/section name=sec loop=$pages start=$start max=$max/}
+<button type="submit" class="number {/if $currpage eq $pages[sec].page/}current{//if/}" formaction="{/$pages[sec].url/}">{/$pages[sec].page/}</button>
+{//section/}
+{/ if $nextpg eq null/}
+<button type="button" >下一页</button>
+{/else/}
+<button type="submit" formaction="{/$nextpg/}">下一页</button>
+{//if/}
+<button type="submit" formaction="{/$last/}">尾页</button>
+</div>
+<div class="clear"></div>
