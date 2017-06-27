@@ -10,7 +10,9 @@
         <h3>商品管理</h3>
         <ul class="content-box-tabs">
             <li><a href="#tab1" class="default-tab">商品管理</a></li>
+            {/if 2 eq 1 /}
             <li><a href="{/get_url rule="/goods/addgoods"/}">添加商品</a></li>
+            {//if/}
         </ul>
         <div class="clear"></div>
       </div>
@@ -23,7 +25,10 @@
             	<p>厂商：<input type="text" value="{/$manu/}" placeholder="厂商信息" style="width:120px !important;" class="text-input small-input" name="manu" />
             	项目品类：<input type="text" value="{/$category/}" placeholder="项目品类" class="text-input small-input" name="category" />
                 关键字：<input type="text" value="{/$key/}" placeholder="编码，名称，备注" class="text-input small-input" name="key" />
-               <input type="submit" name="" id="button" class="button" value="查询" />&nbsp;<input type="button" class="button" onclick="gotoadd();" value="添加商品" />&nbsp;
+               <input type="submit" name="" id="button" class="button" value="查询" />&nbsp;
+               {/if 2 eq 1 /}
+               <input type="button" class="button" onclick="gotoadd();" value="添加商品" />&nbsp;
+               {//if/}
             	<input type="button" id="exportBtn" class="button" value="导出" title="导出所有商品信息。" />&nbsp; 
                <input type="button" id="importBtn" class="button" onclick="$('#uploadxls input[type=file]').click();" value="导入" title="导入所有商品信息。" />
             	</form>

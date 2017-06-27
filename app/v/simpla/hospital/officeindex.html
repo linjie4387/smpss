@@ -18,7 +18,9 @@
             <li><a href="{/get_url rule="/hospital/addhospital"/}">添加医院</a></li>
          -->
             <li><a href="#tab1" class="default-tab">科室查询</a></li>
+            {/if 2 eq 1 /}
         	<li><a href="{/get_url rule="/hospital/addoffice"/}">添加科室</a></li>
+            {//if/}
         </ul>
         <div class="clear"></div>
       </div>
@@ -42,9 +44,12 @@
                     <input type="radio" name="product[]" value="2" {/if $product eq 2/}checked{//if/}>未配置&nbsp;&nbsp;
                     
                     <input type="submit" name="" id="button" class="button" value="查询" />
-                    &nbsp;<span><input type="button" class="button" onclick="gotoadd();" value="添加科室" /></span>&nbsp; 
+                    &nbsp;
+                    {/if 2 eq 1 /}
+                    <span><input type="button" class="button" onclick="gotoadd();" value="添加科室" /></span>&nbsp; 
                     <input type="button" id="exportBtn" class="button" value="导出" title="导出所有科室信息。" />&nbsp; 
                		<input type="button" id="importBtn" class="button" onclick="$('#uploadxls input[type=file]').click();" value="导入" title="导入所有科室商品信息。" />
+                    {//if/}
                </p></form>
             </fieldset>
             

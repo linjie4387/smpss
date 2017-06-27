@@ -9,7 +9,9 @@
         <h3>医院管理</h3>
         <ul class="content-box-tabs">
             <li><a href="#tab1" class="default-tab">医院查询</a></li>
+            {/if 2 eq 1 /}
             <li><a href="{/get_url rule="/hospital/addhospital"/}">添加医院</a></li>
+            {//if/}
             <!-- 
             <li><a href="{/get_url rule="/hospital/officeindex"/}">科室查询</a></li>
         	<li><a href="{/get_url rule="/hospital/addoffice"/}">添加科室</a></li>
@@ -30,9 +32,11 @@
                         {//section/}
                     </select></span>&nbsp;关键字：<input type="text" value="{/$key/}" class="text-input small-input" name="key" />
                     <span>（名称，编号）<input type="submit" name="" id="button" class="button" value="查询" /></span>
+                    {/if 2 eq 1 /}
                     &nbsp;<span><input type="button" class="button" onclick="gotoadd();" value="添加医院" /></span>
                     {/if $button.hospital_syncdata eq 1 /}
                      &nbsp;<span><input type="button" class="button" onclick="syncdata();" value="一键同步工程部数据" /></span></p>
+                    {//if/} 
                     {//if/} 
                      
             </fieldset>
