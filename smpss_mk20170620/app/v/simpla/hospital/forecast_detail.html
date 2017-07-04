@@ -1,0 +1,95 @@
+{/include file="simpla/common/header.html"/} {/include
+file="simpla/common/left.html"/}
+<style>
+.promote {
+	display: none;
+}
+
+.edit-label {
+	background-color:transparent;
+	border:none;
+}
+.text-center {
+	text-align:center;
+}
+</style>
+<div id="main-content">
+	<h2>欢迎您 {/$_adminname/}</h2>
+	<p id="page-intro">1.你可以在这里查询科室安全库存预测，并打印科室安全库存预测单。</p>
+	<div class="clear"></div>
+	<div class="content-box">
+		<div class="content-box-header">
+			<h3>科室安全库存预测</h3>
+			<ul class="content-box-tabs">
+	            <li><a href="#" class="default-tab">科室安全库存预测</a></li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+		<div class="content-box-content">
+			<div class="tab-content default-tab" id="tab1">
+				<div class="form">
+					<form action="{/get_url rule='/hospital/addforecast'/}" onsubmit="return save();" method="post" id="js-form">
+						<fieldset class="clearfix">
+							<input type="hidden" value="{/$office.office_id/}" name="office_id" /> 
+							<h3 class="text-center">
+								{/$forecast.hospital_name/}_{/$forecast.office_name/}
+								<p>安全库存预测</p>
+							</h3>
+							
+							<hr/>
+							<table>
+								<thead>
+									<tr>
+										<th>商品名称</th>
+										<th>规格</th>
+										<th>单位</th>
+										<th>{/$firstMon/}月</th>
+										<th>{/$secondMon/}月</th>
+										<th>{/$thirdMon/}月</th>
+										<th>前三月均数</th>
+										<th>安全倍数</th>
+										<th>前安全库存</th>
+										<th>安全库存</th>
+										<th>确认数</th>
+										<th>备注</th>
+									</tr>
+								</thead>
+								<tbody>
+									{/section name=i loop=$detailList/}
+									<tr>
+										<td>{/$detailList[i].goods_name/}</td>
+										<td>{/$detailList[i].specification/}</td>
+										<td>{/$detailList[i].unit/}</td>
+										<td>{/$detailList[i].firstMon/}</td>
+										<td>{/$detailList[i].secondMon/}</td>
+										<td>{/$detailList[i].thirdMon/}</td>
+										<td>{/$detailList[i].avg+0.0/}</td>
+										<td>{/$detailList[i].safe_stock_ratio+0.0/}</td>
+										<td>{/$detailList[i].last_safe_stock+0.0/}</td>
+										<td>{/$detailList[i].safe_stock+0.0/}</td>
+										<td>{/$detailList[i].confirm_quantity+0.0/}</td>
+										<td>{/$detailList[i].remark/}</td>
+									</tr>
+									{//section/}
+								</tbody>
+							</table>
+							<div style="padding:10px 0px;">
+								<input type="button" onclick="javascript:print();" id="button" class="button" value="打印预览" /> 
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+			<!-- End #tab1 -->
+		</div>
+		<!-- End .content-box-content -->
+	</div>
+	<script>
+	function print(){
+		window.location="{/get_url rule='/hospital/forecastdetail' data='sid='|cat:$forecast.id|cat:'&print=1'/}";
+	}
+	</script>
+	<!-- End .content-box -->
+	{/include file="simpla/common/copy.html"/}
+</div>
+{/include file="simpla/common/footer.html"/}

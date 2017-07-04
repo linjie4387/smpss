@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.26, created on 2017-05-10 11:05:17
+<?php /* Smarty version 2.6.26, created on 2017-06-27 14:58:27
          compiled from simpla/goods/index.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/goods/index.html', 13, false),array('modifier', 'cat', 'simpla/goods/index.html', 82, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/goods/index.html', 14, false),array('modifier', 'cat', 'simpla/goods/index.html', 87, false),)), $this); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/header.html", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -23,8 +23,10 @@ unset($_smarty_tpl_vars);
         <h3>商品管理</h3>
         <ul class="content-box-tabs">
             <li><a href="#tab1" class="default-tab">商品管理</a></li>
+            <?php if (2 == 1): ?>
             <li><a href="<?php echo smarty_function_get_url(array('rule' => "/goods/addgoods"), $this);?>
 ">添加商品</a></li>
+            <?php endif; ?>
         </ul>
         <div class="clear"></div>
       </div>
@@ -41,7 +43,10 @@ unset($_smarty_tpl_vars);
 " placeholder="项目品类" class="text-input small-input" name="category" />
                 关键字：<input type="text" value="<?php echo $this->_tpl_vars['key']; ?>
 " placeholder="编码，名称，备注" class="text-input small-input" name="key" />
-               <input type="submit" name="" id="button" class="button" value="查询" />&nbsp;<input type="button" class="button" onclick="gotoadd();" value="添加商品" />&nbsp;
+               <input type="submit" name="" id="button" class="button" value="查询" />&nbsp;
+               <?php if (2 == 1): ?>
+               <input type="button" class="button" onclick="gotoadd();" value="添加商品" />&nbsp;
+               <?php endif; ?>
             	<input type="button" id="exportBtn" class="button" value="导出" title="导出所有商品信息。" />&nbsp; 
                <input type="button" id="importBtn" class="button" onclick="$('#uploadxls input[type=file]').click();" value="导入" title="导入所有商品信息。" />
             	</form>
@@ -63,10 +68,10 @@ unset($_smarty_tpl_vars);
                 <th>通用名</th>
                 <th>单位</th>
                 <th>规格</th>
-                <th>是否是大包装</th>
-                <th>厂商全名</th>
+                <th>包装</th>
+                <th>厂商</th>
                 <th>适用机型</th>
-                <th>项目品类</th>
+                <th>品类</th>
                 <th>色标</th>
                 <th>备注</th>
                 <th>管理</th>
@@ -116,9 +121,9 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
 </td>
                   <td>
                       <?php if ($this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['is_20l'] == 1): ?>
-                      是
+                      大
                       <?php else: ?>
-                      否
+                      小
                       <?php endif; ?>
                   </td>
                   <td><?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['manu']; ?>

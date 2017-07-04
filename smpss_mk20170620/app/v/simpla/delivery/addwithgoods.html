@@ -1,0 +1,121 @@
+{/include file="simpla/common/header.html"/}
+<style>
+	.goods_qrcode:hover { display:block !important;}
+</style>
+{/include file="simpla/common/left.html"/}
+<div id="main-content">
+    <h2>欢迎您 {/$_adminname/}</h2>
+    <p id="page-intro">查看和管理送货</p>
+    <div class="clear"></div>
+    <div class="content-box">
+      <div class="content-box-header">
+        <h3>添加货品</h3>
+        <div class="clear"></div>
+      </div>
+      <div class="content-box-content">
+      	<form action="{/get_url rule='/delivery/editdeliverywithgoods'/}" method="post" id="js-form">
+        <div class="tab-content default-tab" id="tab1">
+            <div class="form">
+               <div style="font-size: 30px;line-height: 40px;">大包装数量 :<input id="quantity" name="quantity" type="hidden" value="{/$deliveryInfo.20l_quantity/}"><span id="quantitystr" style="padding-left:10px;">{/$deliveryInfo.20l_quantity/}</span></div>
+            </div>
+          <hr />
+          
+          <table>
+            <thead>
+              <tr>
+              	<th><input type="checkbox" name="checkall" id="check_all"></th>
+                <th>正式单号</th>
+                <th>医院名称</th>
+                <th>科室名称</th>
+                <th>货品类型</th>
+                <th>单据号</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td colspan="7">{/$pagebar/}</td>
+              </tr>
+            </tfoot>
+            <tbody>
+                {/section name=i loop=$deliveryList/}
+                <tr>
+                  <td>
+                  	<input id="{/$deliveryList[i].order_id/}{/$deliveryList[i].is_for_goods/}" class="row-check" type="checkbox" name="orders[ids][]" value="{/$deliveryList[i].order_id/}" onchange="getquantity(this,{/$deliveryList[i].is_for_goods/});" {/if $deliveryList[i].ischeck/} checked{//if/}>
+                  	<input style="display:none;" id="is_for_goods_{/$deliveryList[i].order_id/}{/$deliveryList[i].is_for_goods/}" class="row-check" type="checkbox" name="orders[is_for_goods][]" value="{/$deliveryList[i].is_for_goods/}" {/if $deliveryList[i].ischeck/} checked{//if/}>
+                  </td>
+                  <td>{/$deliveryList[i].order_id/}</td>
+                  <td>{/$deliveryList[i].hospital_name/}</td>
+                  <td>{/$deliveryList[i].office_name/}</td>
+                  <td>{/$deliveryList[i].goods_type/}</td>
+                  <td>{/$deliveryList[i].goods_no/}</td>
+                </tr>
+                {//section/}
+            </tbody>
+          </table>
+          <div style="padding:10px 0px;">
+          	<input type="hidden" name="delivery_id" value="{/$delivery_id/}">
+            <input type="button" onclick="donext();" name="" id="button" class="button" value="提 交" />
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+		var oids = new Array();
+    	function getquantity(obj,type){
+			$('#is_for_goods_'+obj.id).prop("checked",obj.checked);
+			if(type == 0){
+				return;	
+			}
+			if(obj.checked){
+				if(oids.indexOf($(obj).val()) < 0){
+					oids.push($(obj).val());
+				}
+			}else{
+				oids.remove($(obj).val());
+			}
+			
+			getdata(oids);
+			
+		}
+		
+		$("#check_all").change(function(){			
+			var obj = this;
+			$('.row-check').prop("checked",this.checked); 
+			oids = new Array();
+			
+			$("input:checkbox[class='row-check'][name='orders[ids][]']").each(function(){
+				if(obj.checked){
+					if(oids.indexOf(this.value) < 0){
+						oids.push(this.value);
+					}
+				}
+			});
+			
+			getdata(oids);
+		});
+		
+		function getdata(oids){
+			$.post('{/get_url rule="/delivery/sumquantity"/}',{
+				oid : oids
+			},function(res){
+				if(res.data != null){
+					$("#quantity").val(res.data.quantity);
+					$("#quantitystr").html(res.data.quantity);
+				}
+			},'json');		
+		}
+		
+		function donext(){
+			if($("input:checkbox[class='row-check'][checked]").length < 1 ){
+				alert('请选择数据');
+				return;
+			}
+			$("#js-form").submit();
+		}
+		
+    </script>
+    {/include file="simpla/common/copy.html"/}
+  </div>
+{/include file="simpla/common/footer.html"/}

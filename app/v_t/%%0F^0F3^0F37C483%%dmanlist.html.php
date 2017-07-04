@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.26, created on 2017-05-10 10:57:25
+<?php /* Smarty version 2.6.26, created on 2017-06-21 16:10:16
          compiled from simpla/delivery/dmanlist.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/dmanlist.html', 62, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/dmanlist.html', 70, false),)), $this); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/header.html", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -75,9 +75,17 @@ $this->_sections['i']['first']      = ($this->_sections['i']['iteration'] == 1);
 $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $this->_sections['i']['total']);
 ?>
                 <tr>
-                  <td><input type="radio" <?php if ($this->_tpl_vars['delivery']['status'] <> 1): ?>disabled="disabled"<?php endif; ?> data-dname="<?php echo $this->_tpl_vars['deliverymanList'][$this->_sections['i']['index']]['name']; ?>
-" name="deliveryman" <?php if ($this->_tpl_vars['deliverymanList'][$this->_sections['i']['index']]['deliveryman_id'] == $this->_tpl_vars['delivery']['driver_deliveryman_id']): ?> checked<?php endif; ?> id="deliveryman" value="<?php echo $this->_tpl_vars['deliverymanList'][$this->_sections['i']['index']]['deliveryman_id']; ?>
-" /></td>
+                  <td>
+                  <input type="radio" 
+                  	<?php if ($this->_tpl_vars['delivery']['status'] <> 1): ?>disabled="disabled"<?php endif; ?> 
+                    data-dname="<?php echo $this->_tpl_vars['deliverymanList'][$this->_sections['i']['index']]['name']; ?>
+" 
+                    name="deliveryman" 
+                    <?php if ($this->_tpl_vars['deliverymanList'][$this->_sections['i']['index']]['deliveryman_id'] == $this->_tpl_vars['delivery']['driver_deliveryman_id']): ?> checked<?php endif; ?> 
+                    id="deliveryman" 
+                    value="<?php echo $this->_tpl_vars['deliverymanList'][$this->_sections['i']['index']]['deliveryman_id']; ?>
+" />
+                  </td>
                   <td><?php echo $this->_tpl_vars['deliverymanList'][$this->_sections['i']['index']]['name']; ?>
 </td>
                   <td><?php echo $this->_tpl_vars['deliverymanList'][$this->_sections['i']['index']]['mobile']; ?>

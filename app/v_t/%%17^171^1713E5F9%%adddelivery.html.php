@@ -1,9 +1,9 @@
-<?php /* Smarty version 2.6.26, created on 2017-05-17 21:24:03
+<?php /* Smarty version 2.6.26, created on 2017-06-21 15:54:09
          compiled from simpla/delivery/adddelivery.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/adddelivery.html', 37, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/adddelivery.html', 49, false),array('function', 'cycle', 'simpla/delivery/adddelivery.html', 97, false),)), $this); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/header.html", 'smarty_include_vars' => array()));
+$this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/header_new.html", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
@@ -13,6 +13,8 @@ $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
 <script src="/assets/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/mycommon.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="/assets/css/mycommon.css" type="text/css" />
 <style>
 .am-primary {
 	color:#14a6ef;
@@ -31,17 +33,27 @@ unset($_smarty_tpl_vars);
 	/*background-color:rgba(221,81,76,.15) !important;
 	border-color:#f5cecd;*/
 }
+.pop_th {
+	background-color: #eee;
+	color: #000;
+	font-size: 12px;
+	font-weight: bold;
+}
+.pop_td {
+	color:#000;
+}
 
 .layui-layer-content table{width:98%;border: 1px #F0F0F0 solid;padding: 10px;margin:10px auto;}
-.layui-layer-content table th{background-color: #F1F1F1;padding: 8px 0;}
+.layui-layer-content table th{background-color: #eee;padding: 8px 0;}
 .layui-layer-content table tr:hover{background-color:#EAEAEA;}
-.layui-layer-content caption, th, td{padding:5px;text-align: center;vertical-align: middle;}
+.layui-layer-content caption, th, td{padding:5px;text-align: left;vertical-align: middle; background-color:#fff}
 .layui-layer-content caption, th, td input[type="text"]{width:60px;}
+
 </style>
 <div id="main-content">
     <h2>欢迎您 <?php echo $this->_tpl_vars['_adminname']; ?>
-</h2>
-    <p id="page-intro">查看和管理待指派任务</p>
+</h2> 
+  <p id="page-intro">查看和管理待指派任务</p>
     <div class="clear"></div>
     <div class="content-box">
       <div class="content-box-header">
@@ -54,32 +66,40 @@ unset($_smarty_tpl_vars);
         <div class="clear"></div>
       </div>
       <div class="content-box-content">
+      
       	<form action="<?php echo smarty_function_get_url(array('rule' => '/delivery/adddeliverystep2'), $this);?>
 " method="post" id="js-form">
         <div class="tab-content default-tab" id="tab1">
+           <table  border="0" width="100%">
+           <tr>
             <div class="form">
-            	<input type="button" class="button" onclick="gotoadd();" value="添加任务" style="padding: 10px;">
+            	<td>
                <span style="font-size: 30px;line-height: 40px;">大包装数量 :<input id="quantity" name="quantity" type="hidden" value="0">
                	<span id="quantitystr" style="padding-left:10px;">0</span>
                </span>
-
+               </td>
+               <td  style="width:250px; font-weight:bold;">
+			    <input  name="orderby" type="radio" onclick="getOrderBy('order by ifnull(if(fid=0,order_id,fid),order_id) asc,goods_type,delivery_time asc')" value="" /> 按订单排序<input name="orderby" type="radio" onclick="getOrderBy('order by delivery_time,goods_type')"  /> 按时间排序
+               </td>
+               <td width="50"><input type="button" class="button" onclick="gotoadd();" value="添加任务" style="padding: 10px;"></td>
             </div>
+          </tr>
+          </table>
           <hr />
-          
-          <table>
+          <table id="9999" border="0">
             <thead>
               <tr>
-              	<th><input type="checkbox" name="checkall" id="check_all"></th>
-                <th>正式单号</th>
-                <th>医院名称</th>
-                <th>科室名称</th>
-                <th>货品类型</th>
-                <th>单据号</th>
-                <th>大包装数量</th>
-                <th>备注</th>
-                <th>等待</th>
-                <th>是否拆分</th>
-                <th>操作</th>
+              	<th style="width:20px;"><input type="checkbox" name="checkall" id="check_all"></th>
+                <th colspan="2" align="center" nowrap="nowrap">正式单号</th>
+                <th nowrap="nowrap">医院名称</th>
+                <th nowrap="nowrap">科室名称</th>
+                <th nowrap="nowrap">货品</th>
+                <th nowrap="nowrap">单据号</th>
+                <th nowrap="nowrap">大包装</th>
+                <th nowrap="nowrap">备注</th>
+                <th nowrap="nowrap">等待</th>
+                <th nowrap="nowrap" style="display:none">拆单</th>
+                <th nowrap="nowrap">操作</th>
               </tr>
             </thead>
             <tfoot>
@@ -113,23 +133,44 @@ $this->_sections['i']['index_next'] = $this->_sections['i']['index'] + $this->_s
 $this->_sections['i']['first']      = ($this->_sections['i']['iteration'] == 1);
 $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $this->_sections['i']['total']);
 ?>
-                <tr id="row_<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
+                <tr  bgcolor="<?php echo smarty_function_cycle(array('values' => '#eee,#fff'), $this);?>
+" childId="<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
 <?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['is_for_goods']; ?>
-" <?php if ($this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['is_deny']): ?>style="color:blue;"<?php endif; ?>>
-                  <td>
-                  	<input data-order_id="<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
+" parentId="<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['fid']; ?>
+<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['is_for_goods']; ?>
+" id="row_<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
+<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['is_for_goods']; ?>
+" <?php if ($this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['is_deny']): ?><?php endif; ?>>
+                  <td style="max-width:20px; min-width:20px; ">
+                  <input data-order_id="<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
 " id="<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
 <?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['is_for_goods']; ?>
 " class="row-check" type="checkbox" name="orders[ids][]" value="<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
 " onchange="getquantity(this,<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['is_for_goods']; ?>
 );">
-                  	<input style="display:none;" id="is_for_goods_<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
+                  <input data-order_id="<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
+" style="display:none;" id="is_for_goods_<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
 <?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['is_for_goods']; ?>
 " class="row-check" type="checkbox" name="orders[is_for_goods][]" value="<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['is_for_goods']; ?>
 ">
                   </td>
-                  <td><?php if ($this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['fid'] == 0): ?> <?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
-  <?php endif; ?></td>
+                  <td style="border:0px solid #000; padding:0px; width:25px;">
+                  <?php if ($this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['fid'] == 0): ?>
+                  <!--div onClick="viewmytab('9999',this,'row_<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
+<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['is_for_goods']; ?>
+')" class="btn-close">-</div-->
+                  <img src="/assets/images/f_open.gif" style="width:20px;height:16px;cursor:hand" onClick="viewmytab('9999',this,'row_<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
+<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['is_for_goods']; ?>
+')"/>
+                  <?php endif; ?>
+                  </td>
+                  <td style="border:0px solid #000; padding:0px; width:70px; ">
+                  <?php if ($this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['fid'] == 0): ?>
+                  <span  class="btn btn-danger btn-xs" style="text-align:left; padding-left:10px ;cursor:normal;"> 
+                  <?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
+
+                  </span> 
+                  <?php endif; ?></td>
                   <td><?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['hospital_name']; ?>
 </td>
                   <td><?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['office_name']; ?>
@@ -154,7 +195,7 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
                   <i class="icon-time"><?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['day_wait']; ?>
 天</i>
                   </td>
-                  <td>
+                  <td  style="display:none">
                   <?php if ($this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['is_sun']): ?> <span style="color: #FF0000;">是</span><?php else: ?>无<?php endif; ?>
                   </td>
                   <td><?php if ($this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['goods_type'] == "商品"): ?>
@@ -164,16 +205,16 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
                   	</a>
                   	<div class="order_<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
 " style="display:none;">
-                  		<table border="1" data-order_id="<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
+                  		<table border="1"  data-order_id="<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_id']; ?>
 "><thead>
 						    <tr align="center" style="font-size: 1.2em;font-weight: bold;">
-						      <th align="center">是否拆分</th>
-						      <th align="center">商品名称</th>
-						      <th align="center">规格</th>
-						      <th align="center">单位</th>
-						      <th align="center">商品数量</th>
-						      <th align="center">备注</th>
-						      <th align="center">拆分数量</th>
+						      <th class="pop_th" align="center">拆分</th>
+						      <th class="pop_th" align="center">商品</th>
+						      <th class="pop_th" align="center">规格</th>
+						      <th class="pop_th" align="center">单位</th>
+						      <th class="pop_th" align="center">商品总数</th>
+						      <th class="pop_th" align="center">备注</th>
+						      <th class="pop_th" align="center">拆分数量</th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -201,36 +242,37 @@ $this->_sections['k']['index_next'] = $this->_sections['k']['index'] + $this->_s
 $this->_sections['k']['first']      = ($this->_sections['k']['iteration'] == 1);
 $this->_sections['k']['last']       = ($this->_sections['k']['iteration'] == $this->_sections['k']['total']);
 ?>
-						  	<tr id="order_details_<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['goods_id']; ?>
+						  	<tr  bgcolor="<?php echo smarty_function_cycle(array('values' => '#eee,#fff'), $this);?>
+" id="order_details_<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['goods_id']; ?>
 ">
-						        <td>
+						        <td class="pop_td">
 						        	<input type="checkbox" value="<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['goods_id']; ?>
 " />
 						        </td>
-						        <td><?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['name']; ?>
+						        <td class="pop_td"><?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['name']; ?>
 </td>
-						        <td><?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['specification']; ?>
+						        <td class="pop_td"><?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['specification']; ?>
 </td>
-						        <td><?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['unit']; ?>
+						        <td class="pop_td"><?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['unit']; ?>
 </td>
-						        <td><?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['quantity']; ?>
+						        <td class="pop_td"><?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['quantity']; ?>
 </td>
-						        <td id="order_remark_<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['goods_id']; ?>
+						        <td  class="pop_td" id="order_remark_<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['goods_id']; ?>
 "><?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['remark']; ?>
  <span></span></td>
-						        <td><input type="text" data-unit="<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['unit']; ?>
+						        <td class="pop_td"><input type="text" data-unit="<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['unit']; ?>
 " data-goodsid="<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['goods_id']; ?>
 " data-quantity="<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['quantity']; ?>
 " onblur="if(this.value><?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['quantity']; ?>
  || this.value<1)this.value=<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['quantity']; ?>
 " value="<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['order_details'][$this->_sections['k']['index']]['quantity']; ?>
-" placeholder="拆分" /></td>
+"  placeholder="拆分" /></td>
 						      </tr>
 						    <?php endfor; endif; ?>
 						    </tbody>
 						</table>
 						<p align="center">
-						<button type="button" id="excreteBtn">拆分</button>&nbsp;&nbsp;<button type="button" class="layui-layer-close layui-layer-close1">关闭</button>
+						<button type="button"  class="button" id="excreteBtn">拆分</button>&nbsp;&nbsp;<button type="button" class="button" >关闭</button>
 						</p>
                   	</div>
                   	<?php endif; ?>
@@ -255,6 +297,7 @@ $this->_sections['k']['last']       = ($this->_sections['k']['iteration'] == $th
     			if($(this).is(':checked')){
     				var order_id = $(this).data('order_id');
 	    			var order_idlen = $('#tab1 input[data-order_id="'+order_id+'"]').length
+					//alert('2');
 	    			if(order_idlen>1){
 	    				$('#tab1 input[data-order_id="'+order_id+'"]').attr('checked',$(this).is(':checked'));
 	    			}
@@ -266,7 +309,7 @@ $this->_sections['k']['last']       = ($this->_sections['k']['iteration'] == $th
     			layer.open({
 				  type: 1,title:'拆分商品',
 				  skin: 'layui-layer-rim', //加上边框
-				  area: ['900px', '450px'], //宽高
+				  area: ['800px', '450px'], //宽高
 				  content: $(order_id).html(),
 				  success: function(layero, index){
 					$('.layui-layer-content input[type="checkbox"]').click(function(){
@@ -329,10 +372,14 @@ $this->_sections['k']['last']       = ($this->_sections['k']['iteration'] == $th
     	
 		var oids = new Array();
     	function getquantity(obj,type){
+
 			$('#is_for_goods_'+obj.id).prop("checked",obj.checked);
+			//alert(oids);
 			if(type == 0){
 				return;	
 			}
+			
+			
 			if(obj.checked){
 				if(oids.indexOf($(obj).val()) < 0){
 					oids.push($(obj).val());
@@ -395,6 +442,9 @@ $this->_sections['k']['last']       = ($this->_sections['k']['iteration'] == $th
 ';
 		}
 		
+		function getOrderBy(str){
+			window.location.href = "/index.php/c/delivery/adddelivery?orderby="+str;
+		}
     </script>
     <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/copy.html", 'smarty_include_vars' => array()));

@@ -19,7 +19,7 @@
 <file name="hospital.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131415825448686007" remote="131415832110000000" Dst="0" />
 <file name="office.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="deliveryman.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
-<file name="ordergoods.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131428486013944010" remote="131428493100000000" Dst="0" />
+<file name="ordergoods.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131412176316858005" remote="131412182570000000" Dst="0" />
 <file name="car.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="forecast.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="forecastdetail.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
@@ -38,6 +38,5 @@
 <file name="engineeroffice.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="group.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="goodsmeta.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131411379980320000" remote="131411394330000000" Dst="0" />
-<file name="deliverycommit.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131425051610380000" remote="131425058200000000" Dst="0" />
-<file name="ordergoods.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_demo/" local="131428486013944010" remote="131428492800000000" Dst="0" />
+<file name="deliverycommit.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131415373283692006" remote="131415379580000000" Dst="0" />
 </dwsync>

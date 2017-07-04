@@ -1,0 +1,244 @@
+{/include file="simpla/common/header.html"/} {/include
+file="simpla/common/left.html"/}
+<style>
+.promote {
+	display: none;
+}
+
+.edit-label {
+	background-color:transparent;
+	border:none;
+}
+
+#facebox table { width: 100%; border-collapse: collapse; }
+#facebox table thead th { font-weight: bold; font-size: 15px; border-bottom: 1px solid #ddd; }
+#facebox tbody { border-bottom: 1px solid #ddd; }
+#facebox tbody tr { background: #fff; }
+#facebox tbody tr.alt-row { background: #f3f3f3; }
+#facebox table td, #main-content table th { padding: 10px; line-height: 1.3em; }
+#facebox table tfoot td .bulk-actions { padding: 15px 0 5px 0; }
+#facebox table tfoot td .bulk-actions select { padding: 4px; border: 1px solid #ccc; }
+
+</style>
+<div id="main-content">
+	<h2>欢迎您 {/$_adminname/}</h2>
+	<p id="page-intro">1.你可以在这里为科室分配商品。</p>
+	<div class="clear"></div>
+	<div class="content-box">
+		<div class="content-box-header">
+			<h3>科室商品分配</h3>
+			<ul class="content-box-tabs">
+				<li><a href="#tab1" class="default-tab">科室商品列表</a></li>
+	            <li><a href="{/get_url rule='/hospital/addofficegoods' data='oid='|cat:$office.office_id|cat:'&orderid='|cat:$order_id/}">添加科室商品</a></li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+		<div class="content-box-content">
+			<div class="tab-content default-tab" id="tab1">
+				<div class="form">
+						<p>科室名称：{/$office.hospital_name/}_{/$office.name/}</p>
+						<div>科室库存安全倍数：
+							<input type="text" value="{/$office.safe_stock_ratio/}" id="safe_stock_ratio" />
+							<a class="button" href="#" onclick="changeRatio();">
+								<i class="icon-edit"></i>修改
+							</a>
+						</div>
+				</div>
+				<hr />
+				<div class="form">
+					<form action="{/get_url rule='/hospital/setofficegoods'/}"
+						method="post" id="js-form">
+						<fieldset class="clearfix">
+							<input type="hidden" value="{/$office.office_id/}" name="office_id" /> 
+							<input type="hidden" value="{/$order_id/}" name="order_id" />
+							<p>
+								<a href="javascript:void(0)">可以购买的商品列表</a>
+							</p>
+							<table>
+								<thead>
+									<tr>
+										<th><input type="checkbox" name="comfig_all" id="check_all"></th>
+										<th>商品名称</th>
+										<th>商品编码</th>
+										<th>规格</th>
+										<th>厂商全名</th>
+										<th>适用机型</th>
+										<th>项目品类</th>
+										<th>备注</th>
+										<th>期初安全库存</th>
+									</tr>
+								</thead>
+								<tbody>
+									{/section name=i loop=$goodsList/}
+									<tr>
+									<td><input class="row-check" type="checkbox" name="checklist[]" value="{/$goodsList[i].goods_id/}"></td>
+										<td>{/$goodsList[i].name/}</td>
+										<td>{/$goodsList[i].goods_no/}</td>
+										<td>{/$goodsList[i].specification/}</td>
+										<td>{/$goodsList[i].manu/}</td>
+										<td>{/$goodsList[i].machine/}</td>
+										<td>{/$goodsList[i].category/}</td>
+										<td><input type="text" readonly id="r_{/$goodsList[i].goods_id/}" data="{/$goodsList[i].goods_id/}" value="{/$goodsList[i].remark/}" class="remark edit-label small-input"/>
+											<i class="icon-edit" onclick="editremark({/$goodsList[i].goods_id/})"></i>
+										</td>
+										<td><input type="text" readonly id="s_{/$goodsList[i].goods_id/}" data="{/$goodsList[i].goods_id/}" value="{/$goodsList[i].safe_stock/}" class="safe-stock edit-label small-input"/>
+											<i class="icon-edit" onclick="editsafestock({/$goodsList[i].goods_id/})"></i>
+										</td>
+									</tr>
+									{//section/}
+								</tbody>
+							</table>
+							<div style="padding:10px 0px;">
+								<input type="button" onclick="del();" id="button" class="button" value="删除商品" /> 
+								<input type="button" onclick="addgoods();" name="" id="button" class="button" value="添加商品" />
+								<input type="button" onclick="showupload();" name="" id="btnupload" class="button" value="批量导入" />
+								<input type="button" onclick="download();" name="" id="btndownload" class="button" value="模板下载" />
+								<input type="button" onclick="goback();" name="" id="button" class="button" value="返回" />
+							</div>
+						</fieldset>
+					</form>
+                    
+                    <form action="{/get_url rule='/hospital/uploadmodel'/}" method="post" id="js-file" enctype="multipart/form-data" style="padding:10px 0;display:none;">
+                        <input type="file" id="file" name="file" />
+                        <input type="hidden" value="{/$office.office_id/}" name="office_id" /> 
+						<input type="hidden" value="{/$order_id/}" name="order_id" />
+                        <input type="button" onclick="submitfile();" class="button" value="确定并导入" />
+						<input type="button" onclick="uploadcannel();" name="" id="btn_cannel" class="button" value="取消" />
+                    </form>
+				</div>
+			</div>
+			<!-- End #tab1 -->
+		</div>
+		<!-- End .content-box-content -->
+	</div>
+	<script>
+		//全选
+		$(function(){
+			$("#check_all").change(function(){
+				$('.row-check').prop("checked",this.checked); 
+			});
+			//修改备注
+			$(".remark").change(function(){
+				$.post("{/get_url rule='/hospital/modifyofficegoodsremark'/}",{
+					office_id : "{/$office.office_id/}",
+					goods_id:$(this).attr('data'),
+					remark:$(this).val()
+				},function(res){
+					console.log(res);
+					if(res.code == 0){
+						
+					}else{
+						jQuery.facebox(res.msg);
+					}
+				},'json');
+			});
+			
+			$(".remark").blur(function(){
+				$(this).addClass("edit-label");
+				$(this).attr("readonly","readonly");
+			});
+			
+			//修改期初库存
+			$(".safe-stock").change(function(){
+				$.post("{/get_url rule='/hospital/modifyofficegoodssafestock'/}",{
+					office_id : "{/$office.office_id/}",
+					goods_id:$(this).attr('data'),
+					safe_stock:$(this).val()
+				},function(res){
+					console.log(res);
+					if(res.code == 0){
+						
+					}else{
+						jQuery.facebox(res.msg);
+					}
+				},'json');
+			});
+			
+			$(".safe-stock").blur(function(){
+				$(this).addClass("edit-label");
+				$(this).attr("readonly","readonly");
+			});
+		});
+		//添加商品
+		function addgoods(){
+			window.location ="{/get_url rule='/hospital/addofficegoods' data='oid='|cat:$office.office_id|cat:'&orderid='|cat:$order_id/}";
+		}
+		
+		function editremark(goods_id){
+			$("#r_"+goods_id).removeClass("edit-label");
+			$("#r_"+goods_id).removeAttr("readonly");
+			$("#r_"+goods_id).focus();
+		}
+		
+		function editsafestock(goods_id){
+			$("#s_"+goods_id).removeClass("edit-label");
+			$("#s_"+goods_id).removeAttr("readonly");
+			$("#s_"+goods_id).focus();
+		}
+		//删除
+		function del(){
+			if($("input:checkbox[class='row-check'][checked]").length<=0){
+				jQuery.facebox("请选择需要删除的科室商品！");
+				return;
+			}
+			if(!confirm("确定要删除所选科室商品吗？")){
+				return;
+			}
+			var goods_list = new Array();
+			$("input:checkbox[class='row-check'][checked]").each(function(){
+				var gid = this.value;
+				goods_list.push(gid);
+			});
+			$.post("{/get_url rule='/hospital/delofficegoods'/}",{
+				office_id : "{/$office.office_id/}",
+				goods_list:goods_list
+			},function(res){
+				console.log(res);
+				if(res.code == 0){
+					jQuery.facebox("操作成功！");
+					window.location.reload();
+				}else{
+					jQuery.facebox(res.msg);
+				}
+			},'json');
+		}
+		
+		function goback(){
+			{/if $order_id eq null or $order_id eq 0/}
+			window.location="{/get_url rule='/hospital/officeindex' /}";
+			{/else/}
+			window.location="{/get_url rule='/order/addrecord' data='oid='|cat:$order_id/}";
+			{//if/}
+		}
+		
+		function download(){
+			window.location="{/get_url rule='/hospital/downloadmodel' /}";
+		}
+		
+		function showupload(){
+			$("#js-file").show();
+		}
+		function uploadcannel(){
+			$("#js-file").hide();
+		}
+		function submitfile(){
+			$("#js-file").submit();
+		}
+		
+		function changeRatio(){
+			$.post("{/get_url rule='/hospital/setofficeratio'/}",{
+				office_id : "{/$office.office_id/}",
+				safe_stock_ratio:$("#safe_stock_ratio").val()
+			},function(res){
+				if(res.code == 0){
+					jQuery.facebox("操作成功！");
+				}else{
+					jQuery.facebox(res.msg);
+				}
+			},'json');
+		}
+	</script>
+	<!-- End .content-box -->
+	{/include file="simpla/common/copy.html"/}
+</div>
+{/include file="simpla/common/footer.html"/}

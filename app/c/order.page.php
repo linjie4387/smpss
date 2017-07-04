@@ -594,7 +594,6 @@ class c_order extends base_c {
 
         $ordergoodsObj = new m_ordergoods();
         $ordergoodsList = $ordergoodsObj->getGoodsList($order_id);
-		//echo json_encode($ordergoodsList);
         if ($readonly > 0) {
             if (!empty($ordergoodsList->items)) {
                 $list = $ordergoodsList->items;
@@ -611,7 +610,7 @@ class c_order extends base_c {
         $this->params['ordergoodsList'] = $ordergoodsList->items;
         
         $this->params['readonly'] = $readonly;
-
+        
         return $this->render('order/addrecord.html', $this->params);
     }
     //订单导出

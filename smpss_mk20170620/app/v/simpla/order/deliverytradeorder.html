@@ -1,0 +1,65 @@
+{/include file="simpla/common/header.html"/}
+{/include file="simpla/common/left.html"/}
+<style>.promote{display:none;}</style>
+<div id="main-content">
+  <h2>欢迎您 {/$_adminname/}</h2>
+  <p id="page-intro">1.你可以在这里对正式订单进行发货确认。2.带 <span class="red">*</span> 的项目必填</p>
+  <div class="clear"></div>
+  <div class="content-box">
+    <div class="content-box-header">
+      <h3>发货确认</h3>
+      <div class="clear"></div>
+    </div>
+    <div class="content-box-content">
+      <div class="tab-content default-tab" id="tab1">
+        <div class="form">
+          <form action="{/get_url rule='/order/deliverytradeorder'/}" method="post" id="js-form" enctype="multipart/form-data" AUTOCOMPLETE="OFF" onSubmit="return check();">
+            <fieldset class="clearfix">
+                <p>
+                <label>订单编号(只读)：</label>
+                <input type="text" value="{/$order.order_id/}" class="text-input small-input" name="oid" id="oid" readonly />
+                <span></span> </p>
+                <p>
+                <label>预订单编号(只读)：</label>
+                <input type="text" value="{/$order.hospitalorder_id/}" class="text-input small-input" name="hid" id="hid" readonly />
+                <span></span> </p>
+                <p>
+                <label>发货单：</label>
+                <input type="file" name="file" id="file" />
+                <br />
+                <span></span> </p>
+                <p>
+                <label><font class="red"> * </font>发货单号：(没有请填写“无”)</label>
+                <input type="text" value="{/$order.delivery_no/}" class="text-input small-input" name="delivery_no" id="delivery_no"/>
+                <span></span> </p>
+                <p>
+                <label><font class="red"> * </font>发票单号：(没有请填写“无”)</label>
+                <input type="text" value="{/$order.invoice_no/}" class="text-input small-input" name="invoice_no" id="invoice_no" />
+                <span></span> </p>
+              <dt>
+                <input type="submit" name="" id="button" class="button" value="提交" />
+              </dt>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <!-- End #tab1 --> 
+    </div>
+    <!-- End .content-box-content --> 
+  </div>
+  <!-- End .content-box --> 
+  <script type="text/javascript">
+  function check(){
+	  var d = $("#delivery_no").val();
+	  var i = $("#invoice_no").val();
+	  if(!d){
+		  alert("请输入发货单号。");return false;
+	  }
+	  if(!i){
+		  alert("请输入发票单号。");return false;
+	  }
+	  return true;
+  }
+  </script>
+  {/include file="simpla/common/copy.html"/} </div>
+{/include file="simpla/common/footer.html"/}

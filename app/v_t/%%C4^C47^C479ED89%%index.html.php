@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.26, created on 2017-05-10 11:39:03
+<?php /* Smarty version 2.6.26, created on 2017-06-27 14:54:38
          compiled from simpla/hospital/index.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/hospital/index.html', 12, false),array('modifier', 'cat', 'simpla/hospital/index.html', 70, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/hospital/index.html', 13, false),array('modifier', 'cat', 'simpla/hospital/index.html', 74, false),)), $this); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/header.html", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -22,8 +22,10 @@ unset($_smarty_tpl_vars);
         <h3>医院管理</h3>
         <ul class="content-box-tabs">
             <li><a href="#tab1" class="default-tab">医院查询</a></li>
+            <?php if (2 == 1): ?>
             <li><a href="<?php echo smarty_function_get_url(array('rule' => "/hospital/addhospital"), $this);?>
 ">添加医院</a></li>
+            <?php endif; ?>
             <!-- 
             <li><a href="<?php echo smarty_function_get_url(array('rule' => "/hospital/officeindex"), $this);?>
 ">科室查询</a></li>
@@ -74,9 +76,11 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
                     </select></span>&nbsp;关键字：<input type="text" value="<?php echo $this->_tpl_vars['key']; ?>
 " class="text-input small-input" name="key" />
                     <span>（名称，编号）<input type="submit" name="" id="button" class="button" value="查询" /></span>
+                    <?php if (2 == 1): ?>
                     &nbsp;<span><input type="button" class="button" onclick="gotoadd();" value="添加医院" /></span>
                     <?php if ($this->_tpl_vars['button']['hospital_syncdata'] == 1): ?>
                      &nbsp;<span><input type="button" class="button" onclick="syncdata();" value="一键同步工程部数据" /></span></p>
+                    <?php endif; ?> 
                     <?php endif; ?> 
                      
             </fieldset>

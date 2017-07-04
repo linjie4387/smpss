@@ -1,0 +1,128 @@
+{/include file="simpla/common/header.html"/}
+{/include file="simpla/common/left.html"/}
+<script src="/assets/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<div id="main-content">
+    <h2>欢迎您 {/$_adminname/}</h2>
+    <p id="page-intro">查看和管理所有商品。</p>
+    <div class="clear"></div>
+    <div class="content-box">
+      <div class="content-box-header">
+        <h3>商品管理</h3>
+        <ul class="content-box-tabs">
+            <li><a href="#tab1" class="default-tab">商品管理</a></li>
+            <li><a href="{/get_url rule="/goods/addgoods"/}">添加商品</a></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+            
+        <div class="form">
+            <fieldset>
+            	<form action="{/get_url rule='/goods/index'/}" method="post" id="js-form">
+            	<p>厂商：<input type="text" value="{/$manu/}" placeholder="厂商信息" style="width:120px !important;" class="text-input small-input" name="manu" />
+            	项目品类：<input type="text" value="{/$category/}" placeholder="项目品类" class="text-input small-input" name="category" />
+                关键字：<input type="text" value="{/$key/}" placeholder="编码，名称，备注" class="text-input small-input" name="key" />
+               <input type="submit" name="" id="button" class="button" value="查询" />&nbsp;<input type="button" class="button" onclick="gotoadd();" value="添加商品" />&nbsp;
+            	<input type="button" id="exportBtn" class="button" value="导出" title="导出所有商品信息。" />&nbsp; 
+               <input type="button" id="importBtn" class="button" onclick="$('#uploadxls input[type=file]').click();" value="导入" title="导入所有商品信息。" />
+            	</form>
+            	</p>
+            </fieldset>
+            
+            <form id="uploadxls" style="display:none;" tabindex="-1" action="{/get_url rule="/goods/import"/}" method="post" enctype="multipart/form-data" target="upiframe">
+			    <input type="file" id="file" name="file"><input type="hidden" name="upload" id="upload" value="" />
+			    <iframe src="about:blank" tabindex="-1" style="display:none;"  name="upiframe"></iframe>
+			</form>
+        </div>
+        <hr />
+          <table>
+            <thead>
+              <tr>
+                <th>编码</th>
+                <th>注册名</th>
+                <th>通用名</th>
+                <th>单位</th>
+                <th>规格</th>
+                <th>是否是大包装</th>
+                <th>厂商全名</th>
+                <th>适用机型</th>
+                <th>项目品类</th>
+                <th>色标</th>
+                <th>备注</th>
+                <th>管理</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td colspan="8">{/$pagebar/}</td>
+              </tr>
+            </tfoot>
+            <tbody>
+                {/section name=i loop=$goodsList/}
+                <tr>
+                  <td>{/$goodsList[i].goods_no/}</td>
+                  <td>{/$goodsList[i].name/}</td>
+                  <td>{/$goodsList[i].extern_name/}</td>
+                  <td>{/$goodsList[i].unit/}</td>
+                  <td>{/$goodsList[i].specification/}</td>
+                  <td>
+                      {/if $goodsList[i].is_20l eq 1/}
+                      是
+                      {/else/}
+                      否
+                      {//if/}
+                  </td>
+                  <td>{/$goodsList[i].manu/}</td>
+                  <td>{/$goodsList[i].machine/}</td>
+                  <td>{/$goodsList[i].category/}</td>
+                  <td>{/$goodsList[i].colorcode/}</td>
+                  <td>{/$goodsList[i].remark/}</td>
+                  <td>
+                    <a style="margin:10px;" href="{/get_url rule='/goods/addgoods' data='gid='|cat:$goodsList[i].goods_id/}" title="编辑">
+                  		<img src="{/$root_dir/}/assets/simpla/images/icons/edit.png" alt="编辑" />
+                  	</a>
+                    </td>
+                </tr>
+                {//section/}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </form>
+    </div>
+    <script language="JavaScript">
+    	
+    	$(function(){
+    		$('#exportBtn').click(function(){
+    			window.open('{/get_url rule="/goods/export"/}');
+    		});
+    		$('#uploadxls input[type=file]').change(function(){
+    			var loadLayer = layer.load();
+  				$('#uploadxls').submit();
+  				$('#uploadxls iframe').off('load');
+				$('#uploadxls iframe').on('load',function(){
+					layer.close(loadLayer);   
+					try{
+						var data = JSON.parse($(this).contents().find('body').text());
+					}catch(e){
+						var data = {status:-1,msg:''};
+					}
+					$('#uploadxls input[type=file]').val(null);
+					jQuery.facebox(data.msg);
+					if(data.code == 0){
+						setTimeout(function(){
+							window.location.href = '{/get_url rule="/goods/index"/}';
+						},2000);
+					}
+				});
+  			});
+    	});
+    	
+		function gotoadd(){
+			window.location.href = '{/get_url rule="/goods/addgoods"/}';
+		}
+	</script>
+    {/include file="simpla/common/copy.html"/}
+  </div>
+{/include file="simpla/common/footer.html"/}

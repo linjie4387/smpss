@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.26, created on 2017-05-17 23:26:19
+<?php /* Smarty version 2.6.26, created on 2017-06-27 14:56:57
          compiled from simpla/hospital/officeindex.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/hospital/officeindex.html', 17, false),array('modifier', 'cat', 'simpla/hospital/officeindex.html', 84, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/hospital/officeindex.html', 17, false),array('modifier', 'cat', 'simpla/hospital/officeindex.html', 89, false),)), $this); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/header.html", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -33,8 +33,10 @@ unset($_smarty_tpl_vars);
 ">添加医院</a></li>
          -->
             <li><a href="#tab1" class="default-tab">科室查询</a></li>
+            <?php if (2 == 1): ?>
         	<li><a href="<?php echo smarty_function_get_url(array('rule' => "/hospital/addoffice"), $this);?>
 ">添加科室</a></li>
+            <?php endif; ?>
         </ul>
         <div class="clear"></div>
       </div>
@@ -86,9 +88,12 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
                     <input type="radio" name="product[]" value="2" <?php if ($this->_tpl_vars['product'] == 2): ?>checked<?php endif; ?>>未配置&nbsp;&nbsp;
                     
                     <input type="submit" name="" id="button" class="button" value="查询" />
-                    &nbsp;<span><input type="button" class="button" onclick="gotoadd();" value="添加科室" /></span>&nbsp; 
+                    &nbsp;
+                    <?php if (2 == 1): ?>
+                    <span><input type="button" class="button" onclick="gotoadd();" value="添加科室" /></span>&nbsp; 
                     <input type="button" id="exportBtn" class="button" value="导出" title="导出所有科室信息。" />&nbsp; 
                		<input type="button" id="importBtn" class="button" onclick="$('#uploadxls input[type=file]').click();" value="导入" title="导入所有科室商品信息。" />
+                    <?php endif; ?>
                </p></form>
             </fieldset>
             
