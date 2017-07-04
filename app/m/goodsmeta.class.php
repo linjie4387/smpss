@@ -64,8 +64,11 @@ class m_goodsmeta extends base_m {
             $this->setError (0, "缺少商品编码");
             return false;
         }
-        $goods = $this->selectOne("goods_no = '{$data['goods_no']}'");
-        if ($goods && $goods['goods_id'] != $data['goods_id']) {
+        $goods = $this->selectOne("goods_no = '".$data['goods_no']."'");
+		//var_dump($goods);
+		//echo $goods['goods_id'].'   '.$data['goods_key'];
+		//echo count($goods);
+        if ($goods && $goods['goods_id'] != $data['goods_key']) {
             $this->setError (0, "商品编码重复" . $this->getError());
             return false;
         }
@@ -77,8 +80,8 @@ class m_goodsmeta extends base_m {
             $this->setError (0, "缺少单位");
             return false;
         }
-        
         $this->set("name", $data['name']);
+		echo '9';
         $this->set("manu", $data['manu']);
         $this->set("extern_name", $data['extern_name']);
         $this->set("goods_no", $data['goods_no']);
@@ -97,7 +100,7 @@ class m_goodsmeta extends base_m {
             $this->set("create_time", date('Y-m-d H:i:s'));
         }
         $this->set("admin_id", $_COOKIE['admin_id']);
-        
+
         $rs = $this->save($data['goods_id']);
         if ($rs) {
             if ($with_log) {

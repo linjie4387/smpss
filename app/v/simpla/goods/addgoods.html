@@ -20,6 +20,7 @@
           <form action="{/get_url rule='/goods/addgoods'/}" enctype="multipart/form-data"  method="post" id="js-form">
             <fieldset class="clearfix">
               <input type="hidden" value="{/$goods.goods_id/}" name="goods_id" />
+              <input type="hidden" value="{/$goods.goods_key/}" name="goods_key" />
               <p>
               <label><font class="red"> * </font>编码(唯一)：</label>
               <input type="text" value="{/$goods.goods_no/}" class="text-input small-input" name="goods_no" id="goods_no" />
@@ -76,7 +77,7 @@
                 
               	<p>
                 <label>商品注册证图片：</label>
-                <span>{/if $goods.img.regimg ==''/}暂无图片{/else/}<img src="{/$goods.img.regimg/}" width="48"style="vertical-align: middle;" />{//if/}</span>
+                <span>{/if $goods.img.regimg ==''/}暂无图片{/else/}<img src="{/$goods.img.regimg/}" width="48"style="vertical-align: middle;display:none" />{//if/}</span>
                 <input type="file" class="text-input medium-input" name="regimg" />
                 {/ if !empty($goods.img.regimg) /}
                 <a href="{/$goods.img.regimg/}">点击下载</a>
@@ -84,7 +85,7 @@
                  </p>
                 <p>
                 <label>说明书图片：</label>
-                <span>{/if $goods.img.noticeimg ==''/}暂无图片{/else/}<img src="{/$goods.img.noticeimg/}" width="48"style="vertical-align: middle;" />{//if/}</span>
+                <span>{/if $goods.img.noticeimg ==''/}暂无图片{/else/}<img src="{/$goods.img.noticeimg/}" width="48"style="vertical-align: middle;display:none" />{//if/}</span>
                 <input type="file" class="text-input medium-input" name="noticeimg" />
                 {/ if !empty($goods.img.noticeimg) /}
                 <a href="{/$goods.img.noticeimg/}">点击下载</a>
@@ -92,7 +93,7 @@
                 </p>
                 <p>
                 <label>商品标签图片：</label>
-                <span>{/if $goods.img.labelimg ==''/}暂无图片{/else/}<img src="{/$goods.img.labelimg/}" width="48"style="vertical-align: middle;" />{//if/}</span>
+                <span>{/if $goods.img.labelimg ==''/}暂无图片{/else/}<img src="{/$goods.img.labelimg/}" width="48"style="vertical-align: middle;display:none" />{//if/}</span>
                 <input type="file" class="text-input medium-input" name="labelimg" />
                 {/ if !empty($goods.img.labelimg) /}
                 <a href="{/$goods.img.labelimg/}">点击下载</a>

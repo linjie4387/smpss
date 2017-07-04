@@ -183,8 +183,9 @@ class c_goods extends base_c {
 		$url = $this->getUrlParams($inPath);
 		$goods_id = (int)$url['gid'] > 0 ? (int)$url['gid'] : (int)$_POST['goods_id'];
 		
-		$goodsObj = new m_goodsmeta();
-		$goodsinfo = $goodsObj->selectOne('goods_id='.$goods_id);
+		$goodsObj = new m_goods();
+		$goodsmetaObj = new m_goodsmeta();
+		$goodsinfo = $goodsObj->selectOne("goods_id='".$goods_id."'");
 		
 		$goods_imgObj = new m_goodsimgs();
 		$goods_imgs = $goods_imgObj->selectOne('goods_no='.$goodsinfo['goods_no']);
@@ -219,15 +220,15 @@ class c_goods extends base_c {
 				$post['labelimg'] = "http://" . base_Constant::DOMAIN_NAME . base_Constant::ROOT_DIR . "/app" . base_Constant::UPLOAD_DATA_DIR. "/commodity/".$file_name;
 				$goods_imgObj->create(['labelimg'=>$post['labelimg'],'goods_no'=>$goodsinfo['goods_no'],'id'=>$goods_imgs['id']]);
 			}
-			
-			if ($goodsObj->create($post, "TRUE")) {
+			if ($goodsmetaObj->create($post, "TRUE")) {
 				$this->ShowMsg( "操作成功！", $this->createUrl("/goods/addgoods-gid-{$goods_id}" ), 2, 1);
 			}
 			$this->ShowMsg("操作失败" . $goodsObj->getError());
 		}
 		
-		$this->params['goods'] = $goodsObj->selectOne("goods_id = {$goods_id}");
-		$this->params['goods']['img'] = $goods_imgObj->selectOne("id=".$goods_imgs['id']);
+		$this->params['goods'] = $goodsObj->selectOne('goods_id='.$goods_id);
+		//$this->params['goods']['img'] = $goods_imgObj->selectOne("id=".$goods_imgs['id']);
+		$this->params['goods']['img'] = $goods_imgObj->selectOne("goods_no='".$goods_id."'");
 		return $this->render('goods/addgoods.html', $this->params);
 	}
 
