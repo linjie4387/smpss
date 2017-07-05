@@ -81,7 +81,7 @@ class m_goodsmeta extends base_m {
             return false;
         }
         $this->set("name", $data['name']);
-		echo '9';
+
         $this->set("manu", $data['manu']);
         $this->set("extern_name", $data['extern_name']);
         $this->set("goods_no", $data['goods_no']);

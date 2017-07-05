@@ -84,9 +84,13 @@
                   <td>{/$goodsList[i].colorcode/}</td>
                   <td>{/$goodsList[i].remark/}</td>
                   <td>
-                    <a style="margin:10px;" href="{/get_url rule='/goods/addgoods' data='gid='|cat:$goodsList[i].goods_id/}" title="编辑">
+                    <!--a style="margin:10px;" href="{/get_url rule='/goods/addgoods' data='gid='|cat:$goodsList[i].goods_id/}" title="编辑">
+                  		<img src="{/$root_dir/}/assets/simpla/images/icons/edit.png" alt="编辑" />
+                  	</a-->
+                    <a style="margin:10px;" href="javascript:gotoedit('{/$goodsList[i].goods_id/}')" title="编辑">
                   		<img src="{/$root_dir/}/assets/simpla/images/icons/edit.png" alt="编辑" />
                   	</a>
+                    
                     </td>
                 </tr>
                 {//section/}
@@ -126,6 +130,10 @@
     	
 		function gotoadd(){
 			window.location.href = '{/get_url rule="/goods/addgoods"/}';
+		}
+		
+		function gotoedit(gid){
+			window.location.href = '{/get_url rule="/goods/addgoods"/}'+"?gid="+gid;
 		}
 	</script>
     {/include file="simpla/common/copy.html"/}

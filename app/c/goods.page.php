@@ -181,14 +181,18 @@ class c_goods extends base_c {
 	function pageaddgoods($inPath) {
 		
 		$url = $this->getUrlParams($inPath);
-		$goods_id = (int)$url['gid'] > 0 ? (int)$url['gid'] : (int)$_POST['goods_id'];
-		
+		$goods_id = $url['gid'] > 0 ? $url['gid'] : $_POST['goods_id'];
+		if(empty($goods_id)){
+			$goods_id=$_GET['gid'];
+			
+		}
 		$goodsObj = new m_goods();
 		$goodsmetaObj = new m_goodsmeta();
 		$goodsinfo = $goodsObj->selectOne("goods_id='".$goods_id."'");
 		
 		$goods_imgObj = new m_goodsimgs();
-		$goods_imgs = $goods_imgObj->selectOne('goods_no='.$goodsinfo['goods_no']);
+		$goods_imgs = $goods_imgObj->selectOne("goods_no='".$goodsinfo['goods_no']."'");
+		//var_dump($goods_imgs);
 		if ($_POST) {
 			$post = base_Utils::shtmlspecialchars($_POST);
 			if (is_uploaded_file($_FILES['regimg']['tmp_name'])){
@@ -221,12 +225,12 @@ class c_goods extends base_c {
 				$goods_imgObj->create(['labelimg'=>$post['labelimg'],'goods_no'=>$goodsinfo['goods_no'],'id'=>$goods_imgs['id']]);
 			}
 			if ($goodsmetaObj->create($post, "TRUE")) {
-				$this->ShowMsg( "操作成功！", $this->createUrl("/goods/addgoods-gid-{$goods_id}" ), 2, 1);
+				$this->ShowMsg( "操作成功！", $this->createUrl("/goods/addgoods?gid={$goods_id}" ), 2, 1);
 			}
 			$this->ShowMsg("操作失败" . $goodsObj->getError());
 		}
 		
-		$this->params['goods'] = $goodsObj->selectOne('goods_id='.$goods_id);
+		$this->params['goods'] = $goodsObj->selectOne("goods_id='".$goods_id."'");
 		//$this->params['goods']['img'] = $goods_imgObj->selectOne("id=".$goods_imgs['id']);
 		$this->params['goods']['img'] = $goods_imgObj->selectOne("goods_no='".$goods_id."'");
 		return $this->render('goods/addgoods.html', $this->params);
@@ -240,10 +244,10 @@ class c_goods extends base_c {
 		
 		$goods_imgObj = new m_goodsimgs();
 		$goodsObj = new m_goodsmeta();
-		$goods = $goodsObj->selectOne("goods_no = {$goods_no}");
+		$goods = $goodsObj->selectOne("goods_no ='".$goods_no."'");
 		if(!$goods)$this->ShowMsg("该商品标识信息不存在.");
 		$this->params['goods'] = $goods;
-		$this->params['goods']['img'] = $goods_imgObj->selectOne("goods_no=".$goods_no);
+		$this->params['goods']['img'] = $goods_imgObj->selectOne("goods_no='".$goods_no."'");
 		//print_r($this->params['goods']);exit;
 		
 		return $this->render('goods/goodsimgprint.html', $this->params);
