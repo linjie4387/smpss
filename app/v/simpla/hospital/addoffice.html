@@ -53,9 +53,11 @@
                 <label><font class="red"> * </font>库存空间：</label>
                 <input type="text" value="{/$office.space/}" class="text-input small-input" name="space" id="space" />
                 <span></span> </p>
+              {/if 1 eq 2/}
               <dt>
                 <input type="submit" name="" id="button" class="button" value="{/if $office.office_id/}编辑{/else/}添加{//if/}" />
               </dt>
+              {//if/}
             </fieldset>
           </form>
         </div>

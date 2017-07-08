@@ -100,9 +100,11 @@
                     <a style="margin:10px;" href="{/get_url rule='/hospital/printofficegoods' data='hid='|cat:$officeList[i].hospital_id|cat:'&oid='|cat:$officeList[i].office_id/}" title="打印单据">
                         <img src="{/$root_dir/}/assets/simpla/images/icons/print.png" alt="打印单据" />
                     </a>
-                    <a style="margin:10px;" href="{/get_url rule='/hospital/forecastofficegoods' data='hid='|cat:$officeList[i].hospital_id|cat:'&oid='|cat:$officeList[i].office_id/}" title="销量预测">
-                        <img src="{/$root_dir/}/assets/simpla/images/icons/bullish.png" alt="销量预测" />
-                    </a>
+                        {/ if 1 eq 2/}
+                        <a style="margin:10px;" href="{/get_url rule='/hospital/forecastofficegoods' data='hid='|cat:$officeList[i].hospital_id|cat:'&oid='|cat:$officeList[i].office_id/}" title="销量预测">
+                            <img src="{/$root_dir/}/assets/simpla/images/icons/bullish.png" alt="销量预测" />
+                        </a>
+                        {//if/}
                     {//if/}
                   </td>
                 </tr>

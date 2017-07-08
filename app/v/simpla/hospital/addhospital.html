@@ -68,9 +68,11 @@
                 <label><font class="red"> * </font>地址：</label>
                 <input type="text" value="{/$hospital.address/}" class="text-input small-input" name="address" id="address" />
                 <span></span> </p>
+              {/if 1 eq 2/}
               <dt>
                 <input type="submit" name="" id="button" class="button" value="{/if $hospital.hospital_id/}编辑{/else/}添加{//if/}" />
               </dt>
+              {//if/}
             </fieldset>
           </form>
         </div>

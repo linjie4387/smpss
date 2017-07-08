@@ -21,8 +21,18 @@ class c_goods extends base_c {
 		$this->params ['head_title'] = "商品管理-" . $this->params ['head_title'];
 	}
 	
-
+	//跳转主页，不带导入导出功能
     function pageindex($inPath) {
+		$this->params = $this->gotoindex($inPath,0);
+		return $this->render('goods/index.html', $this->params);
+	}
+	//跳转主页，带导入导出功能
+	function pageimportandexport($inPath) {
+		$this->params = $this->gotoindex($inPath,1);
+		return $this->render('goods/index.html', $this->params);
+	}
+
+	function gotoindex($inPath,$importandexport){
 		$url = $this->getUrlParams ( $inPath );
 		$page = $url ['page'] ? ( int ) $url ['page'] : 1;
 		
@@ -55,10 +65,12 @@ class c_goods extends base_c {
 		$rs = $goodsObj->getGoodsList($condition, $page);
 		$this->params['goodsList'] = $rs->items;
 		
+		$this->params['importandexport'] = $importandexport;
 		$this->params['pagebar'] = $this->PageBar($rs->totalSize, base_Constant::PAGE_SIZE, $page, $inPath);
+		return $this->params;
 		
-		return $this->render('goods/index.html', $this->params);
 	}
+
 	//导出所有商品到excel表格
 	function pageexport($inPath) {
 		$excel = array ();

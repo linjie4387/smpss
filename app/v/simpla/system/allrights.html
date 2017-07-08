@@ -79,6 +79,7 @@
 			{/if $action.menu.device.logindex/}checked="checked" {//if/} /> 更新记录</li>
 	</ul>
 </div>
+<!--
 <div class="rights">
 	<p>
 		<a href="javascript:void(0)">试剂管理权限</a>
@@ -94,6 +95,7 @@
 			{/if $action.menu.reagent.logindex/}checked="checked" {//if/} /> 更新记录</li>
 	</ul>
 </div>
+-->
 <div class="rights">
     <p>
     <a href="javascript:void(0)">商品管理权限</a>
@@ -101,10 +103,18 @@
     <ul>
         <li><input type="checkbox" name="goods[]" value="商品管理:index"
             {/if $action.menu.goods.index/}checked="checked" {//if/} /> 商品管理</li>
-        <li><input type="checkbox" name="goods[]"
+        <!--li>
+        	<input type="checkbox" name="goods[]"
             value="新增商品:addgoods"
             {/if $action.menu.goods.addgoods/}checked="checked" {//if/} />
-            新增商品</li>
+            新增商品
+        </li-->
+        <li>
+        	<input type="checkbox" name="goods[]"
+            value="导入导出商品:importandexport"
+            {/if $action.menu.goods.importandexport/}checked="checked" {//if/} />
+            导入导出商品
+        </li>
     </ul>
 </div>
 <div class="rights">
