@@ -29,6 +29,7 @@ class m_ordergoods extends base_m {
         $where .= "(select goods_id from smpss_ordergoods where order_id={$order_id}";
         $where .= " union select goods_id from smpss_officegoods where office_id={$order['office_id']}) b";
 		$where .=" on a.goods_id=b.goods_id order by manu, category, name";
+
 		//echo $where;
         $goodslist = $orderObj->query($where);
 		
@@ -92,7 +93,7 @@ class m_ordergoods extends base_m {
 			$this->set("order_id",$order_id);
 			$this->set("hospital_id",(int)$order['hospital_id']);
 			$this->set("office_id",(int)$order['office_id']);
-			$this->set("goods_id",(int)$item['goods_id']);
+			$this->set("goods_id",$item['goods_id']);
 			$this->set("quantity", (float)$item['excrete']);
 			$this->set("create_time", date('Y-m-d H:i:s'));
 			$this->set("modify_time", date('Y-m-d H:i:s'));
@@ -170,12 +171,12 @@ class m_ordergoods extends base_m {
         for ($i=0; $i<$count; $i++) {
             $data['goods_id'] = $list['goods_id'][$i];
             $data['quantity'] = $list['quantity'][$i];
-            $goods = $goodsObj->selectOne("goods_id={$list['goods_id'][$i]}");
+            $goods = $goodsObj->selectOne("goods_id='{$list['goods_id'][$i]}'");
             $data['goods_name'] = $goods['name'];
             $data['spec'] = $goods['specification'];
             $data['unit'] = $goods['unit'];
             
-            $itemResult = $this->selectOne("order_id = {$data['order_id']} and goods_id = {$data['goods_id']}");
+            $itemResult = $this->selectOne("order_id = {$data['order_id']} and goods_id = '{$data['goods_id']}'");
             if ($itemResult) {
                 $data['ordergoods_id'] = $itemResult['ordergoods_id'];
             }

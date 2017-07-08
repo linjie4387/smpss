@@ -7,6 +7,8 @@ class m_delivery extends base_m {
 	const STATUS_TO_SEND = 1;
 	const STATUS_SENDED = 2;
 	const STATUS_CANCEL = 3;
+	const STATUS_UNREACH = 4;
+	const STATUS_FINISHED = 5;
 	
     public function primarykey() {
 		return 'delivery_id';
@@ -173,5 +175,12 @@ class m_delivery extends base_m {
     	}
     	$this->setError (0, "删除订单失败：" . $this->getDbError());
     	return false;
+    }
+    
+    public function changeStatus($delivery_id,$status){
+		$this->set("status",$status);
+    	$this->set("modify_time", date('Y-m-d H:i:s'));
+    	$rs = $this->save($delivery_id);
+    	return true;
     }
 }

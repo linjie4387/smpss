@@ -571,105 +571,123 @@ class c_delivery extends base_c {
      */
     function pageeditwithgoods($inPath){
         $url = $this->getUrlParams($inPath);
-		$sign_status = (string)$_POST['isSign'];
+		$sign_status = (string)$_POST['status'];
+		$order_id = (string)$_POST['order_id'];
+		$fromorder = (string)$_POST['fromorder'];
 		$withgoods_id = (int)$url['wid'] > 0 ? (int)$url ['wid'] : (int)$_POST['withgoods_id'];
-		$adminObj = new m_admin();
-        $admin = $adminObj->selectOne("admin_id = {$_COOKIE['admin_id']}");
+		
+		//获得商品父订单
+		$orderObj = new m_order();
+		$sql = 'select a.* from smpss_order a,smpss_order b where a.order_id = ifnull(if(b.fid=0,b.order_id,b.fid),b.order_id) and   b.order_id='.$order_id;
+		//echo $sql;
+		$orderrs = $orderObj->query($sql);
+		$order = $orderrs->items;
+		$fid = $order[0]['fid'];
+		if($fid==0){
+			$fid=$order_id;
+		}
 		
 		//获得当前商品配送任务
 		$deliverywithgoodsObj = new m_deliverywithgoods();
 		$goods = $deliverywithgoodsObj->selectOne("withgoods_id =".$withgoods_id);
-		//获得商品父订单
-		$orderObj = new m_order();
-		$sql = 'select a.* from smpss_order a,smpss_order b where a.order_id = ifnull(if(b.fid=0,b.order_id,b.fid),b.order_id) and   b.order_id='.$goods['order_id'];
-		//echo $sql;
-		$orderrs = $orderObj->query($sql);
-		$order = $orderrs->items;
-		//var_dump($order);
-		//待签收
-		if($sign_status=1){
+		$deliveryid = $goods['delivery_id'];
+		
+		if($sign_status){
+			$adminObj = new m_admin();
+			$admin = $adminObj->selectOne("admin_id = {$_COOKIE['admin_id']}");
 			
-			//配送任务变化，父订单要跟着变化
-			$deliverywithgoodsObj->set("sign_status",'1');
-			$deliverywithgoodsObj->set("modify_time",date ("Y-m-d H:i:s"));
-			$deliverywithgoodsObj->set("remark",$_POST['remark'].'</br>修改者：'.$admin['admin_name']);
-			$rs = $deliverywithgoodsObj->save($withgoods_id);
-			
-			//配送任务变化，父订单要跟着变化
-			$deliveryObj = new m_delivery();
-			$deliveryObj->set("status",'2');
-			$rs = $deliveryObj->save($goods['delivery_id']);
-			//修改的是商品还是发票？
-			if($goods['is_for_goods']==1){
-				$orderObj->set("is_goods_signed",'0');  //待签收
-			}else {
-				$orderObj->set("is_invoice_signed",'0');  //待签收
+			//var_dump($order);
+			//待签收
+			if($sign_status==1){
+				
+				//配送任务变化，父订单要跟着变化
+				$deliverywithgoodsObj->set("sign_status",'1');
+				$deliverywithgoodsObj->set("modify_time",date ("Y-m-d H:i:s"));
+				$deliverywithgoodsObj->set("remark",$_POST['remark'].'</br>修改者：'.$admin['admin_name']);
+				$rs = $deliverywithgoodsObj->save($withgoods_id);
+				
+				//配送任务变化，父订单要跟着变化
+				$deliveryObj = new m_delivery();
+				$deliveryObj->set("status",'2');
+				$rs = $deliveryObj->save($goods['delivery_id']);
+				//修改的是商品还是发票？
+				if($goods['is_for_goods']==1){
+					$orderObj->set("is_goods_signed",'0');  //待签收
+				}else {
+					$orderObj->set("is_invoice_signed",'0');  //待签收
+				}
+				//将订单恢复到已签收状态
+				$orderObj->set("sign_status",'1');  //待签收
+				$orderObj->set("status",'3');  //待签收
+				$orderObj->set("verify_time",date ("Y-m-d H:i:s"));	
+				$orderObj->save($order[0]['order_id']);
+	
+				$orderObj->save($goods['order_id']);
+				
+			}elseif($sign_status>=2){  //已签收、拒签、部分签收
+				$deliverywithgoodsObj = new m_deliverywithgoods();
+				$info['sign_status']=$sign_status;
+				$info['remark']=$_POST['remark'];
+				$rs = $deliverywithgoodsObj->editWithgoods($withgoods_id,$info);
+				
+				//修改的是商品还是发票？
+				if($goods['is_for_goods']==1){
+					$orderObj->set("is_goods_signed",'1');  //待签收
+				}else {
+					$orderObj->set("is_invoice_signed",'1');  //待签收
+				}
+				//将订单恢复到已签收状态
+				$orderObj->set("sign_status",$sign_status);  //代签收
+				$orderObj->set("verify_time",date ("Y-m-d H:i:s"));	
+				
+				$orderObj->save($order[0]['order_id']);
+				
+				$orderObj->save($goods['order_id']);
+	
+				$this->releaseManAndCar($goods['delivery_id']);
 			}
-			//将订单恢复到已签收状态
-			$orderObj->set("sign_status",'1');  //待签收
-			$orderObj->set("status",'3');  //待签收
-			$orderObj->set("verify_time",date ("Y-m-d H:i:s"));	
-			$orderObj->save($order[0]['order_id']);
-
-			$orderObj->save($goods['order_id']);
-			
-		}elseif($sign_status=2){  //已签收、拒签、部分签收
-			$deliverywithgoodsObj = new m_deliverywithgoods();
-			$info['sign_status']=$sign_status;
-			$info['remark']=$_POST['remark'].'</br>修改者：'.$admin['admin_name'];
-			$rs = $deliverywithgoodsObj->editWithgoods($withgoods_id,$info);
-			
-			//修改的是商品还是发票？
-			if($goods['is_for_goods']==1){
-				$orderObj->set("is_goods_signed",'1');  //待签收
-			}else {
-				$orderObj->set("is_invoice_signed",'1');  //待签收
-			}
-			//将订单恢复到已签收状态
-			$orderObj->set("sign_status",$sign_status);  //代签收
-			$orderObj->set("verify_time",date ("Y-m-d H:i:s"));	
-			$orderObj->save($order[0]['order_id']);
-			
-			$orderObj->save($goods['order_id']);
-
-			$this->releaseManAndCar($goods['delivery_id']);
+			$this->params['withgoods_id'] = $withgoods_id;
+			$this->params['order_id'] = $order_id;
+			$this->params['status'] = $info['sign_status'];
+			$this->params['remark'] = $info['remark'];
+			$this->params['fid'] = $fid;
+			$this->params['deliveryid'] = $deliveryid;
+        	return $this->render('delivery/editgoodsstatus.html', $this->params);
+		}else{
+			$this->params['withgoods_id'] = $withgoods_id;
+			$this->params['order_id'] = $order_id;
+			$this->params['fid'] = $fid;
+			$this->params['deliveryid'] = $deliveryid;
+        	return $this->render('delivery/editgoodsstatus.html', $this->params);
 		}
-		
-        if ($rs) {
-            $this->ajax_res("操作成功:{$withgoods_id}-|{$sign_status}|-".$sql, 0);
-            exit;
-        }
-        $this->ajax_res("操作失败：".$deliverywithgoodsObj->getError(), -1);
-        exit;
-        //$this->ShowMsg("操作失败" . $hospitalorderObj->getError());
-		
     }
 	//释放司机和车
 	function releaseManAndCar($deliveryid){
 		
 		$deliverywithgoodsObj = new m_deliverywithgoods();
 		//查看是否有存在未签收的配送任务
-		$goods = $deliverywithgoodsObj->selectOne("withgoods_id=".$deliveryid." and sign_status<=1 limit 0,1");
-		
+		$goods = $deliverywithgoodsObj->selectOne("delivery_id=".$deliveryid." and sign_status<=1 limit 0,1");
+
 		if($goods){
 		}else{//如果不存则，则表示都已经签收了（或者拒签了），就可以把司机和车释放掉。
 			$deliveryObj = new m_delivery();
 			$dilivwm = $deliveryObj->selectOne("delivery_id=".$deliveryid);
 			if($dilivwm){
 				$carObj = new m_car();
-				$carObj-set('isrun','0');
+				$carObj->set('isrun','0');
 				$carObj->save($dilivwm['car_id']);
 				
 				$deliverymanObj = new m_deliveryman();
-				$deliverymanObj-set('isrun','0');
+				$deliverymanObj->set('isrun','0');
 				$deliverymanObj->save($dilivwm['driver_deliveryman_id']);
 				
-				//$deliveryObj = new m_delivery();
-				//$deliveryObj-set('status','3');
-				//$deliveryObj->save($dilivwm['delivery_id']);
+				//将配送任务结束掉
+				$deliveryObj->changeStatus($deliveryid,5);
+
 			}
 		}
 	}
+	
     /**
      * 增加送货员
      * @param unknown $inPath
@@ -893,7 +911,8 @@ class c_delivery extends base_c {
 			exit();
 		}
 		$order = $orderObj->getOrderDetail((int)$_POST['id']);
-		
+
+
 		$order['order_id'] = NULL;
 		$order['remark'] = '订单号:'.$_POST['id'].',的子订单.';
 		$newOrderData = [
@@ -905,6 +924,7 @@ class c_delivery extends base_c {
 			$newOrderData['fid'] = $order['fid'];
 			$order['remark'] = '订单号:'.$order['fid'].',的子订单.';
 		}
+
 		$neworder = $orderObj->excreteOrder($order,$newOrderData);
 		if($neworder){
 			$this->ajax_res("操作成功！",1,$neworder);exit();
@@ -964,6 +984,9 @@ class c_delivery extends base_c {
 						$deliveryList[$key]['20l_quantity_quantity'] = $val['large_size_count'];
 					}
 					$order_details = $ordergoodsObj->getGoodsList($val['order_id']);
+					//if($val['order_id']==526){
+					//	echo json_encode($order_details
+					//}
 					if(!empty($order_details))$deliveryList[$key]['order_details'] = $order_details->items;
 				}
 				//计算等待的时间

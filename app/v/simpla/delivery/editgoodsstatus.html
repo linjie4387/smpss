@@ -1,0 +1,64 @@
+{/include file="simpla/common/header.html"/}
+{/include file="simpla/common/left.html"/}
+<style>.promote{display:none;}</style>
+<div id="main-content">
+  <h2>欢迎您 {/$_adminname/}</h2>
+  <p id="page-intro">你可以下面填写确认意见</p>
+  <div class="clear"></div>
+  <div class="content-box">
+   <div class="content-box-header">
+    <a href="{/get_url rule='/delivery/deliverygoodsbo' data='did='|cat:$order_fid/}" class="btn-back" title="后退"><img src="{/$root_dir/}/assets/simpla/images/icons/back.png" /></a>
+    <h3>配送任务清单_{/$delivery_id/}&nbsp;任务确认</h3>
+    <div class="clear"></div>
+   </div>
+    <div class="content-box-content">
+      <div class="tab-content default-tab" id="tab1">
+        <div class="form">
+          <form action="{/get_url rule='/delivery/editwithgoods'/}" method="post">
+            <fieldset class="clearfix">
+              <input type="hidden" value="{/$withgoods_id/}" name="withgoods_id" />
+              <input type="hidden" value="{/$order_id/}" name="order_id" />
+              <input type="hidden" value="{/$fid/}" name="fid" />
+              <input type="hidden" value="{/$fromorder/}" name="fromorder" />
+              <table width="100%" border="1">
+                <tr>
+                  <td width="12%" bgcolor="#FFFFFF">配送结果</td>
+                  <td width="88%" bgcolor="#FFFFFF">
+                    <select name="status" style="width:100%" id="status">
+                    <option value="2" {/if $status eq 2/} selected="selected" {//if/}>已签收</option>
+                    <option value="3" {/if $status eq 3/} selected="selected" {//if/}>拒签</option>
+                    <option value="4" {/if $status eq 4/} selected="selected" {//if/}>部分签收</option>
+                  </select></td>
+                </tr>
+                <tr>
+                  <td>结果描述</td>
+                  <td><textarea name="remark" cols="45" rows="5" id="remark" style="width:100%">{/$remark/}</textarea></td>
+                </tr>
+                <tr>
+                  <td height="46" align="right" bgcolor="#FFFFFF">&nbsp;</td>
+                  <td align="right" bgcolor="#FFFFFF"><input type="submit" name="button" id="button" class="button" value="提  交" />
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" name="button" id="button" onclick="cancel()" class="button" value="取  消" /></td>
+                </tr>
+              </table>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <!-- End #tab1 --> 
+    </div>
+    <!-- End .content-box-content --> 
+  </div>
+  <script>
+  function cancel(){
+	  {/if $fromorder eq 1 /}
+	  var url = "{/get_url rule='/delivery/deliverygoodsbo' data='did='|cat:$fid/}";
+	  {/else/}
+	  var url = "{/get_url rule='/delivery/deliverygoodslist' data='did='|cat:$deliveryid/}";
+	  {//if/}
+	  window.location.href=url;
+  }
+  </script>
+  <!-- End .content-box --> 
+  {/include file="simpla/common/copy.html"/} </div>
+{/include file="simpla/common/footer.html"/}

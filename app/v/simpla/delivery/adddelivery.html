@@ -245,8 +245,10 @@
 		    			var postdata = {
 		    				id:order_id,details:order_details
 		    			};
+
 		    			$.ajax({type:'POST',url:'{/get_url rule='/delivery/excreteorder'/}',data:postdata,dataType:'json',timeout:30000,success:function(msg,textStatus){
-		    				layer.msg(msg.msg);
+		    				//alert(msg.msg);
+							layer.msg(msg.msg);
 		    				if(msg.code == 1){
 		    					window.location.reload();
 		    				}

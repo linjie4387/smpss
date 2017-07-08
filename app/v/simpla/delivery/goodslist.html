@@ -48,6 +48,8 @@
                 {/if $fromorder eq '1' /}
 	                <th>确认结果</th>
                     <th>管理</th>
+                {/else/}
+                    <th>管理</th>
                 {//if/}
               </tr>
             </thead>
@@ -94,36 +96,38 @@
 	                	{/$goodsList[i].evaluate_remark/}
                    </td>
 	              {/ if $fromorder eq '1' /}
-	                <td>
-	                	{/ if $goodsList[i].commit_result eq '1' /}
-                        	已回单【{/$goodsList[i].commit_username/}】<br />
-                            {/$goodsList[i].commit_remark/}
-	                	{/ elseif $goodsList[i].commit_result eq '2' /}
-                        	回单遗失【{/$goodsList[i].commit_username/}】<br />
-                            {/$goodsList[i].commit_remark/}
-                        {/else/}
-                        	未确认
+                        <td>
+                            {/ if $goodsList[i].commit_result eq '1' /}
+                                已回单【{/$goodsList[i].commit_username/}】<br />
+                                {/$goodsList[i].commit_remark/}
+                            {/ elseif $goodsList[i].commit_result eq '2' /}
+                                回单遗失【{/$goodsList[i].commit_username/}】<br />
+                                {/$goodsList[i].commit_remark/}
+                            {/else/}
+                                未确认
+                            {//if/}
+                        </td>
+                        <td>
+                        {/if $delivery_status eq 1/}
+                          <a class="btn btn-primary btn-xs"  title="删除" onclick="javascript:del_goods('{/$goodsList[i].withgoods_id /}')">
+                              删除
+                          </a>
                         {//if/}
-                    </td>
+                        
+                        {/if $goodsList[i].sign_status >=2  /}
+                          <a class="btn btn-primary btn-xs" title="确认" onclick="javascript:commit_goods('{/$goodsList[i].withgoods_id /}','{/$goodsList[i].order_id/}')">
+                              确认
+                          </a>
+                        {//if/}
+                        </td>
+                  {/else/}
                   	<td>
-                  	{/if $delivery_status eq 1/}
-                      <a class="btn btn-primary btn-xs"  title="删除" onclick="javascript:del_goods('{/$goodsList[i].withgoods_id /}')">
-                          删除
-                      </a>
-                    {//if/}
-                    
-                  	{/if $goodsList[i].sign_status >=2  /}
-                      <a class="btn btn-primary btn-xs" title="确认" onclick="javascript:commit_goods('{/$goodsList[i].withgoods_id /}','{/$goodsList[i].order_id/}')">
-                          确认
-                      </a>
-                    {//if/}
-
-                    {/if $goodsList[i].sign_status >=2 and 1 eq 2 /}
-                      <a class="btn btn-primary btn-xs" title="修改备注信息" onclick="javascript:edit_goods('{/$goodsList[i].withgoods_id /}')">
+                    {/if $goodsList[i].sign_status <2 and 2 eq 2/}
+                      <a class="btn btn-primary btn-xs" title="修改备注信息" onclick="javascript:edit_goods('{/$goodsList[i].withgoods_id /}','{/$goodsList[i].order_id/}')">
                          修改
                       </a>
                     {//if/}
-                  	</td>
+                    </td>
                   {//if/}
                 </tr>
                 {//section/}
@@ -132,18 +136,29 @@
         </div>
       </div>
       </form>
+      <form id="form1" name="form1" method="post" action="{/get_url rule='/delivery/editwithgoods'/}">
+      		<input type="hidden" name="order_id" id="order_id" />
+      		<input type="hidden" name="withgoods_id" id="withgoods_id" />
+      		<input type="hidden" name="fromorder" id="fromorder" value="{/$fromorder/}" />
+            
+      </form>
     </div>
     <script>
 	//1:待签收,2:已签收,3:被拒签;4:部分签收
-  function edit_goods(withgoodsId){
+  function edit_goods(withgoodsId,orderId){
+	  var url = "{/get_url rule='/delivery/editwithgoods'/}";
+	  document.getElementById("form1").order_id.value = orderId;
+	  document.getElementById("form1").withgoods_id.value = withgoodsId;
+	  form1.submit();
+  }
+  function edit_goods1(withgoodsId){
 			layer.prompt({title:"请填写备注信息:",success: function(){
 					$('.layui-layer-content').prepend('<p> 请填写备注信息：</p>');
 					$('.layui-layer-content').append('<strong><br>修改状态:<br><input type="radio" name="status" value="2" style="vertical-align: middle;" /> 已签收<br><input type="radio" name="status" value="3" style="vertical-align: middle;" /> 拒签<br><input type="radio" name="status" value="4" style="vertical-align: middle;" /> 部分签收</strong>');
 				}},
 				function(val, index){
-					
 					var isSign = $('.layui-layer-content 	input[name=\'status\']:checked').val()||0;
-					aler(isSign);
+					//alert(isSign);
 					$.post("{/get_url rule='/delivery/editwithgoods'/}",{
 						withgoods_id :withgoodsId,remark:val,isSign:isSign
 					},function(res){
