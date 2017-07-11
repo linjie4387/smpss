@@ -67,7 +67,7 @@ class c_system extends base_c {
 			if($logo['size']>0){
 				$logo_url = $this->uploadLogo($logo);
 				if($logo_url){
-					$logo_url = str_replace("/var/websites/smpss","",$logo_url);
+					//$logo_url = str_replace("/var/websites/smpss","",$logo_url);
 					$constant = str_replace(base_Constant::LOGO_DATA_DIR, $logo_url, $constant);
 					//$constant = base_Constant::LOGO_DATA_DIR;
 				}
