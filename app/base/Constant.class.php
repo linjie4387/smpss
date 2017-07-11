@@ -25,6 +25,7 @@ class base_Constant {
     const KEY_DRIVERLICENSE_TYPE = 1011;
 const KEY_APPAISE_TYPE = 1012;
     const LOGO_DATA_DIR = "/app/upload/logo/logo.jpg";
+	const INSTALL_DIR = "/var/websites/jchx/smpss";
     const WP_ORDER_CONFIRM_URL = "http://wqlmk.chens.mobi/index.php?s=/addon/Hospital/OrderEvent/orderaccept";
 	//发车
     const WP_ORDER_SENDGOODS_URL = "http://wqlmk.chens.mobi/index.php?s=/addon/Hospital/Hospital/deliverySendGoods";
