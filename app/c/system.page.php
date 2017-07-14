@@ -69,6 +69,8 @@ class c_system extends base_c {
 				if($logo_url){
 					$logo_url = str_replace(base_Constant::INSTALL_DIR,"",$logo_url);
 					$constant = str_replace(base_Constant::LOGO_DATA_DIR, $logo_url, $constant);
+					echo $constant;
+					exit();
 				}
 			}
 			$f = @fopen(ROOT_APP."/base/Constant.class.php", "w+");

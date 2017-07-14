@@ -6,7 +6,7 @@
 <file name="device.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131415825634026007" remote="131415832170000000" Dst="0" />
 <file name="reagent.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="model.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
-<file name="goods.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
+<file name="goods.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131436125753416009" remote="131444935460000000" Dst="0" />
 <file name="weichatuser.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="orderpic.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="goodsimgs.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
@@ -39,4 +39,5 @@
 <file name="group.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="goodsmeta.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131436240057260000" remote="131436246970000000" Dst="0" />
 <file name="deliverycommit.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131415373283692006" remote="131415379580000000" Dst="0" />
+<file name="goods.class.php" server="114.55.27.112//data1/sci/apps/websites/test/smpss/" local="131436125753416009" remote="131444934830000000" Dst="0" />
 </dwsync>

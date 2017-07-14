@@ -33,15 +33,11 @@
                {/if $importandexport eq 1/}
                <input type="button" id="exportBtn" class="button" value="导出" title="导出所有商品信息。" />&nbsp; 
                <input type="button" id="importBtn" class="button" onclick="$('#uploadxls input[type=file]').click();" value="导入" title="导入所有商品信息。" />
+               <input type="button" id="downloadBtn" class="button" value="模板下载" title="模板下载。" />
                {//if/}	
-                </form>
             	</p>
             </fieldset>
             
-            <form id="uploadxls" style="display:none;" tabindex="-1" action="{/get_url rule="/goods/import"/}" method="post" enctype="multipart/form-data" target="upiframe">
-			    <input type="file" id="file" name="file"><input type="hidden" name="upload" id="upload" value="" />
-			    <iframe src="about:blank" tabindex="-1" style="display:none;"  name="upiframe"></iframe>
-			</form>
         </div>
         <hr />
           <table>
@@ -102,12 +98,19 @@
         </div>
       </div>
       </form>
+        <form id="uploadxls" style="display:none;" tabindex="-1" action="{/get_url rule="/goods/import"/}" method="post" enctype="multipart/form-data" target="upiframe">
+            <input type="file" id="file" name="file"><input type="hidden" name="upload" id="upload" value="" />
+            <iframe src="about:blank" tabindex="-1" style="display:none;"  name="upiframe"></iframe>
+        </form>
     </div>
     <script language="JavaScript">
     	
     	$(function(){
     		$('#exportBtn').click(function(){
     			window.open('{/get_url rule="/goods/export"/}');
+    		});
+    		$('#downloadBtn').click(function(){
+    			window.open('{/$demofile/}');
     		});
     		$('#uploadxls input[type=file]').change(function(){
     			var loadLayer = layer.load();
@@ -138,6 +141,7 @@
 		function gotoedit(gid){
 			window.location.href = '{/get_url rule="/goods/addgoods"/}'+"?gid="+gid;
 		}
+
 	</script>
     {/include file="simpla/common/copy.html"/}
   </div>

@@ -101,9 +101,9 @@
                 </p>
               <dt>
               	<input name="token" type="hidden" value="{/$upload_token/}">
-                {/if 1 eq 2/}
-                <input type="submit" name="" id="button" class="button" value="{/if $goods.goods_id/}编辑{/else/}添加{//if/}" />
                
+                <input type="submit" name="" id="button" class="button" value="{/if $goods.goods_id/}编 辑{/else/}添 加{//if/}" />
+                {/if 1 eq 2/}
                 <input type="button" class="button" value="打印图片" onclick="window.open('{/get_url rule='/goods/goodsimgprint'/}-gid-{/$goods.goods_no/}');" />
               	 {//if/}
               </dt>

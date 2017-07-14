@@ -29,6 +29,8 @@ class c_goods extends base_c {
 	//跳转主页，带导入导出功能
 	function pageimportandexport($inPath) {
 		$this->params = $this->gotoindex($inPath,1);
+		$file_url = "http://" . base_Constant::DOMAIN_NAME . base_Constant::ROOT_DIR . "/app" . base_Constant::UPLOAD_DATA_DIR. "/goods/demo.xls";
+		$this->params['demofile'] = $file_url;
 		return $this->render('goods/index.html', $this->params);
 	}
 
@@ -79,7 +81,37 @@ class c_goods extends base_c {
 		$sheet['name'] = "全部商品信息_".date('Y-m-d');
 		$sheet['sheet'] = array("商品信息");
 		$goodsObj = new m_goodsmeta();
-		$rsgoods = $goodsObj->select("");
+		$sql = "select a.* from smpss_goodsmeta a left join smpss_officegoods b on a.goods_no = b.goods_id where 1=1";
+		if($_GET){
+			$office_id = $_GET['officeid'];
+			if($office_id){
+				 $sql=$sql." and b.office_id = ".$office_id;	
+			}
+		}
+		
+		/*
+		if($_POST){
+			$office_id = $_POST['officeid'];
+			if($office_id){
+				 $sql=$sql." and b.office_id = ".$office_id;	
+			}
+			$manu = $_POST['manu'];
+			if($office_id){
+				 $sql=$sql." and a.manu like '%".$manu."%'";	
+			}
+			$category = $_POST['category'];
+			if($category){
+				 $sql=$sql." and a.category like '%".$category."%'";	
+			}
+			$key = $_POST['key'];
+			if($key){
+				 $sql=$sql." and (a.goods_no like '%".$key."%' or a.name like '%".$key."%' or a.remark like '%".$key."%')";	
+			}
+		}
+		*/
+		//echo $sql;
+		//exit();
+		$rsgoods = $goodsObj->query($sql);
 		$goods = $rsgoods->items;
 		$exc_goods = array ();
     	foreach ( $goods as $ed ) {
@@ -92,6 +124,8 @@ class c_goods extends base_c {
 			$e ['category'] = $ed ['category'];
 			$e ['is_20l'] = $ed ['is_20l'];
 			$e ['volume'] = $ed ['volume'];
+			$e ['colorcode'] = $ed ['colorcode'];
+			$e ['remark'] = $ed ['remark'];
 			$exc_goods[] = $e;
     	}
 		$goods_title = array (
@@ -103,7 +137,9 @@ class c_goods extends base_c {
     			"F:10"=>'适用机型',
     			"G:10"=>'项目品类',
     			"H:10"=>'是否大包装',
-    			"I:10"=>'容积'
+    			"I:10"=>'容积',
+    			"J:10"=>'色标',
+    			"K:10"=>'备注'
     	);
 		$sheet['title'][] = $goods_title;
 		$sheet['lists']['s0'] = $exc_goods;
@@ -151,16 +187,18 @@ class c_goods extends base_c {
 			
             $sheet = $PHPExcel->getSheet(0);
             $highestRow = $sheet->getHighestRow(); // 取得总行数
-            
+            //$this->ajax_res ( "导入字段数不够.".$highestRow,-1);exit;
             $highestColumn = $sheet->getHighestColumn();
             $highestColumnIdx = PHPExcel_Cell::columnIndexFromString($highestColumn); // 取得总列数
-            if ($highestColumnIdx != 9) {
+            if ($highestColumnIdx != 11) {
             	$this->ajax_res ( "导入字段数不够.".$highestColumnIdx,-1);exit;
             }
-            $highestColumnIdx = 10;
+            $highestColumnIdx = 11;
 			$goodsObj = new m_goodsmeta();
 			$goodsObj->delete();
 			$inrsetCount = 0;
+            	
+			
 			for ($row = 2; $row <= $highestRow; $row++){//行数是以第1行开始
 				$data = array();
 				for ($column = 0; $column < $highestColumnIdx; $column++) {
@@ -176,6 +214,8 @@ class c_goods extends base_c {
 						case 6: $data['category'] = $value;    break;
 						case 7: $data['is_20l'] = $value;    break;
 						case 8: $data['volume'] = $value;    break;
+						case 9: $data['colorcode'] = $value;    break;
+						case 10: $data['remark'] = $value;    break;
 					}
 				}
 				$isSave = $goodsObj->selectOne('goods_no = '.$data['goods_no']);
@@ -196,8 +236,9 @@ class c_goods extends base_c {
 		$goods_id = $url['gid'] > 0 ? $url['gid'] : $_POST['goods_id'];
 		if(empty($goods_id)){
 			$goods_id=$_GET['gid'];
-			
 		}
+		//echo $goods_id;
+		//exit();
 		$goodsObj = new m_goods();
 		$goodsmetaObj = new m_goodsmeta();
 		$goodsinfo = $goodsObj->selectOne("goods_id='".$goods_id."'");
@@ -205,6 +246,7 @@ class c_goods extends base_c {
 		$goods_imgObj = new m_goodsimgs();
 		$goods_imgs = $goods_imgObj->selectOne("goods_no='".$goodsinfo['goods_no']."'");
 		//var_dump($goods_imgs);
+		$flag = false;
 		if ($_POST) {
 			$post = base_Utils::shtmlspecialchars($_POST);
 			if (is_uploaded_file($_FILES['regimg']['tmp_name'])){
@@ -214,7 +256,7 @@ class c_goods extends base_c {
 				$target_name = $target_name.$file_name;
 				if(!move_uploaded_file($tempFiles, $target_name))$this->ShowMsg('上传商品注册证图片失败.');
 				$post['regimg'] = "http://" . base_Constant::DOMAIN_NAME . base_Constant::ROOT_DIR . "/app" . base_Constant::UPLOAD_DATA_DIR. "/commodity/".$file_name;
-				$goods_imgObj->create(['regimg'=>$post['regimg'],'goods_no'=>$goodsinfo['goods_no'],'id'=>$goods_imgs['id']]);
+				$flag =$goods_imgObj->create(['regimg'=>$post['regimg'],'goods_no'=>$goodsinfo['goods_no'],'id'=>$goods_imgs['id']]);
 			}
 			
 			if (is_uploaded_file($_FILES['noticeimg']['tmp_name'])){
@@ -224,7 +266,7 @@ class c_goods extends base_c {
 				$target_name = $target_name.$file_name;
 				if(!move_uploaded_file($tempFiles, $target_name))$this->ShowMsg('上传说明书图片失败.');
 				$post['noticeimg'] = "http://" . base_Constant::DOMAIN_NAME . base_Constant::ROOT_DIR . "/app" . base_Constant::UPLOAD_DATA_DIR. "/commodity/".$file_name;
-				$goods_imgObj->create(['noticeimg'=>$post['noticeimg'],'goods_no'=>$goodsinfo['goods_no'],'id'=>$goods_imgs['id']]);
+				$flag =$goods_imgObj->create(['noticeimg'=>$post['noticeimg'],'goods_no'=>$goodsinfo['goods_no'],'id'=>$goods_imgs['id']]);
 			}
 			
 			if (is_uploaded_file($_FILES['labelimg']['tmp_name'])){
@@ -234,11 +276,14 @@ class c_goods extends base_c {
 				$target_name = $target_name.$file_name;
 				if(!move_uploaded_file($tempFiles, $target_name))$this->ShowMsg('上传商品标签图片失败.');
 				$post['labelimg'] = "http://" . base_Constant::DOMAIN_NAME . base_Constant::ROOT_DIR . "/app" . base_Constant::UPLOAD_DATA_DIR. "/commodity/".$file_name;
-				$goods_imgObj->create(['labelimg'=>$post['labelimg'],'goods_no'=>$goodsinfo['goods_no'],'id'=>$goods_imgs['id']]);
+				$flag =$goods_imgObj->create(['labelimg'=>$post['labelimg'],'goods_no'=>$goodsinfo['goods_no'],'id'=>$goods_imgs['id']]);
 			}
-			if ($goodsmetaObj->create($post, "TRUE")) {
+			if ($flag) {
 				$this->ShowMsg( "操作成功！", $this->createUrl("/goods/addgoods?gid={$goods_id}" ), 2, 1);
 			}
+			//if ($goodsmetaObj->create($post, "TRUE")) {
+			//	$this->ShowMsg( "操作成功！", $this->createUrl("/goods/addgoods?gid={$goods_id}" ), 2, 1);
+			//}
 			$this->ShowMsg("操作失败" . $goodsObj->getError());
 		}
 		

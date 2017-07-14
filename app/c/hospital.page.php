@@ -163,7 +163,7 @@ class c_hospital extends base_c {
 		$officegoodsObj = new m_officegoods();
 		
 		$sheet['name'] = "科室商品信息_".date('Y-m-d');
-		$sheet['sheet'] = array("科室信息","商品信息");
+		$sheet['sheet'] = array("科室信息","全量商品信息");
 		$maps = '';
 		if((int)$_GET['hospital_id']!= 0)$maps = 'hospital_id='.(int)$_GET['hospital_id'];
 		
@@ -236,17 +236,23 @@ class c_hospital extends base_c {
 			$goodsInfo ['machine'] = $ed ['machine'];
 			$goodsInfo ['category'] = $ed ['category'];
 			$goodsInfo ['is_20l'] = $ed ['is_20l'];
+			$goodsInfo ['volume'] = $ed ['volume'];
+			$goodsInfo ['colorcode'] = $ed ['colorcode'];
+			$goodsInfo ['remark'] = $ed ['remark'];
 			$exc_goods[] = $goodsInfo;
     	}
 		$goods_title = array (
-			"A:20"=>'商品编号',
-			"B:20"=>'商品名称',
-			"C:10"=>'规格',
-			"D:10"=>'单位',
-			"E:10"=>'厂商全名',
-			"F:10"=>'适用机型',
-			"G:10"=>'项目品类',
-			"H:10"=>'是否大包装'
+    			"A:20"=>'商品编号',
+    			"B:20"=>'商品名称',
+    			"C:10"=>'规格',
+    			"D:10"=>'单位',
+    			"E:10"=>'厂商全名',
+    			"F:10"=>'适用机型',
+    			"G:10"=>'项目品类',
+    			"H:10"=>'是否大包装',
+    			"I:10"=>'容积',
+    			"J:10"=>'色标',
+    			"K:10"=>'备注'				
     	);
 		$sheet['title'][] = $goods_title;
 		$sheet['lists']['s1'] = $exc_goods;
@@ -805,7 +811,7 @@ class c_hospital extends base_c {
     			"J:20"=>'备注'
     	);
 		$sheet['name'] = "科室商品模板_".date('Y-m-d');
-		$sheet['sheet'] = array("模板","商品信息");
+		$sheet['sheet'] = array("导入模板","全量商品信息");
 		$sheet['title'][] = $titles;
 		$sheet['lists']['s0'] = $excel;
 		
@@ -821,7 +827,10 @@ class c_hospital extends base_c {
 			$e ['manu'] = $ed ['manu'];
 			$e ['machine'] = $ed ['machine'];
 			$e ['category'] = $ed ['category'];
-			
+			$e ['is_20l'] = $ed ['is_20l'];
+			$e ['volume'] = $ed ['volume'];
+			$e ['colorcode'] = $ed ['colorcode'];
+			$e ['remark'] = $ed ['remark'];
 			$exc_goods[] = $e;
     	}
 		
@@ -832,7 +841,11 @@ class c_hospital extends base_c {
     			"D:10"=>'单位',
     			"E:10"=>'厂商全名',
     			"F:10"=>'适用机型',
-    			"G:10"=>'项目品类'
+    			"G:10"=>'项目品类',
+    			"H:10"=>'是否大包装',
+    			"I:10"=>'容积',
+    			"J:10"=>'色标',
+    			"K:10"=>'备注'				
     	);
 		$sheet['title'][] = $goods_title;
 		$sheet['lists']['s1'] = $exc_goods;
@@ -903,7 +916,8 @@ class c_hospital extends base_c {
 		
 			$officegoodsObj = new m_officegoods ();
 			$goodsObj = new m_goods();
-			
+			$delsql = "delete from smpss_officegoods  where  office_id = ifnull({$office_id},-1)";
+			$officegoodsObj->query($delsql);
 			for ($row = 2; $row <= $highestRow; $row++){//行数是以第1行开始
 				$data = array();
 				for ($column = 0; $column < $highestColumnIdx; $column++) {

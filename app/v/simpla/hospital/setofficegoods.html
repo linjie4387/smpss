@@ -37,9 +37,9 @@ file="simpla/common/left.html"/}
 			<div class="tab-content default-tab" id="tab1">
 				<div class="form">
 						<p>科室名称：{/$office.hospital_name/}_{/$office.name/}</p>
-						<div>科室库存安全倍数：
+						<div style="display:none">科室库存安全倍数：
 							<input type="text" value="{/$office.safe_stock_ratio/}" id="safe_stock_ratio" />
-							<a class="button" href="#" onclick="changeRatio();">
+                                <a class="button" href="#" onclick="changeRatio();">
 								<i class="icon-edit"></i>修改
 							</a>
 						</div>
@@ -79,10 +79,10 @@ file="simpla/common/left.html"/}
 										<td>{/$goodsList[i].machine/}</td>
 										<td>{/$goodsList[i].category/}</td>
 										<td><input type="text" readonly id="r_{/$goodsList[i].goods_id/}" data="{/$goodsList[i].goods_id/}" value="{/$goodsList[i].remark/}" class="remark edit-label small-input"/>
-											<i class="icon-edit" onclick="editremark({/$goodsList[i].goods_id/})"></i>
+											<i class="icon-edit" onclick="editremark('{/$goodsList[i].goods_id/}')"></i>
 										</td>
 										<td><input type="text" readonly id="s_{/$goodsList[i].goods_id/}" data="{/$goodsList[i].goods_id/}" value="{/$goodsList[i].safe_stock/}" class="safe-stock edit-label small-input"/>
-											<i class="icon-edit" onclick="editsafestock({/$goodsList[i].goods_id/})"></i>
+											<i class="icon-edit" onclick="editsafestock('{/$goodsList[i].goods_id/}')"></i>
 										</td>
 									</tr>
 									{//section/}
@@ -91,7 +91,8 @@ file="simpla/common/left.html"/}
 							<div style="padding:10px 0px;">
 								<input type="button" onclick="del();" id="button" class="button" value="删除商品" /> 
 								<input type="button" onclick="addgoods();" name="" id="button" class="button" value="添加商品" />
-								<input type="button" onclick="showupload();" name="" id="btnupload" class="button" value="批量导入" />
+								<input type="button" onclick="showupload();" name="" id="btnupload" class="button" value="导入商品" />
+								<input type="button" onclick="exportgoods('{/$office.office_id/}');" name="" id="button" class="button" value="导出商品" />
 								<input type="button" onclick="download();" name="" id="btndownload" class="button" value="模板下载" />
 								<input type="button" onclick="goback();" name="" id="button" class="button" value="返回" />
 							</div>
@@ -209,6 +210,10 @@ file="simpla/common/left.html"/}
 			{/else/}
 			window.location="{/get_url rule='/order/addrecord' data='oid='|cat:$order_id/}";
 			{//if/}
+		}
+		
+		function exportgoods(officeid){
+			window.open('{/get_url rule="/goods/export"/}?officeid='+officeid);
 		}
 		
 		function download(){

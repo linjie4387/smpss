@@ -3,4 +3,18 @@
 <file name="addhospital.html" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131439668818230014" remote="131439675860000000" Dst="0" />
 <file name="addoffice.html" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131439669282670014" remote="131439676310000000" Dst="0" />
 <file name="officeindex.html" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131439670227900014" remote="131439677250000000" Dst="0" />
+<file name="setofficegoods.html" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131442572383000000" remote="131442579500000000" Dst="0" />
+<file name="setofficegoods.html" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131442572383000000" remote="131442580220000000" Dst="0" />
+<file name="setofficegoods.html" server="114.55.27.112//data1/sci/apps/websites/test/smpss/" local="131442572383000000" remote="131442579900000000" Dst="0" />
+<file name="addhospital.html" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131439702529150014" remote="131443251340000000" Dst="0" />
+<file name="addoffice.html" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131439702529160014" remote="131443251350000000" Dst="0" />
+<file name="addofficegoods.html" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131436125758346009" remote="131443251350000000" Dst="0" />
+<file name="add_forecast.html" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131436125758296009" remote="131443251350000000" Dst="0" />
+<file name="forecast_detail.html" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131436125758356009" remote="131443251360000000" Dst="0" />
+<file name="index.html" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131436125758366009" remote="131443251360000000" Dst="0" />
+<file name="officeindex.html" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131439702529170014" remote="131443251360000000" Dst="0" />
+<file name="print.html" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131436125758396009" remote="131443251360000000" Dst="0" />
+<file name="print_forecast.html" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131436125758406009" remote="131443251370000000" Dst="0" />
+<file name="sales_forecast.html" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131436125758416009" remote="131443251370000000" Dst="0" />
+<file name="sync_result.html" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131436125758446009" remote="131443251370000000" Dst="0" />
 </dwsync>
