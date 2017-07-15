@@ -11,7 +11,7 @@
 <file name="account.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="goods.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131444878321880000" remote="131444935370000000" Dst="0" />
 <file name="user.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
-<file name="delivery.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131439849716510014" remote="131439856920000000" Dst="0" />
+<file name="delivery.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131445625976640000" remote="131445633250000000" Dst="0" />
 <file name="device.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131436125752386009" remote="131444935510000000" Dst="0" />
 <file name="supplier.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="stock.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
@@ -25,4 +25,6 @@
 <file name="hospital.page.php" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131444926161330000" remote="131444933380000000" Dst="0" />
 <file name="hospital.page.php" server="114.55.27.112//data1/sci/apps/websites/test/smpss/" local="131444926161330000" remote="131444934600000000" Dst="0" />
 <file name="device.page.php" server="114.55.27.112//data1/sci/apps/websites/test/smpss/" local="131436125752386009" remote="131444934910000000" Dst="0" />
+<file name="delivery.page.php" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131445625976640000" remote="131445633860000000" Dst="0" />
+<file name="delivery.page.php" server="114.55.27.112//data1/sci/apps/websites/test/smpss/" local="131445625976640000" remote="131445634260000000" Dst="0" />
 </dwsync>

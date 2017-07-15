@@ -86,6 +86,7 @@ class m_car extends base_m {
         $this->set("model", $data['model']);
 		$this->set("mold", $data['mold']);
         $this->set("volume", $data['volume']);
+        $this->set("isrun", $data['isrun']);
         if ($data['car_id']) {
             $this->set("modify_time", date('Y-m-d H:i:s'));
         }

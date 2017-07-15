@@ -28,7 +28,7 @@
               <label><font class="red"> * </font>手机号码：</label>
               <input type="text" value="{/$deliveryman.mobile/}" class="text-input small-input" name="mobile" id="mobile" />
               <span></span> </p>
-              <p><label>微信用户：</label>
+              <p><label>微信用户：{/$deliveryman.weichatuser_id/}</label>
               <span><select name="weichatuser_id">
                   <option value="0">选择微信用户</option>
                   {/section name=i loop=$weichatuserList/}<option value="{/$weichatuserList[i].weichatuser_id/}" {/if $weichatuserList[i].weichatuser_id eq $deliveryman.weichatuser_id/}selected="selected"{//if/}>{/$weichatuserList[i].name/}</option>{//section/}
@@ -51,6 +51,13 @@
                   {//section/}
               </select>
               <span></span>
+              </p>
+              <p>
+              <label><font class="red"> * </font>状态：</label>
+              <select id="isrun" name="isrun" style="width:200px">
+                  <option value="0" {/if $deliveryman.isrun eq 0/}selected="selected"{//if/}>空闲</option>
+                  <option value="1" {/if $deliveryman.isrun eq 1/}selected="selected"{//if/}>占用</option>
+              </select>
               </p>
               <dt>
                 <input type="submit" name="" id="button" class="button" value="{/if $deliveryman.deliveryman_id/}编辑{/else/}添加{//if/}" />

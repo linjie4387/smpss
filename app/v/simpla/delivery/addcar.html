@@ -46,16 +46,23 @@
               
               <p id="dlt">
               <label><font class="red"> * </font>准驾级别：</label>
-              <select id="mold" name="mold">
+              <select id="mold" name="mold" style="width:200px">
                   <option value="0">-----选择准驾级别-----</option>
                   {/section name=i loop=$driverlicensetypeList/}
-                  <option value="{/$driverlicensetypeList[i].value/}" {/if $driverlicensetypeList[i].value eq $deliveryman.driverlicense_type/}selected="selected"{//if/}>
+                  <option value="{/$driverlicensetypeList[i].value/}" {/if $driverlicensetypeList[i].value eq $car.mold /}selected="selected"{//if/}>
                       {/$driverlicensetypeList[i].pre/}{/$driverlicensetypeList[i].name/}
                   </option>
                   {//section/}
               </select>
               </p>
-              
+              <p>
+              <label><font class="red"> * </font>状态：</label>
+              <select id="isrun" name="isrun" style="width:200px">
+                  <option value="0" {/if $car.isrun eq 0/}selected="selected"{//if/}>空闲</option>
+                  <option value="1" {/if $car.isrun eq 1/}selected="selected"{//if/}>占用</option>
+              </select>
+              </p>
+
               <dt>
                 <input type="submit" name="" id="button" class="button" value="{/if $car.car_id/}编辑{/else/}添加{//if/}" />
               </dt>

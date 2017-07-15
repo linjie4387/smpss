@@ -18,9 +18,9 @@
 <file name="reagentdevice.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="hospital.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131415825448686007" remote="131415832110000000" Dst="0" />
 <file name="office.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
-<file name="deliveryman.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
+<file name="deliveryman.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131445625541110000" remote="131445632750000000" Dst="0" />
 <file name="ordergoods.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131439831128050014" remote="131439838140000000" Dst="0" />
-<file name="car.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
+<file name="car.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131445613810000000" remote="131445621080000000" Dst="0" />
 <file name="forecast.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="forecastdetail.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="engineerdistrict.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
@@ -40,4 +40,8 @@
 <file name="goodsmeta.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131436240057260000" remote="131436246970000000" Dst="0" />
 <file name="deliverycommit.class.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131415373283692006" remote="131415379580000000" Dst="0" />
 <file name="goods.class.php" server="114.55.27.112//data1/sci/apps/websites/test/smpss/" local="131436125753416009" remote="131444934830000000" Dst="0" />
+<file name="car.class.php" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131445613810000000" remote="131445633910000000" Dst="0" />
+<file name="deliveryman.class.php" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131445625541110000" remote="131445633970000000" Dst="0" />
+<file name="car.class.php" server="114.55.27.112//data1/sci/apps/websites/test/smpss/" local="131445613810000000" remote="131445634300000000" Dst="0" />
+<file name="deliveryman.class.php" server="114.55.27.112//data1/sci/apps/websites/test/smpss/" local="131445625541110000" remote="131445634330000000" Dst="0" />
 </dwsync>

@@ -76,6 +76,7 @@ class m_deliveryman extends base_m {
         $this->set("name", $data['name']);
         $this->set("mobile", $data['mobile']);
         $this->set("is_driver", $data['is_driver']);
+        $this->set("isrun", $data['isrun']);
         if ((int)$data['is_driver'] > 0) {
             $this->set("driverlicense_type", $data['driverlicense_type']);
         }

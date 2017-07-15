@@ -60,7 +60,7 @@ class c_delivery extends base_c {
 			$post = base_Utils::shtmlspecialchars($_POST);
 			
 			if ($carObj->create($post, "TRUE")) {
-				$this->ShowMsg( "操作成功！", $this->createUrl("/delivery/addcar" ), 2, 1);
+				$this->ShowMsg( "操作成功！", $this->createUrl("/delivery/caradm" ), 2, 1);
 			}
 			$this->ShowMsg("操作失败" . $carObj->getError());
 		}
@@ -117,7 +117,7 @@ class c_delivery extends base_c {
             $post = base_Utils::shtmlspecialchars($_POST);
             
             if ($deliverymanObj->create($post, "TRUE")) {
-                $this->ShowMsg( "操作成功！", $this->createUrl("/delivery/adddeliveryman" ), 2, 1);
+                $this->ShowMsg( "操作成功！", $this->createUrl("/delivery/manadm" ), 2, 1);
             }
             $this->ShowMsg("操作失败" . $deliverymanObj->getError());
         }
