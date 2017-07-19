@@ -157,7 +157,7 @@ class c_delivery extends base_c {
         if ($_POST) {
             $key = base_Utils::getStr($_POST['key'], 'html');
             if ($key) {
-                $condition .= "(car_license like '%{$key}%' or delivery_id like '%{$key}%' or  driver_name like '%{$key}%' or exists (select 1 from smpss_deliverywithgoods g where g.delivery_id=smpss_delivery.delivery_id and g.order_id={$key}))";
+                $condition .= "(car_license like '%{$key}%' or delivery_id like '%{$key}%' or  driver_name like '%{$key}%' or exists (select 1 from smpss_deliverywithgoods g where g.delivery_id=smpss_delivery.delivery_id and g.order_id like '%{$key}%'))";
                 $this->params['key'] = $key;
             }
             $status = (int)$_POST['status'];
@@ -1230,6 +1230,14 @@ class c_delivery extends base_c {
 			$goods_id = $goodsres['goods_id'];
 			$goodsObj = new m_goods();
 			$goodsInfo = $goodsObj->selectOne("goods_id = {$goods_id}");
+			
+			
+			$update_openid = "update smpss_delivery set driver_openid='".$postData['users'][0]['open_id']."' where delivery_id=".$delivery_id;
+			$deliveryObj->query($update_openid);
+			//echo $update_openid;
+			//echo json_encode($postData);
+			//echo $postData['user'][0]['open_id'];
+			
 			//注意如果字数太长，或者微信模板不对，也将产生消息发送不出去。
 			$postData["token"] = base_Constant::WP_APP_TOKEN;
 			$postData['id'] = $delivery_id;
@@ -1237,7 +1245,9 @@ class c_delivery extends base_c {
 			$postData['consignee'] = $orderInfo['hospital_name'];			
 			$postData['address'] = $hospitalInfo['address'];		
 			$postData['status'] = $deliveryInfo['status_name'];
-			$postData['open_id'] = $postData['user'][0]['open_id'];
+			$postData['open_id'] = $postData['users'][0]['open_id'];
+			
+			///exit();
 			//var_dump(json_encode($postData));
 			$resp = base_Utils::httpPost(base_Constant::WP_DELIVERY_CONFIRM_URL, urldecode(json_encode($postData)),array('Content-Type'=>'text/plain;charset=UTF-8'));
 			//修改车辆为占用状态

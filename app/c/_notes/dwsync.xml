@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="order.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131416293949279019" remote="131416301870000000" Dst="0" />
-<file name="hospital.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131444926161330000" remote="131444935710000000" Dst="0" />
+<file name="order.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131447668473109027" remote="131447684910000000" Dst="0" />
+<file name="hospital.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131444990203190000" remote="131447684870000000" Dst="0" />
 <file name="report.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="main.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="district.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
@@ -11,8 +11,8 @@
 <file name="account.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="goods.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131444878321880000" remote="131444935370000000" Dst="0" />
 <file name="user.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
-<file name="delivery.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131445625976640000" remote="131445633250000000" Dst="0" />
-<file name="device.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131436125752386009" remote="131444935510000000" Dst="0" />
+<file name="delivery.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131445894099680000" remote="131445901320000000" Dst="0" />
+<file name="device.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131449258364095027" remote="131449265750000000" Dst="0" />
 <file name="supplier.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="stock.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131408703160000000" remote="131408703160000000" Dst="0" />
 <file name="deliverycommit.page.php" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131415047043310000" remote="131415053330000000" Dst="0" />
@@ -23,8 +23,11 @@
 <file name="goods.page.php" server="114.55.27.112//data1/sci/apps/websites/test/smpss/" local="131444878321880000" remote="131444934990000000" Dst="0" />
 <file name="goods.page.php" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131444878321880000" remote="131444885540000000" Dst="0" />
 <file name="hospital.page.php" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131444926161330000" remote="131444933380000000" Dst="0" />
-<file name="hospital.page.php" server="114.55.27.112//data1/sci/apps/websites/test/smpss/" local="131444926161330000" remote="131444934600000000" Dst="0" />
+<file name="hospital.page.php" server="114.55.27.112//data1/sci/apps/websites/test/smpss/" local="131444990203190000" remote="131447683870000000" Dst="0" />
 <file name="device.page.php" server="114.55.27.112//data1/sci/apps/websites/test/smpss/" local="131436125752386009" remote="131444934910000000" Dst="0" />
-<file name="delivery.page.php" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131445625976640000" remote="131445633860000000" Dst="0" />
+<file name="delivery.page.php" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131445878794520000" remote="131445887230000000" Dst="0" />
 <file name="delivery.page.php" server="114.55.27.112//data1/sci/apps/websites/test/smpss/" local="131445625976640000" remote="131445634260000000" Dst="0" />
+<file name="order.page.php" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131447668473109027" remote="131447678580000000" Dst="0" />
+<file name="order.page.php" server="114.55.27.112//data1/sci/apps/websites/test/smpss/" local="131447668473109027" remote="131447683830000000" Dst="0" />
+<file name="device.page.php" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131449267892215027" remote="131449275260000000" Dst="0" />
 </dwsync>

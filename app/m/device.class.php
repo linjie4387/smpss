@@ -113,6 +113,8 @@ class m_device extends base_m {
             $officeData['contact_phone'] = $data['contact_phone'];
         	$officeData['space'] = $data['space'];
             $rs = $officeObj->create($officeData);
+			//var_dump($rs);
+			//echo '2222222222222222222';
             if (!$rs) {
                 $this->setError(0, "保存科室数据失败" . $officeObj->getError());
                 return false;

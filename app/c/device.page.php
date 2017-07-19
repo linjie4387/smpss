@@ -131,6 +131,13 @@ class c_device extends base_c {
             $deviceObj = new m_device();
             //删除现有仪器数据
             $deviceObj->delete();
+			$hospitalObj = new m_hospital();
+			$hospitalObj->delete();
+			//echo '11111111111111';
+			$officeObj = new m_office();
+			$officeObj->delete();
+			//echo '222222222222';
+			//exit();
 			//删除现有科室商品数据
 			//$officegoodsObj = new m_officegoods();
 			//$officegoodsObj->delete();
