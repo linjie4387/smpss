@@ -113,8 +113,7 @@ class m_device extends base_m {
             $officeData['contact_phone'] = $data['contact_phone'];
         	$officeData['space'] = $data['space'];
             $rs = $officeObj->create($officeData);
-			//var_dump($rs);
-			//echo '2222222222222222222';
+
             if (!$rs) {
                 $this->setError(0, "保存科室数据失败" . $officeObj->getError());
                 return false;
@@ -125,20 +124,22 @@ class m_device extends base_m {
         }
 
         // 供应商处理
-        $supplierObj = new m_supplier();
-        $supplier = $supplierObj->selectOne("code = '{$data['supplier_code']}'");
-        if ($supplier) {
-            $supplier_id = $supplierData['supplier_id'] = $supplier['supplier_id'];
-        }
-        else {
-            $supplierData['code'] = $data['supplier_code'];
-
-            $supplier_id = $supplierObj->create($supplierData);
-            if (!$rs) {
-                $this->setError(0, "保存供应商数据失败" . $supplierObj->getError());
-                return false;
-            }
-        }
+		if($data['supplier_code']){
+			$supplierObj = new m_supplier();
+			$supplier = $supplierObj->selectOne("code = '{$data['supplier_code']}'");
+			if ($supplier) {
+				$supplier_id = $supplierData['supplier_id'] = $supplier['supplier_id'];
+			}
+			else {
+				$supplierData['code'] = $data['supplier_code'];
+	
+				$supplier_id = $supplierObj->create($supplierData);
+				if (!$rs) {
+					$this->setError(0, "保存供应商数据失败" . $supplierObj->getError());
+					return false;
+				}
+			}
+		}
         
         // 模型处理, 供应商有可能为空
         if ($supplier_id) {
@@ -187,13 +188,17 @@ class m_device extends base_m {
         $this->set("admin_id", $_COOKIE['admin_id']);
         $this->set("create_time", date('Y-m-d H:i:s'));
         $this->set("delivery_msg",$data['delivery_msg']);
-
-        if ($device['device_id']) {
-            $rs = $this->save($device['device_id']);
-        }
-        else {
-            $rs = $this->save(false);
-        }
+		
+		if($data['id_code']){
+			if ($device['device_id']) {
+				$rs = $this->save($device['device_id']);
+			}
+			else {
+				$rs = $this->save(false);
+			}
+		}else{
+			$rs=true;
+		}
         if ($rs)
         {
             return $rs;
