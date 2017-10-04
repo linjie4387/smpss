@@ -26,11 +26,11 @@ class m_ordergoods extends base_m {
             return false;
         }
         $where = "select * from smpss_goods as a join ";
-        $where .= "(select ordergoods_id sort, goods_id from smpss_ordergoods where order_id={$order_id}";
-        $where .= " union select sort , goods_id from smpss_officegoods where office_id={$order['office_id']}) b";
+        $where .= "(select k2.sort, k1.goods_id from smpss_ordergoods k1 left join smpss_officegoods k2 on k1.goods_id = k2.goods_id where k1.order_id={$order_id}";
+        $where .= " union ";
+		$where .= "select sort , goods_id from smpss_officegoods where office_id={$order['office_id']}) b";
 		$where .=" on a.goods_id=b.goods_id order by b.sort ,manu, category, name";
 
-		//echo $where;
         $goodslist = $orderObj->query($where);
 		
         if (!empty($goodslist->items)) {

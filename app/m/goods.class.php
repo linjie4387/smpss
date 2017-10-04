@@ -82,6 +82,7 @@ class m_goods extends base_m {
         $this->set("manu", $data['manu']);
         $this->set("extern_name", $data['extern_name']);
         $this->set("goods_no", $data['goods_no']);
+        $this->set("testnum", $data['testnum']);
         $this->set("specification", $data['specification']);
 		$this->set("volume", $data['volume']);
         $this->set("unit", $data['unit']);
@@ -122,6 +123,7 @@ class m_goods extends base_m {
         $this->set("specification", $data['specification']);
         $this->set("unit", $data['unit']);
 		$this->set("volume", $data['volume']);
+        $this->set("testnum", $data['testnum']);		
         $this->set("category", $data['category']);
         $this->set("machine", $data['machine']);
         $this->set("is_20l", $data['is_20l']);

@@ -217,9 +217,15 @@
                   {/elseif $orderList[i].is_valid eq 0/}
                   	<span style="font-weight:bold; color:#999;">已结束</span>
                   {/else/}
-                      {/$orderList[i].status_name/}
+                      {/if $orderList[i].status eq 3 /}
+                      <span style="font-weight:bold; color:#090;">
+                      {/else/}
+                      <span style="font-weight:bold; color:#f00;">
+                      {//if/}
+                      	{/$orderList[i].status_name/}
+                      </span>
                       {/if $orderList[i].sign_status eq 4 /}
-                      	<br/><span style="color:red;">(部分签收)</span>
+                      <br/><span style="color:red;">(部分签收)</span>
                       {//if/}
                   {//if/}
                   </td>
@@ -242,7 +248,9 @@
                       {/if $orderList[i].is_valid neq 2 /}
                       <div align="center">
                        <!--a class="btn btn-danger btn-xs" class="btn btn-danger btn-xs"  href="tradeindex?parent_order_id={/$orderList[i].order_id/}"-->
-                      <a class="btn btn-success btn-xs" class="btn btn-danger btn-xs"  href="{/get_url rule='/delivery/deliverygoodsbo' data='did='|cat:$orderList[i].order_id/}">查看配送单</a>
+                      	{/if $orderList[i].delivery_cnt gt 0 /}
+                      		<a class="btn btn-success btn-xs" class="btn btn-danger btn-xs"  href="{/get_url rule='/delivery/deliverygoodsbo' data='did='|cat:$orderList[i].order_id/}">查看配送单</a>
+                      	{//if/}
                       </div>
                       {//if/}
                   </td>
@@ -257,18 +265,19 @@
                       </a>
 
                       {//if/}
-
-                      {/if $orderList[i].status eq 3 && $orderList[i].hospitalorder_id neq null/}
+					  
+                      
+                      <!--if $orderList[i].status eq 3 && $orderList[i].hospitalorder_id neq null
 
                       </br>
 
-                      <a href="{/get_url rule='/order/deliveryprint' data='oid='|cat:$orderList[i].order_id/}" title="出库单凭证">
+                      <a href="{get_url rule='/order/deliveryprint' data='oid='|cat:$orderList[i].order_id}" title="出库单凭证">
 
                           出库单
 
                       </a>
 
-                      {//if/}
+                      if-->
 
                   </td>
 

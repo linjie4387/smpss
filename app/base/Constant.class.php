@@ -27,6 +27,8 @@ const KEY_APPAISE_TYPE = 1012;
     const LOGO_DATA_DIR = "/app/upload/logo/logo.jpg";
 	const INSTALL_DIR = "/var/websites/jchx/smpss";
     const WP_ORDER_CONFIRM_URL = "http://wqlmk.chens.mobi/index.php?s=/addon/Hospital/OrderEvent/orderaccept";
+	//删除预订单通知
+    const WP_PER_ORDER_DEL_URL = "http://wqlmk.chens.mobi/index.php?s=/addon/Hospital/OrderEvent/delperorder";
 	//发车
     const WP_ORDER_SENDGOODS_URL = "http://wqlmk.chens.mobi/index.php?s=/addon/Hospital/Hospital/deliverySendGoods";
     //签收和部分签收

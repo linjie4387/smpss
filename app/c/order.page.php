@@ -23,7 +23,7 @@ class c_order extends base_c {
 		$page = $url ['page'] ? (int)$url ['page'] : 1;
 		
 		$status = $url ['status'] ? (int)$url ['status'] : '';
-		        
+		
         $adminObj = new m_admin();
         $admin = $adminObj->selectOne("admin_id = {$_COOKIE['admin_id']}");
 
@@ -42,13 +42,13 @@ class c_order extends base_c {
             
             $status = (int)$_POST['status'];
             
-            $showDel = $_POST['showDel'];
-            if(!$showDel){
-            	$condition = $condition ? $condition." and status != ".m_hospitalorder::ORDER_STATUS_DEL : "status != ".m_hospitalorder::ORDER_STATUS_DEL;
+            //$showDel = $_POST['showDel'];
+            //if(!$showDel){
+            //	$condition = $condition ? $condition." and status != ".m_hospitalorder::ORDER_STATUS_DEL : "status != ".m_hospitalorder::ORDER_STATUS_DEL;
             	//$this->params['showDel'] = $status;
-            }else {
-            	$this->params['showDel'] = $showDel;
-            }
+            //}else {
+            //	$this->params['showDel'] = $showDel;
+            //}
             
             $is_agent = (int)$_POST['is_agent'];
             if ($is_agent) {
@@ -64,7 +64,7 @@ class c_order extends base_c {
 			$condition = $condition ? $condition." and status = {$status}" : "status = {$status}";
 			$this->params['status'] = $status;
 		}
-				
+		//echo $condition;
         $rs = $hospitalorderObj->getHospitalorderList($condition, $page);
         $this->params['hospitalorderList'] = $rs->items;
         
@@ -152,9 +152,10 @@ class c_order extends base_c {
             $this->params['order_id'] = $order_id;
         }
 		
+		
         $rs = $orderObj->getOrdermetaList($condition, $page);
 		$list = $rs->items;
-		
+		//echo json_encode($condition);
 		if($list) {
 			$myorderObj = new m_order();
 			foreach($list as $key => $val){
@@ -441,16 +442,33 @@ class c_order extends base_c {
     function pagedelhospitalorder($inPath){
     	$url = $this->getUrlParams($inPath);
     	$hospitalorder_id = (int)$url['oid'] > 0 ? (int)$url ['oid'] : (int)$_POST['hospitalorder_id'];
-    	 
     	$hospitalorderObj = new m_hospitalorder($hospitalorder_id);
     	if ($hospitalorderObj->delHospitalorder($hospitalorder_id, "TRUE")) {
+			
+    		$order = $hospitalorderObj->selectOne("hospitalorder_id={$hospitalorder_id}");
+    		$uid = $order['weichatuser_id'];
+			$weichatuserObj = new m_weichatuser();
+    		$user = $weichatuserObj->selectOne("weichatuser_id={$uid}");
+    		$data["token"] = base_Constant::WP_APP_TOKEN;
+    		$data["open_id"] = $user["open_id"];
+    		$data["order_id"] = $order["hospitalorder_id"];
+    		$postData = urldecode(json_encode($data));
+			//var_dump($postData);
+    		error_log($postData);
+    		$resp = base_Utils::httpPost(base_Constant::WP_PER_ORDER_DEL_URL, $postData,
+                array('Content-Type'=>'text/plain;charset=UTF-8'));
+    		error_log($resp);
     		//$this->ShowMsg("操作成功！", $this->createUrl("/order/index"), 2, 1);
-    		$this->ajax_res("操作成功", 0);
-    		exit;
+
+    		$this->ShowMsg("操作成功！", $this->createUrl("/order/index-status-1.html"), 2, 1);
+    	
+			
+			//$this->ajax_res("操作成功", 0);
+    		//exit;
     	}
-    	$this->ajax_res("操作失败：".$hospitalorderObj->getError(), -1);
-    	exit;
-    	//$this->ShowMsg("操作失败" . $hospitalorderObj->getError());
+    	//$this->ajax_res("操作失败：".$hospitalorderObj->getError(), -1);
+    	//exit;
+    	$this->ShowMsg("操作失败" . $hospitalorderObj->getError());
     }
 	
 	/**
@@ -591,7 +609,7 @@ class c_order extends base_c {
             exit();
         }
         $this->params['order'] = $order;
-
+		//echo json_encode($order);
         $ordergoodsObj = new m_ordergoods();
         $ordergoodsList = $ordergoodsObj->getGoodsList($order_id);
 		//echo json_encode($ordergoodsList);

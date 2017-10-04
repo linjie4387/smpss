@@ -40,8 +40,8 @@
                             <option value="1" {/if $is_agent eq 1/}selected="selected"{//if/}>否</option>
                             <option value="2" {/if $is_agent eq 2/}selected="selected"{//if/}>是</option>
                         </select>
-                    <input type="checkbox" name="showDel" id="showDel"  {/if $showDel/}checked{//if/} />
-                    <label style="display: -webkit-inline-box;font-weight: normal;" for="stockempty">显示已删除预订单</label></span>
+                    <!--input type="checkbox" name="showDel" id="showDel"  {/if $showDel/}checked{//if/} />
+                    <label style="display: -webkit-inline-box;font-weight: normal;" for="stockempty">显示已删除预订单</label--></span>
                     <input type="submit" name="" id="button" class="button" value="查询" /></span></p>
             </fieldset>
         </div>
@@ -70,12 +70,28 @@
             <tbody>
                 {/section name=i loop=$hospitalorderList/}
                 <tr>
-                  <td>{/$hospitalorderList[i].hospitalorder_id/}</td>
+                  <td>
+                       {/if $hospitalorderList[i].status eq 5/}
+                  			<span style="font-weight:bold; color:#999;text-decoration:line-through;">
+                            {/$hospitalorderList[i].hospitalorder_id/}
+                            </span>
+                       {/else/}
+                       		<a style="font-weight:bold">{/$hospitalorderList[i].hospitalorder_id/}</a>
+                       {//if/}
+                  </td>
                   <td>{/$hospitalorderList[i].hospital_name/}</td>
                   <td>{/$hospitalorderList[i].office_name/}</td>
                   <td>{/$hospitalorderList[i].name/}</br>{/$hospitalorderList[i].mobile/}</td>
                   <td>{/$hospitalorderList[i].preapply_time/}</td>
-                  <td>{/$hospitalorderList[i].status_name/}</td>
+                  <td>
+                       {/if $hospitalorderList[i].status eq 5/}
+                  			<span style="font-weight:bold; color:#999;text-decoration:line-through;">
+                            {/$hospitalorderList[i].status_name/}
+                            </span>
+                       {/else/}
+                       		<a style="font-weight:bold">{/$hospitalorderList[i].status_name/}</a>
+                       {//if/}
+                  </td>
                   {/if $hospitalorderList[i].is_agent eq 1/}
                   <td>否</td>
                   {/else /}
@@ -134,6 +150,11 @@
 		if(!confirm("确定要删除该预订单吗？")){
 			return;
 		}
+		var url = "{/get_url rule='/order/delhospitalorder'/}-oid-"+orderId+".html";;
+		//alert(url);
+		window.location.href=url;
+		//window.location.href="/order/delhospitalorder?hospitalorder_id="+orderId;
+		/*
 		$.post("{/get_url rule='/order/delhospitalorder'/}",{
 			hospitalorder_id : orderId
 		},function(res){
@@ -146,6 +167,7 @@
 				jQuery.facebox(res.msg);
 			}
 		},'json');
+		*/
 	}
 	
 	function updatehospitalorder(obj,hospitalorderid){

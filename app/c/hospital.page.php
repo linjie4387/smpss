@@ -493,8 +493,8 @@ class c_hospital extends base_c {
 		$page = $url ['page'] ? ( int ) $url ['page'] : 1;
 		$key = $url ['key'] ? $url ['key'] : $_POST ['key'];
 		$manu = $url ['manu'] ? $url ['manu'] : $_POST ['manu'];
-		$name = $url ['name'] ? $url ['name'] : $_POST ['name'];
-		$machine = $url ['machine'] ? $url ['machine'] : $_POST ['machine'];
+		$category = $url ['category'] ? $url ['category'] : $_POST ['category'];
+		
 		$office_id = ( int ) $url ['oid'] > 0 ? ( int ) $url ['oid'] : ( int ) $_POST ['office_id'];
 		$order_id = ( int ) $url ['orderid'] > 0 ? ( int ) $url ['orderid'] : ( int ) $_POST ['order_id'];
 		$officeObj = new m_office ( $office_id );
@@ -505,16 +505,16 @@ class c_hospital extends base_c {
 		$goodsObj = new m_goods ();
 		$where = "";
 		if ($key) {
-			$where = " (extern_name like '%{$key}%' or category like '%{$key}%' )";
+			$where = "(name like '%{$key}%' or extern_name like '%{$key}%' or goods_no like '%{$key}%' or remark like '%{$key}%')";;
 			$this->params ['key'] = $key;
 		}
-		if($machine) {
+		if($category) {
 			if(strlen($where)>0){
-				$where = $where . " and machine like '%{$machine}%'";
+				$where = $where . " and category like '%{$category}%'";
 			}else {
-				$where = "machine like '%{$machine}%'";
+				$where = "category like '%{$category}%'";
 			}
-			$this->params ['machine'] = $machine;
+			$this->params ['category'] = $category;
 		}
 		if($manu) {
 			if(strlen($where)>0){
@@ -523,14 +523,6 @@ class c_hospital extends base_c {
 				$where = "manu like '%{$manu}%'";
 			}
 			$this->params ['manu'] = $manu;
-		}
-		if($name) {
-			if(strlen($where)>0){
-				$where = $where . " and name like '%{$name}%'";
-			}else {
-				$where = "name like '%{$name}%'";
-			}
-			$this->params ['name'] = $name;
 		}
 		$rs = $goodsObj->getGoodsList ( $where, $page );
 		$this->params ['goodsList'] = $rs->items;

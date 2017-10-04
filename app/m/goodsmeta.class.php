@@ -86,6 +86,7 @@ class m_goodsmeta extends base_m {
         $this->set("extern_name", $data['extern_name']);
         $this->set("goods_no", $data['goods_no']);
         $this->set("specification", $data['specification']);
+        $this->set("testnum", $data['testnum']);
 		$this->set("volume", $data['volume']);
         $this->set("unit", $data['unit']);
         $this->set("category", $data['category']);
@@ -124,6 +125,7 @@ class m_goodsmeta extends base_m {
         $this->set("goods_no", $data['goods_no']);
         $this->set("specification", $data['specification']);
         $this->set("unit", $data['unit']);
+        $this->set("testnum", $data['testnum']);
 		$this->set("volume", $data['volume']);
         $this->set("category", $data['category']);
         $this->set("machine", $data['machine']);

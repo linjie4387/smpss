@@ -119,6 +119,7 @@ class c_goods extends base_c {
 			$e ['name'] = $ed ['name'];
 			$e ['specification'] = $ed ['specification'];
 			$e ['unit'] = $ed ['unit'];
+			$e ['testnum'] = $ed ['testnum'];
 			$e ['manu'] = $ed ['manu'];
 			$e ['machine'] = $ed ['machine'];
 			$e ['category'] = $ed ['category'];
@@ -133,13 +134,14 @@ class c_goods extends base_c {
     			"B:20"=>'商品名称',
     			"C:10"=>'规格',
     			"D:10"=>'单位',
-    			"E:10"=>'厂商全名',
-    			"F:10"=>'适用机型',
-    			"G:10"=>'项目品类',
-    			"H:10"=>'是否大包装',
-    			"I:10"=>'容积',
-    			"J:10"=>'色标',
-    			"K:10"=>'备注'
+    			"E:10"=>'测试数',
+    			"F:10"=>'厂商全名',
+    			"G:10"=>'适用机型',
+    			"H:10"=>'项目品类',
+    			"I:10"=>'是否大包装',
+    			"J:10"=>'容积',
+    			"K:10"=>'色标',
+    			"L:10"=>'备注'
     	);
 		$sheet['title'][] = $goods_title;
 		$sheet['lists']['s0'] = $exc_goods;
@@ -190,10 +192,10 @@ class c_goods extends base_c {
             //$this->ajax_res ( "导入字段数不够.".$highestRow,-1);exit;
             $highestColumn = $sheet->getHighestColumn();
             $highestColumnIdx = PHPExcel_Cell::columnIndexFromString($highestColumn); // 取得总列数
-            if ($highestColumnIdx != 11) {
+            if ($highestColumnIdx != 12) {
             	$this->ajax_res ( "导入字段数不够.".$highestColumnIdx,-1);exit;
             }
-            $highestColumnIdx = 11;
+            $highestColumnIdx = 12;
 			$goodsObj = new m_goodsmeta();
 			$goodsObj->delete();
 			$inrsetCount = 0;
@@ -209,13 +211,14 @@ class c_goods extends base_c {
 						case 1: $data['name'] = $value;    break;
 						case 2: $data['specification'] = $value;    break;
 						case 3: $data['unit'] = $value;    break;
-						case 4: $data['manu'] = $value;    break;
-						case 5: $data['machine'] = $value;    break;
-						case 6: $data['category'] = $value;    break;
-						case 7: $data['is_20l'] = $value;    break;
-						case 8: $data['volume'] = $value;    break;
-						case 9: $data['colorcode'] = $value;    break;
-						case 10: $data['remark'] = $value;    break;
+						case 4: $data['testnum'] = $value;    break;
+						case 5: $data['manu'] = $value;    break;
+						case 6: $data['machine'] = $value;    break;
+						case 7: $data['category'] = $value;    break;
+						case 8: $data['is_20l'] = $value;    break;
+						case 9: $data['volume'] = $value;    break;
+						case 10: $data['colorcode'] = $value;    break;
+						case 11: $data['remark'] = $value;    break;
 					}
 				}
 				$isSave = $goodsObj->selectOne('goods_no = '.$data['goods_no']);
@@ -239,8 +242,8 @@ class c_goods extends base_c {
 		}
 		//echo $goods_id;
 		//exit();
-		$goodsObj = new m_goods();
-		$goodsmetaObj = new m_goodsmeta();
+		$goodsObj = new m_goods();   //原生的goods表，主键为goods_id
+		$goodsmetaObj = new m_goodsmeta();  //已将goods_no转成主键
 		$goodsinfo = $goodsObj->selectOne("goods_id='".$goods_id."'");
 		
 		$goods_imgObj = new m_goodsimgs();

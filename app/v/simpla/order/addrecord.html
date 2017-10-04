@@ -14,9 +14,15 @@
                 <div class="form">
                     <form action="{/get_url rule='/order/addrecord'/}" method="post" id="js-form" AUTOCOMPLETE="OFF">
                         <fieldset class="clearfix">
-                            <p><span>{/$order.hospital_name/}_{/$order.office_name/} {/if $readonly eq 0 /}&nbsp; <a class="btn btn-success btn-xs" href="{/get_url rule='/hospital/setofficegoods' data='oid='|cat:$order.office_id|cat:'&orderid='|cat:$order.order_id/}">
-                                商品配置
-                            </a>{//if/}&nbsp; <a class="btn btn-success btn-xs" href="{/get_url rule='/order/exportordergoods' data='oid='|cat:$order.order_id/}">
+                            <p><span>
+                            {/$order.hospital_name/}_{/$order.office_name/} 
+                            {/if $readonly eq 0 /}
+                            	{/if 1 eq 2 /}
+                                    <a class="btn btn-success btn-xs" href="{/get_url rule='/hospital/setofficegoods' data='oid='|cat:$order.office_id|cat:'&orderid='|cat:$order.order_id/}">
+                                        商品配置
+                                    </a>
+                                 {//if/}
+                            {//if/}&nbsp; <a class="btn btn-success btn-xs" href="{/get_url rule='/order/exportordergoods' data='oid='|cat:$order.order_id/}">
                                 数据导出
                             </a></span></p>
                             <hr />
@@ -30,7 +36,7 @@
                                             <th>规格</th>
                                             <th>单位</th>
                                             <th>数量</th>
-                                            <th>厂商全名</th>
+                                            <th>厂商</th>
                                             <th>适用机型</th>
                                             <th>项目品类</th>
                                         </tr>
@@ -43,7 +49,7 @@
                                             <td>{/$ordergoodsList[i].goods_no/}</td>
                                             <td>{/$ordergoodsList[i].specification/}</td>
                                             <td>{/$ordergoodsList[i].unit/}</td>
-                                            <td>{/if $readonly eq 0 /}<input type="text" value="{/$ordergoodsList[i].quantity/}" class="text-input small-input" name="goodslist[quantity][]" {/if $ordergoodsList[i].is_exist eq 0 /}readonly="true"{//if/} />{/elseif $readonly eq 1/}{/$ordergoodsList[i].quantity/}{//if/}</td>
+                                            <td>{/if $readonly eq 0 /}<input type="text"  value="{/$ordergoodsList[i].quantity/}" class="text-input small-input" name="goodslist[quantity][]" {/if $ordergoodsList[i].is_exist eq 0 /}readonly="true"{//if/} />{/elseif $readonly eq 1/}{/$ordergoodsList[i].quantity/}{//if/}</td>
                                             <td>{/$ordergoodsList[i].manu/}</td>
                                             <td>{/$ordergoodsList[i].machine/}</td>
                                             <td>{/$ordergoodsList[i].category/}</td>
@@ -53,7 +59,7 @@
                                 </table>
                             </ul>
                             <dt>
-                                {/if $readonly eq 0 /}<input type="submit" name="" id="button" class="button" value="保存" />{//if/}
+                                {/if $readonly eq 0 /}<input type="submit" name="" id="button" class="button" value="&nbsp;保&nbsp;&nbsp;存&nbsp;" />{//if/}
                             </dt>
                         </fieldset>
                     </form>

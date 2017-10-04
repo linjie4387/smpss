@@ -23,12 +23,13 @@ file="simpla/common/left.html"/}
 						<fieldset class="clearfix">
 							<input type="hidden" value="{/$office.office_id/}" name="office_id" /> 
 							<input type="hidden" value="{/$order_id/}" name="order_id" />
-							<p>厂商：
-								<input type="text" class="small-input" id="manu" name="manu" value="{/$manu/}"/>
-								&nbsp;&nbsp;适用机型:
-								<input type="text" class="small-input" id="machine" name="machine" value="{/$machine/}"/> 
-							    &nbsp;&nbsp;商品名称：
-								<input type="text" class="small-input" id="name" name="name" value="{/$name/}"/> 
+							<p>
+                            	厂商：
+								<input type="text" class="text-input small-input" id="manu" name="manu" value="{/$manu/}"/>
+								&nbsp;&nbsp;项目品类:
+								<input type="text" class="text-input small-input" id="category" name="category" value="{/$category/}"/> 
+                                &nbsp;&nbsp;关键字：
+                                <input type="text" value="{/$key/}" placeholder="编码，名称，备注" class="text-input small-input" name="key" />
 								<input type="submit" class="button" formaction="{/get_url rule='/hospital/addofficegoods' data='oid='|cat:$office.office_id|cat:'&orderid='|cat:$order_id/}" value="查询" />
 							</p>
 						</fieldset>
