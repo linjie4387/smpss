@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-09-24 11:01:25
+<?php /* Smarty version 2.6.26, created on 2018-11-06 16:18:09
          compiled from simpla/common/page/style2.html */ ?>
 <div class="pagination">
 <button type="submit" formaction="<?php echo $this->_tpl_vars['first']; ?>

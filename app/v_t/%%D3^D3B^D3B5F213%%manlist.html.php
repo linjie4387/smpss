@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-01-24 19:09:17
+<?php /* Smarty version 2.6.26, created on 2017-07-13 10:14:48
          compiled from simpla/delivery/manlist.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/manlist.html', 66, false),array('modifier', 'cat', 'simpla/delivery/manlist.html', 81, false),)), $this); ?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-02-03 14:30:07
+<?php /* Smarty version 2.6.26, created on 2018-09-21 12:23:20
          compiled from simpla/system/dictsetting.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/system/dictsetting.html', 11, false),)), $this); ?>

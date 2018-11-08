@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-09-24 11:01:25
+<?php /* Smarty version 2.6.26, created on 2018-11-06 16:18:01
          compiled from simpla/common/left.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/common/left.html', 19, false),array('modifier', 'cat', 'simpla/common/left.html', 19, false),)), $this); ?>

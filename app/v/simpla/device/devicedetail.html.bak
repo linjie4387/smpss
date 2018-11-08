@@ -68,6 +68,10 @@
                                 <td>邮编</td>
                                 <td>{/$hospital.post_code/}</td>
                             </tr>
+                            <tr>
+                              <td>税号</td>
+                              <td>{/$hospital.tax_num/}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -128,6 +132,10 @@
                             <tr>
                                 <td>公司安装单号</td>
                                 <td>{/$device.company_install_order_id/}</td>
+                            </tr>
+                            <tr>
+                              <td>配送信息</td>
+                              <td>{/$device.delivery_msg /}</td>
                             </tr>
                         </tbody>
                     </table>

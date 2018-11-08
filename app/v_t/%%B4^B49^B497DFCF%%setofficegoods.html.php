@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-10-13 16:04:04
+<?php /* Smarty version 2.6.26, created on 2017-10-20 14:28:00
          compiled from simpla/hospital/setofficegoods.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/hospital/setofficegoods.html', 32, false),array('modifier', 'cat', 'simpla/hospital/setofficegoods.html', 32, false),)), $this); ?>

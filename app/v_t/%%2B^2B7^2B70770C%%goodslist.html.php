@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.26, created on 2017-01-24 19:09:13
+<?php /* Smarty version 2.6.26, created on 2017-07-13 09:48:50
          compiled from simpla/delivery/goodslist.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/goodslist.html', 15, false),array('modifier', 'cat', 'simpla/delivery/goodslist.html', 58, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/goodslist.html', 16, false),array('modifier', 'cat', 'simpla/delivery/goodslist.html', 65, false),)), $this); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/header.html", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -12,6 +12,7 @@ $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/left.ht
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
+<script src="/assets/layer/layer.js" type="text/javascript" charset="utf-8"></script>
 <div id="main-content">
     <h2>欢迎您 <?php echo $this->_tpl_vars['_adminname']; ?>
 </h2>
@@ -65,7 +66,7 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
 <?php echo $this->_tpl_vars['signstatusList'][$this->_sections['i']['index']]['name']; ?>
 </option>
                             <?php endfor; endif; ?>
-                        </select></span><input type="submit" name="" id="button" class="button" value="查询" /></span>
+                        </select></span> <input type="submit" name="" id="button" class="button" value="查询" /></span>
                     <?php if ($this->_tpl_vars['delivery_status'] == 1): ?>
                         &nbsp;<span><input type="button" class="button" onclick="gotoadd();" value="添加货品" /></span>
                     <?php endif; ?>
@@ -75,17 +76,23 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
           <table>
             <thead>
               <tr>
-                <th>送货单号</th>
-                <th>正式单号</th>
-                <th>医院名称</th>
-                <th>科室名称</th>
-                <th>货品类型</th>
-                <th>接单备注</th>
+                <th width="70">送货单号</th>
+                <th width="50">订单号</th>
+                <?php if ($this->_tpl_vars['fromorder'] != '1'): ?>
+	                <th>医院名称</th>
+	                <th>科室名称</th>
+                	<th>接单备注</th>
+                <?php endif; ?>
+                <th>类型</th>
                 <th>签收状态</th>
                 <th>签收时间</th>
                 <th>签收备注</th>
-                <?php if ($this->_tpl_vars['delivery_status'] == 1): ?>
-                <th>管理</th>
+                <th>用户评价</th>
+                <?php if ($this->_tpl_vars['fromorder'] == '1'): ?>
+	                <th>确认结果</th>
+                    <th>管理</th>
+                <?php else: ?>
+                    <th>管理</th>
                 <?php endif; ?>
               </tr>
             </thead>
@@ -121,15 +128,19 @@ $this->_sections['i']['first']      = ($this->_sections['i']['iteration'] == 1);
 $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $this->_sections['i']['total']);
 ?>
                 <tr <?php if ($this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['is_valid'] == 2): ?>style="text-decoration:line-through;"<?php endif; ?>>
-                  <td><?php echo $this->_tpl_vars['delivery_id']; ?>
+                  <td><?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['delivery_id']; ?>
 </td>
                   <td><a href="<?php echo smarty_function_get_url(array('rule' => '/order/orderdetail','data' => ((is_array($_tmp='oid=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['order_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['order_id']))), $this);?>
 " title="正式单"><?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['order_id']; ?>
 </td>
+                  <?php if ($this->_tpl_vars['fromorder'] != '1'): ?>
                   <td><?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['hospital_name']; ?>
 </td>
                   <td><?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['office_name']; ?>
 </td>
+                  <td style="color:red;"><?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['order_remark']; ?>
+</td>
+                  <?php endif; ?>
                   <td>
                       <?php if ($this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['type'] == '商品'): ?>
                       <a href="<?php echo smarty_function_get_url(array('rule' => '/order/addrecord','data' => ((is_array($_tmp=((is_array($_tmp='oid=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['order_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['order_id'])))) ? $this->_run_mod_handler('cat', true, $_tmp, '&readonly=1') : smarty_modifier_cat($_tmp, '&readonly=1'))), $this);?>
@@ -141,8 +152,6 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
                       <?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['type']; ?>
 
                   </td>
-                  <td style="color:red;"><?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['order_remark']; ?>
-</td>
                   <td>
                   	<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['sign_status_name']; ?>
 
@@ -151,14 +160,68 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
 </td>
                   <td style="color:red;"><?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['remark']; ?>
 </td>
-                  <?php if ($this->_tpl_vars['delivery_status'] == 1): ?>
-                  <td>
-                      <a style="margin:10px;" title="删除" onclick="javascript:del_goods('<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['withgoods_id']; ?>
+	              <td>
+	                	<?php if ($this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['level'] == '1'): ?>
+	                		<span style="color:#F00; font-weight:bold">很不满意</span>【<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['weichatuser_name']; ?>
+】<br />
+	                	<?php elseif ($this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['level'] == '2'): ?>
+	                		<span style="color:#F00; font-weight:bold">不满意</span>【<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['weichatuser_name']; ?>
+】<br />
+	                	<?php elseif ($this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['level'] == '3'): ?>
+	                		<span style="color:#060; font-weight:bold">一般</span>【<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['weichatuser_name']; ?>
+】<br />
+	                	<?php elseif ($this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['level'] == '4'): ?>
+	                		<span style="color:#060; font-weight:bold">满意</span>【<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['weichatuser_name']; ?>
+】<br />
+	                	<?php elseif ($this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['level'] == '5'): ?>
+	                		<span style="color:#060; font-weight:bold">很满意</span>【<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['weichatuser_name']; ?>
+】<br />
+	                	<?php endif; ?>
+	                	<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['evaluate_remark']; ?>
+
+                   </td>
+	              <?php if ($this->_tpl_vars['fromorder'] == '1'): ?>
+                        <td>
+                            <?php if ($this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['commit_result'] == '1'): ?>
+                                已回单【<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['commit_username']; ?>
+】<br />
+                                <?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['commit_remark']; ?>
+
+                            <?php elseif ($this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['commit_result'] == '2'): ?>
+                                回单遗失【<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['commit_username']; ?>
+】<br />
+                                <?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['commit_remark']; ?>
+
+                            <?php else: ?>
+                                未确认
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                        <?php if ($this->_tpl_vars['delivery_status'] == 1): ?>
+                          <a class="btn btn-primary btn-xs"  title="删除" onclick="javascript:del_goods('<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['withgoods_id']; ?>
 ')">
-                          <img src="<?php echo $this->_tpl_vars['root_dir']; ?>
-/assets/simpla/images/icons/delete.png" alt="删除" />
+                              删除
+                          </a>
+                        <?php endif; ?>
+                        
+                        <?php if ($this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['sign_status'] >= 2): ?>
+                          <a class="btn btn-primary btn-xs" title="确认" onclick="javascript:commit_goods('<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['withgoods_id']; ?>
+','<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['order_id']; ?>
+')">
+                              确认
+                          </a>
+                        <?php endif; ?>
+                        </td>
+                  <?php else: ?>
+                  	<td>
+                    <?php if ($this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['sign_status'] < 2 && 2 == 2): ?>
+                      <a class="btn btn-primary btn-xs" title="修改备注信息" onclick="javascript:edit_goods('<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['withgoods_id']; ?>
+','<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['order_id']; ?>
+')">
+                         修改
                       </a>
-                  </td>
+                    <?php endif; ?>
+                    </td>
                   <?php endif; ?>
                 </tr>
                 <?php endfor; endif; ?>
@@ -167,8 +230,58 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
         </div>
       </div>
       </form>
+      <form id="form1" name="form1" method="post" action="<?php echo smarty_function_get_url(array('rule' => '/delivery/editwithgoods'), $this);?>
+">
+      		<input type="hidden" name="order_id" id="order_id" />
+      		<input type="hidden" name="withgoods_id" id="withgoods_id" />
+      		<input type="hidden" name="fromorder" id="fromorder" value="<?php echo $this->_tpl_vars['fromorder']; ?>
+" />
+            
+      </form>
     </div>
     <script>
+	//1:待签收,2:已签收,3:被拒签;4:部分签收
+  function edit_goods(withgoodsId,orderId){
+	  var url = "<?php echo smarty_function_get_url(array('rule' => '/delivery/editwithgoods'), $this);?>
+";
+	  document.getElementById("form1").order_id.value = orderId;
+	  document.getElementById("form1").withgoods_id.value = withgoodsId;
+	  form1.submit();
+  }
+  function edit_goods1(withgoodsId){
+			layer.prompt({title:"请填写备注信息:",success: function(){
+					$('.layui-layer-content').prepend('<p> 请填写备注信息：</p>');
+					$('.layui-layer-content').append('<strong><br>修改状态:<br><input type="radio" name="status" value="2" style="vertical-align: middle;" /> 已签收<br><input type="radio" name="status" value="3" style="vertical-align: middle;" /> 拒签<br><input type="radio" name="status" value="4" style="vertical-align: middle;" /> 部分签收</strong>');
+				}},
+				function(val, index){
+					var isSign = $('.layui-layer-content 	input[name=\'status\']:checked').val()||0;
+					//alert(isSign);
+					$.post("<?php echo smarty_function_get_url(array('rule' => '/delivery/editwithgoods'), $this);?>
+",{
+						withgoods_id :withgoodsId,remark:val,isSign:isSign
+					},function(res){
+						alert(res.msg);
+						if(res.code == 0){
+							jQuery.facebox("操作成功！");
+							window.location.reload();
+						}else{
+							jQuery.facebox(res.msg);
+						}
+					},'json');
+				  	layer.close(index);
+				}
+			);
+   }
+
+   function commit_goods(withgoodsId,order_id){ 
+   		//	alert(withgoodsId);
+			window.location.href="<?php echo smarty_function_get_url(array('rule' => '/deliverycommit/commit-wdi'), $this);?>
+-"+withgoodsId+"-oid-"+order_id+".html";
+			//window.location.href="<?php echo smarty_function_get_url(array('rule' => '/deliverycommit/commit?wdi='), $this);?>
+"+withgoodsId;
+
+   }
+  	
         function del_goods(withgoodsId){
             //$("#button").click();
             //return;
@@ -187,7 +300,7 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
                    }else{
                    jQuery.facebox(res.msg);
                    }
-                   },'json');
+            },'json');
         }
         function gotoadd(){
             window.location.href = "<?php echo smarty_function_get_url(array('rule' => '/delivery/addwithgoods','data' => ((is_array($_tmp='did=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['delivery_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['delivery_id']))), $this);?>

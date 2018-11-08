@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-01-24 19:08:10
+<?php /* Smarty version 2.6.26, created on 2018-04-27 10:11:25
          compiled from simpla/delivery/adddeliveryman.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/adddeliveryman.html', 12, false),)), $this); ?>
@@ -46,7 +46,8 @@ unset($_smarty_tpl_vars);
               <input type="text" value="<?php echo $this->_tpl_vars['deliveryman']['mobile']; ?>
 " class="text-input small-input" name="mobile" id="mobile" />
               <span></span> </p>
-              <p><label>微信用户：</label>
+              <p><label>微信用户：<?php echo $this->_tpl_vars['deliveryman']['weichatuser_id']; ?>
+</label>
               <span><select name="weichatuser_id">
                   <option value="0">选择微信用户</option>
                   <?php unset($this->_sections['i']);
@@ -120,6 +121,13 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
                   <?php endfor; endif; ?>
               </select>
               <span></span>
+              </p>
+              <p>
+              <label><font class="red"> * </font>状态：</label>
+              <select id="isrun" name="isrun" style="width:200px">
+                  <option value="0" <?php if ($this->_tpl_vars['deliveryman']['isrun'] == 0): ?>selected="selected"<?php endif; ?>>空闲</option>
+                  <option value="1" <?php if ($this->_tpl_vars['deliveryman']['isrun'] == 1): ?>selected="selected"<?php endif; ?>>占用</option>
+              </select>
               </p>
               <dt>
                 <input type="submit" name="" id="button" class="button" value="<?php if ($this->_tpl_vars['deliveryman']['deliveryman_id']): ?>编辑<?php else: ?>添加<?php endif; ?>" />

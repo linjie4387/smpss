@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-11-20 07:05:38
+<?php /* Smarty version 2.6.26, created on 2017-10-13 09:19:33
          compiled from simpla/order/billadmtrade.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/order/billadmtrade.html', 18, false),)), $this); ?>

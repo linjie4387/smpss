@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2018-04-26 15:31:54
+<?php /* Smarty version 2.6.26, created on 2018-01-09 13:26:53
          compiled from simpla/account/modifypwd.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/account/modifypwd.html', 11, false),)), $this); ?>

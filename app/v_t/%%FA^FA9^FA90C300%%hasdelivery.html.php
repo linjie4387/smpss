@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.26, created on 2017-01-24 19:09:22
+<?php /* Smarty version 2.6.26, created on 2017-07-13 09:18:51
          compiled from simpla/delivery/hasdelivery.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/hasdelivery.html', 35, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/hasdelivery.html', 33, false),)), $this); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/header.html", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -39,10 +39,16 @@ unset($_smarty_tpl_vars);
     <p id="page-intro">查看和管理送货</p>
     <div class="clear"></div>
     <div class="content-box">
-      <div class="content-box-header">
-        <h3>任务管理</h3>
-        <div class="clear"></div>
-      </div>
+   		<div class="content-box-header">
+	      <h3>任务管理</h3>
+	      <ul class="content-box-tabs">
+	        <li><a href="#tab1" class="default-tab">任务管理</a></li>
+	        <li><a href="<?php echo smarty_function_get_url(array('rule' => "/delivery/addhasdeliveryindex"), $this);?>
+">添加任务</a></li>
+	      </ul>
+	      <div class="clear"></div>
+	  	</div>
+	  
       <div class="content-box-content">
         <div class="tab-content default-tab" id="tab1">
             <form action="<?php echo smarty_function_get_url(array('rule' => '/delivery/hasdeliverylist'), $this);?>
@@ -80,8 +86,15 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
 " <?php if ($this->_tpl_vars['sign_slist'][$this->_sections['i']['index']]['value'] == $this->_tpl_vars['status']): ?>selected="selected"<?php endif; ?>><?php echo $this->_tpl_vars['sign_slist'][$this->_sections['i']['index']]['name']; ?>
 </option>
                         <?php endfor; endif; ?>
-                    </select></span>&nbsp;&nbsp;<input type="submit" name="" id="btnQry" class="button" value="查询" /></span>
+                    </select></span>&nbsp;&nbsp;单号：
+                    <input type="text"  class="text-input small-input" value="<?php echo $this->_tpl_vars['delivery_id']; ?>
+" name="delivery_id" placeholder="输入送货单号" />
+                    <input type="text"  class="text-input small-input" value="<?php echo $this->_tpl_vars['order_id']; ?>
+" name="order_id" placeholder="输入正式单号" />
+                    <input type="submit" name="" id="btnQry" class="button" value="查询" /></span>
+                    <input type="button" class="button" onclick="gotoadd();" value="添加任务">
                 </fieldset>
+                
             </div>
           	<hr />
           
@@ -194,6 +207,11 @@ $this->_sections['j']['last']       = ($this->_sections['j']['iteration'] == $th
 " <?php if ($this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['data'][$this->_sections['j']['index']]['appraise_comment']): ?>style="color:green;"<?php endif; ?>>
                   	<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['data'][$this->_sections['j']['index']]['appraise_name']; ?>
 
+                  	<!--评价内容-->
+                  	<?php if ($this->_sections['j']['first']): ?>  <?php if (! empty ( $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['data'][$this->_sections['j']['index']]['appraise_comment'] )): ?>
+                  		<p style="padding:0;max-width:100px;">(<?php echo $this->_tpl_vars['deliveryList'][$this->_sections['i']['index']]['data'][$this->_sections['j']['index']]['appraise_comment']; ?>
+)</p>
+                  	<?php endif; ?><?php endif; ?>
                   	</span>
                   
                   </td>
@@ -236,7 +254,14 @@ $this->_sections['j']['last']       = ($this->_sections['j']['iteration'] == $th
 					jQuery.facebox(res.msg);
 				}
 			},'json');
-		}		
+		}
+		
+		var gotoadd = function(){
+			window.location.href='<?php echo smarty_function_get_url(array('rule' => '/delivery/addhasdeliveryindex'), $this);?>
+';
+		}   
+		
+		
     </script>
     <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/copy.html", 'smarty_include_vars' => array()));

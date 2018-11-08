@@ -444,7 +444,6 @@ class c_order extends base_c {
     	$hospitalorder_id = (int)$url['oid'] > 0 ? (int)$url ['oid'] : (int)$_POST['hospitalorder_id'];
     	$hospitalorderObj = new m_hospitalorder($hospitalorder_id);
     	if ($hospitalorderObj->delHospitalorder($hospitalorder_id, "TRUE")) {
-			
     		$order = $hospitalorderObj->selectOne("hospitalorder_id={$hospitalorder_id}");
     		$uid = $order['weichatuser_id'];
 			$weichatuserObj = new m_weichatuser();
@@ -453,16 +452,13 @@ class c_order extends base_c {
     		$data["open_id"] = $user["open_id"];
     		$data["order_id"] = $order["hospitalorder_id"];
     		$postData = urldecode(json_encode($data));
-			//var_dump($postData);
-    		error_log($postData);
-    		$resp = base_Utils::httpPost(base_Constant::WP_PER_ORDER_DEL_URL, $postData,
-                array('Content-Type'=>'text/plain;charset=UTF-8'));
-    		error_log($resp);
+			//var_dump(json_encode($postData));
+			//edit by linj:  error-> base_Constant::WP_PER_ORDER_DEL_URL not found
+    		//$resp = base_Utils::httpPost(base_Constant::WP_PER_ORDER_DEL_URL, $postData,
+            //    array('Content-Type'=>'text/plain;charset=UTF-8'));
+    		//error_log($resp);
     		//$this->ShowMsg("操作成功！", $this->createUrl("/order/index"), 2, 1);
-
-    		$this->ShowMsg("操作成功！", $this->createUrl("/order/index-status-1.html"), 2, 1);
-    	
-			
+    		$this->ShowMsg("操作成功！", $this->createUrl("/order/index-status-1.html"), 2, 1);	
 			//$this->ajax_res("操作成功", 0);
     		//exit;
     	}

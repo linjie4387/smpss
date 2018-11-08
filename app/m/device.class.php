@@ -52,8 +52,8 @@ class m_device extends base_m {
 	}
     
     public function create($data) {
-        $device = $this->selectOne("serial_code = '{$data['serial_code']}'");
-
+		//echo "id_code='".$data['id_code']."'";
+		$device = $this->selectOne("serial_code='".$data['serial_code']."'");
         // 区县处理
         $districtObj = new m_district();
         $district = $districtObj->selectOne("name = '{$data['district_name']}'");
@@ -70,7 +70,8 @@ class m_device extends base_m {
         else {
             $district_id = $district['district_id'];
         }
-
+		
+		//var_dump('区县完成了');
 
         // 医院处理, 有可能为空
         if ($data['hospital_code']) {
@@ -99,7 +100,7 @@ class m_device extends base_m {
                 $hospital_id = $rs;
             }
         }
-
+		//var_dump('医院完成了');
         // 科室处理, 有可能为空
         if ($hospital_id && $data['office_name']) {
             $officeObj = new m_office();
@@ -122,7 +123,7 @@ class m_device extends base_m {
                 $office_id = $rs;
             }
         }
-
+		//var_dump('科室完成了');
         // 供应商处理
 		if($data['supplier_code']){
 			$supplierObj = new m_supplier();
@@ -140,7 +141,7 @@ class m_device extends base_m {
 				}
 			}
 		}
-        
+        //var_dump('供应商完成了');
         // 模型处理, 供应商有可能为空
         if ($supplier_id) {
             $modelObj = new m_model();
@@ -159,7 +160,7 @@ class m_device extends base_m {
                 $model_id = $model['model_id'];
             }
         }
-
+		//var_dump('模型处理完成了');
         $this->set("id_code", $data['id_code']);
         $this->set("district_id", $district_id);
         $this->set("hospital_id", $hospital_id);
@@ -190,20 +191,25 @@ class m_device extends base_m {
         $this->set("delivery_msg",$data['delivery_msg']);
 		
 		if($data['id_code']){
+			//echo $device['device_id'];
 			if ($device['device_id']) {
+				//echo 'update';
 				$rs = $this->save($device['device_id']);
 			}
 			else {
+				//echo 'save';
 				$rs = $this->save(false);
 			}
 		}else{
 			$rs=true;
 		}
+		//var_dump('仪器完成了');
+		//var_dump('<br/>==========================================================<br/>');
         if ($rs)
-        {
+        {	
             return $rs;
         }
-
+		//var_dump(json_encode($this));
         $this->setError (0, "保存仪器数据失败" . $this->getError());
         return false;
     }

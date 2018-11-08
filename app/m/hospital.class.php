@@ -54,16 +54,18 @@ class m_hospital extends base_m {
             return false;
         }
         if (!$data['level']) {
-            $this->setError (0, "缺少级别");
-            return false;
+			$data['level']='-';
+            //$this->setError (0, "缺少级别");
+            //return false;
         }
         if (!$data['level_order']) {
             $this->setError (0, "缺少级别顺序");
             return false;
         }
         if (!$data['hospital_level']) {
-            $this->setError (0, "缺少医院等级");
-            return false;
+            //$this->setError (0, "缺少医院等级");
+            //return false;
+			$data['hospital_level']='-';
         }
         if (!$data['district_id']) {
             $this->setError (0, "缺少区县");

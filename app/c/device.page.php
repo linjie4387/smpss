@@ -150,65 +150,73 @@ class c_device extends base_c {
                 for ($column = 0; $column < $highestColumnIdx; $column++) {
                     $columnName = PHPExcel_Cell::stringFromColumnIndex($column);
                     $value = (string)$sheet->getCellByColumnAndRow($column, $row)->getCalculatedValue();
-					//echo  $column."/";
+					//echo  $column."/".$value.';';
                     switch ($column) {
-                        case 0: $data['id_code'] = $value;  break;
-                        case 1: $data['district_name'] = $value;    break;
-                        case 2: $data['level_order'] = $value; break;
-                        case 3: $data['level'] = $value; break;
-                        case 4: $data['hospital_code'] = $value; break;
-                        case 5: $data['hospital_level'] = $value; break;
-                        case 6: $data['hospital_name'] = $value; break;
-                        case 7: $data['invoice_name'] = $value; break;
-                        case 8: $data['supplier_code'] = $value; break;
-                        case 9: $data['service_level'] = $value; break;
-                        case 10: $data['model_name'] = $value; break;
-                        case 11: $data['instruction'] = $value; break;
-                        case 12: $data['serial_code'] = $value; break;
-                        case 13: $data['qrcode'] = $value; break;
-                        case 14: $data['office_name'] = $value; break;
-                        case 15: $data['contact_phone'] = $value; break;
-                        case 16: $data['contact_name'] = $value; break;
-                        case 17: $data['address'] = $value; break;
-                        case 18: $data['post_code'] = $value; break;
-                        case 19: $data['saler_name'] = $value; break;
-                        case 20: $data['reagent_source'] = $value; break;
-                        case 21: $data['deliveryman'] = $value; break;
-                        case 22: $data['serviceman'] = $value; break;
-                        case 23: $data['applyman'] = $value; break;
-                        case 24:
+						case 0: $data['hospital_name'] = $value; break;
+						case 1: $data['district_name'] = $value;    break;
+						case 2: $data['level'] = $value; break;
+						case 3: $data['hospital_level'] = $value; break;
+						case 4: $data['invoice_name'] = $value; break;
+						case 5: $data['tax_num'] = $value; break;
+						case 6: $data['office_name'] = $value; break;
+                        case 7: $data['contact_phone'] = $value; break;
+                        case 8: $data['contact_name'] = $value; break;
+						case 9: $data['address'] = $value; break;
+						case 10: $data['post_code'] = $value; break;
+						case 11: $data['model_name'] = $value; break;
+						case 12: $data['serial_code'] = $value; break;
+						case 13:
                             if ($reader_format) {
                                 $data['install_time'] = gmdate("Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($value));
                             }
                             else
                                 $data['install_time'] = $value;
                             break;
-                        case 25: $data['warranty_period'] = $value; break;
-                        case 26:
+						case 14: $data['warranty_period'] = $value; break;
+						case 15:
                             if ($reader_format) {
                                 $data['warranty_time'] = gmdate("Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($value));
                             }
                             else
                                 $data['warranty_time'] = $value;
                             break;
-                        case 27: $data['service_period'] = $value; break;
-                        case 28: $data['apply_period'] = $value; break;
-                        case 29: $data['code'] = $value; break;
-                        case 30: $data['supplier_install_order_id'] = $value; break;
-                        case 31: $data['company_install_order_id'] = $value; break;
-						case 32: $data['space'] = $value; break;
-						case 33: $data['tax_num'] = $value; break;
-						case 34: $data['delivery_msg'] = $value; break;
-                    }
+						case 16: $data['supplier_code'] = $value; break;
+						case 17: $data['service_level'] = $value; break;
+						case 18: $data['service_period'] = $value; break;
+						case 19: $data['apply_period'] = $value; break;
+						case 20: $data['code'] = $value; break;
+						case 21: $data['supplier_install_order_id'] = $value; break;
+						case 22: $data['company_install_order_id'] = $value; break;
+						case 23: $data['instruction'] = $value; break;
+						case 24: $data['saler_name'] = $value; break;
+						case 25: $data['reagent_source'] = $value; break;
+						case 26: $data['serviceman'] = $value; break;
+						case 27: $data['applyman'] = $value; break;
+						case 28: $data['deliveryman'] = $value; break;
+						case 29: $data['space'] = $value; break;
+						case 30: $data['delivery_msg'] = $value; break;
+                   }
                 }
-                if (!$deviceObj->create($data)) {
-                    $this->ShowMsg("操作失败: " . $deviceObj->getError());
-                }
+				//if(is_null($data['serial_code']) || $data['serial_code']==''){
+				//	$data['serial_code'] = substr(md5(time().mt_rand(1,1000000)),1,29);
+				//}
+				
+				if(!is_null($data['serial_code']) && $data['serial_code']!=''){
+					$data['id_code']=$data['serial_code'];
+					//echo $data['serial_code'].'<br/>';
+					$data['level_order']=3;
+					$data['hospital_code']=$data['hospital_name'];
+					$data['qrcode']='';
+					
+					if (!$deviceObj->create($data)) {
+						$this->ShowMsg("操作失败: " . $deviceObj->getError());
+					}
+				}
             }
+			
 			
             if (move_uploaded_file($file_tmp_name, $target_name)) {
                 $uploadlogObj = new m_uploadlog();
-                
                 if ($uploadlogObj->createUploadlog($file_name, $target_name, $file_url)) {
                     $this->ShowMsg("操作成功！", $this->createUrl("/device/logindex"), 2, 1);
                 }

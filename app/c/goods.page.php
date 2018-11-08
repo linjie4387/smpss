@@ -106,6 +106,8 @@ class c_goods extends base_c {
 					$goods[$i] ['volume'] = $goodsMsg ['volume'];
 					$goods[$i] ['colorcode'] = $goodsMsg ['colorcode'];
 					$goods[$i] ['remark'] = $goodsMsg ['remark'];
+					$goods[$i] ['reg_num'] = $goodsMsg ['reg_num'];
+					$goods[$i] ['store_conditions'] = $goodsMsg ['store_conditions'];
 					$goods[$i] ['price'] = $goodsMsg ['price'];
 				}
 			}
@@ -153,6 +155,8 @@ class c_goods extends base_c {
 			$e ['volume'] = $ed ['volume'];
 			$e ['colorcode'] = $ed ['colorcode'];
 			$e ['remark'] = $ed ['remark'];
+			$e ['reg_num'] = $ed ['reg_num'];
+			$e ['store_conditions'] = $ed ['store_conditions'];
 			$e ['price'] = $ed ['price'];
 			$exc_goods[] = $e;
     	}
@@ -169,7 +173,9 @@ class c_goods extends base_c {
     			"J:10"=>'容积',
     			"K:10"=>'色标',
     			"L:10"=>'备注',
-    			"M:10"=>'价格'
+    			"M:10"=>'注册证号/批准文号',
+    			"N:10"=>'储藏条件',
+    			"O:10"=>'价格'
     	);
 		$sheet['title'][] = $goods_title;
 		$sheet['lists']['s0'] = $exc_goods;
@@ -219,10 +225,10 @@ class c_goods extends base_c {
             $highestRow = $sheet->getHighestRow(); // 取得总行数
             $highestColumn = $sheet->getHighestColumn();
             $highestColumnIdx = PHPExcel_Cell::columnIndexFromString($highestColumn); // 取得总列数
-            if ($highestColumnIdx != 12) {
+            if ($highestColumnIdx != 14 && $highestColumnIdx != 15) {
             	$this->ajax_res ( "导入字段数不够.".$highestColumnIdx,-1);exit;
             }
-            $highestColumnIdx = 12;
+            $highestColumnIdx = 14;
 			$goodsObj = new m_goodsmeta();
 			$goodsObj->delete();
 			$inrsetCount = 0;
@@ -246,9 +252,11 @@ class c_goods extends base_c {
 						case 9: $data['volume'] = $value;    break;
 						case 10: $data['colorcode'] = $value;    break;
 						case 11: $data['remark'] = $value;    break;
+						case 12: $data['reg_num'] = $value; break;
+						case 13: $data['store_conditions'] = $value; break;
 					}
 				}
-				$isSave = $goodsObj->selectOne('goods_no = '.$data['goods_no']);
+				$isSave = $goodsObj->selectOne("goods_no = '".$data['goods_no']."'");
 				if(!$isSave){
 					if(!$data['extern_name'])$data['extern_name'] = $data['name'];
 					if($goodsObj->createOne($data))$inrsetCount++;

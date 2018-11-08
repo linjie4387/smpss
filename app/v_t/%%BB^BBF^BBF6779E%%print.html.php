@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-09-28 20:46:13
+<?php /* Smarty version 2.6.26, created on 2017-07-13 08:55:36
          compiled from simpla/hospital/print.html */ ?>
 <!doctype html>
 <html class="no-js">

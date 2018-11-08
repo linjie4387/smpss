@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2018-11-06 10:01:43
+<?php /* Smarty version 2.6.26, created on 2018-09-21 12:23:26
          compiled from simpla/system/addrights.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/system/addrights.html', 15, false),)), $this); ?>

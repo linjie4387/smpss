@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-09-24 11:02:41
+<?php /* Smarty version 2.6.26, created on 2017-07-12 17:23:22
          compiled from simpla/system/allrights.html */ ?>
 <div class="rights">
 	<p>

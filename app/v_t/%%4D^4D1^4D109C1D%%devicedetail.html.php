@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-10-24 14:34:10
+<?php /* Smarty version 2.6.26, created on 2017-07-22 10:02:17
          compiled from simpla/device/devicedetail.html */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/header.html", 'smarty_include_vars' => array()));

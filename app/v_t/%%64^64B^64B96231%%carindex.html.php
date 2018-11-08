@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.26, created on 2017-01-25 09:59:59
+<?php /* Smarty version 2.6.26, created on 2017-07-13 09:24:54
          compiled from simpla/delivery/carindex.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/carindex.html', 12, false),array('modifier', 'cat', 'simpla/delivery/carindex.html', 56, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/carindex.html', 12, false),array('modifier', 'cat', 'simpla/delivery/carindex.html', 64, false),)), $this); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/header.html", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -46,10 +46,11 @@ unset($_smarty_tpl_vars);
                 <th>车牌标识</th>
                 <th>车牌号</th>
                 <th>牌照类型</th>
+                <th>准驾车型</th>
                 <th>型号</th>
                 <th>容量</th>
                 <th>添加时间</th>
-                <th>添加人</th>
+                <th>状态</th>
                 <th>管理</th>
               </tr>
             </thead>
@@ -91,14 +92,21 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
 </td>
                   <td><?php echo $this->_tpl_vars['carList'][$this->_sections['i']['index']]['license_type_name']; ?>
 </td>
+                  <td><?php echo $this->_tpl_vars['carList'][$this->_sections['i']['index']]['mold']; ?>
+</td>
                   <td><?php echo $this->_tpl_vars['carList'][$this->_sections['i']['index']]['model']; ?>
 </td>
                   <td><?php echo $this->_tpl_vars['carList'][$this->_sections['i']['index']]['volume']; ?>
 </td>
                   <td><?php echo $this->_tpl_vars['carList'][$this->_sections['i']['index']]['create_time']; ?>
 </td>
-                  <td><?php echo $this->_tpl_vars['carList'][$this->_sections['i']['index']]['admin_name']; ?>
-</td>
+                  <td>
+                  <?php if ($this->_tpl_vars['carList'][$this->_sections['i']['index']]['isrun'] == 1): ?>
+                  <span style="color:#F00">占用</span>
+                  <?php else: ?>
+                  <span>空闲</span>
+                  <?php endif; ?>
+                  </td>
                   <td>
                     <a style="margin:10px;" href="<?php echo smarty_function_get_url(array('rule' => '/delivery/addcar','data' => ((is_array($_tmp='cid=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['carList'][$this->_sections['i']['index']]['car_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['carList'][$this->_sections['i']['index']]['car_id']))), $this);?>
 " title="编辑">

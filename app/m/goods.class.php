@@ -91,6 +91,8 @@ class m_goods extends base_m {
         $this->set("is_20l", $data['is_20l']);
         $this->set("colorcode", $data['colorcode']);
         $this->set("remark", $data['remark']);
+        $this->set("reg_num", $data['reg_num']);
+        $this->set("store_conditions", $data['store_conditions']);
         if ($data['goods_id']) {
             $this->set("modify_time", date('Y-m-d H:i:s'));
         }
@@ -129,6 +131,8 @@ class m_goods extends base_m {
         $this->set("is_20l", $data['is_20l']);
         $this->set("colorcode", $data['colorcode']);
         $this->set("remark", $data['remark']);
+        $this->set("reg_num", $data['reg_num']);
+        $this->set("store_conditions", $data['store_conditions']);
         if ($data['goods_id']) {
             $this->set("modify_time", date('Y-m-d H:i:s'));
         }

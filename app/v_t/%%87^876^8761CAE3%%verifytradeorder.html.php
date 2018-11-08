@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-11-20 07:05:32
+<?php /* Smarty version 2.6.26, created on 2017-07-29 22:56:49
          compiled from simpla/order/verifytradeorder.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/order/verifytradeorder.html', 16, false),array('modifier', 'cat', 'simpla/order/verifytradeorder.html', 27, false),)), $this); ?>

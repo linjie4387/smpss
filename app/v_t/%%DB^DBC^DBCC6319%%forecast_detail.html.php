@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2016-10-25 15:45:23
+<?php /* Smarty version 2.6.26, created on 2017-06-02 16:32:02
          compiled from simpla/hospital/forecast_detail.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/hospital/forecast_detail.html', 31, false),array('modifier', 'cat', 'simpla/hospital/forecast_detail.html', 89, false),)), $this); ?>
