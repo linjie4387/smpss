@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-06-27 14:56:57
+<?php /* Smarty version 2.6.26, created on 2017-09-24 11:02:58
          compiled from simpla/hospital/officeindex.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/hospital/officeindex.html', 17, false),array('modifier', 'cat', 'simpla/hospital/officeindex.html', 89, false),)), $this); ?>
@@ -180,11 +180,13 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
                         <img src="<?php echo $this->_tpl_vars['root_dir']; ?>
 /assets/simpla/images/icons/print.png" alt="打印单据" />
                     </a>
-                    <a style="margin:10px;" href="<?php echo smarty_function_get_url(array('rule' => '/hospital/forecastofficegoods','data' => ((is_array($_tmp=((is_array($_tmp=((is_array($_tmp='hid=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['officeList'][$this->_sections['i']['index']]['hospital_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['officeList'][$this->_sections['i']['index']]['hospital_id'])))) ? $this->_run_mod_handler('cat', true, $_tmp, '&oid=') : smarty_modifier_cat($_tmp, '&oid=')))) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['officeList'][$this->_sections['i']['index']]['office_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['officeList'][$this->_sections['i']['index']]['office_id']))), $this);?>
+                        <?php if (1 == 2): ?>
+                        <a style="margin:10px;" href="<?php echo smarty_function_get_url(array('rule' => '/hospital/forecastofficegoods','data' => ((is_array($_tmp=((is_array($_tmp=((is_array($_tmp='hid=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['officeList'][$this->_sections['i']['index']]['hospital_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['officeList'][$this->_sections['i']['index']]['hospital_id'])))) ? $this->_run_mod_handler('cat', true, $_tmp, '&oid=') : smarty_modifier_cat($_tmp, '&oid=')))) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['officeList'][$this->_sections['i']['index']]['office_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['officeList'][$this->_sections['i']['index']]['office_id']))), $this);?>
 " title="销量预测">
-                        <img src="<?php echo $this->_tpl_vars['root_dir']; ?>
+                            <img src="<?php echo $this->_tpl_vars['root_dir']; ?>
 /assets/simpla/images/icons/bullish.png" alt="销量预测" />
-                    </a>
+                        </a>
+                        <?php endif; ?>
                     <?php endif; ?>
                   </td>
                 </tr>

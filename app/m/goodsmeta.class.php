@@ -117,6 +117,31 @@ class m_goodsmeta extends base_m {
         return false;
     }
 	
+    public function update($data, $with_log = NULL) {
+        $this->set("price", $data['price']);
+        if ($data['goods_id']) {
+            $this->set("modify_time", date('Y-m-d H:i:s'));
+        }
+        else {
+            $this->set("create_time", date('Y-m-d H:i:s'));
+        }
+        $this->set("admin_id", $_COOKIE['admin_id']);
+
+        $rs = $this->save($data['goods_key']);
+        if ($rs) {
+            if ($with_log) {
+                $content = $data['goods_id'] ? "修改商品：{$data['name']}" : "新增商品：{$data['name']}";
+                $logObj = base_mAPI::get("m_log");
+                $logObj->create($rs, $content, 3);
+            }
+
+            return $rs;
+        }
+        
+        $this->setError (0, "保存数据失败" . $this->getError());
+        return false;
+    }
+
 	
 	public function createOne($data) {
         $this->set("name", $data['name']);

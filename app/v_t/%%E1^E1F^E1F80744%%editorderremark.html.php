@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-05-10 11:29:34
+<?php /* Smarty version 2.6.26, created on 2017-11-06 09:10:38
          compiled from simpla/order/editorderremark.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/order/editorderremark.html', 16, false),)), $this); ?>
@@ -50,7 +50,7 @@ unset($_smarty_tpl_vars);
                 <?php endif; ?>
                 <span></span> </p>
               <dt>
-                <input type="submit" name="" id="button" class="button" value="编辑" />
+                <input type="submit" name="" id="button" class="button" value=" 提  交 " />
               </dt>
             </fieldset>
           </form>

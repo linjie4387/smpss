@@ -121,32 +121,36 @@ class c_device extends base_c {
             
             $sheet = $PHPExcel->getSheet(0);
             $highestRow = $sheet->getHighestRow(); // 取得总行数
+			//echo $highestRow."<br/>" ;
             $highestColumn = $sheet->getHighestColumn();
+			//echo $highestColumn ;
             $highestColumnIdx = PHPExcel_Cell::columnIndexFromString($highestColumn); // 取得总列数
             if ($highestColumnIdx < 35) {
-                $this->ShowMsg("操作失败: " . "字段数不够".$highestColumn);
+                $this->ShowMsg("操作失败: " . "字段数不够".$highestColumn."  ".$highestColumnIdx."   ".$highestRow);
             }
             $highestColumnIdx = 35;
-
+			
             $deviceObj = new m_device();
+			
             //删除现有仪器数据
             $deviceObj->delete();
 			//$hospitalObj = new m_hospital();
 			//$hospitalObj->delete();
-			//echo '11111111111111';
+			
 			//$officeObj = new m_office();
 			//$officeObj->delete();
 			//echo '222222222222';
+			//echo '11111111111111';
 			//exit();
 			//删除现有科室商品数据
 			//$officegoodsObj = new m_officegoods();
 			//$officegoodsObj->delete();
             for ($row = 2; $row <= $highestRow; $row++){//行数是以第1行开始
-			//echo  $highestColumnIdx."///";
+			    //echo  $row."   ";
                 for ($column = 0; $column < $highestColumnIdx; $column++) {
                     $columnName = PHPExcel_Cell::stringFromColumnIndex($column);
                     $value = (string)$sheet->getCellByColumnAndRow($column, $row)->getCalculatedValue();
-					
+					//echo  $column."/";
                     switch ($column) {
                         case 0: $data['id_code'] = $value;  break;
                         case 1: $data['district_name'] = $value;    break;
@@ -201,7 +205,7 @@ class c_device extends base_c {
                     $this->ShowMsg("操作失败: " . $deviceObj->getError());
                 }
             }
-
+			
             if (move_uploaded_file($file_tmp_name, $target_name)) {
                 $uploadlogObj = new m_uploadlog();
                 

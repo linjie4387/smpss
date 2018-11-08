@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-05-10 11:25:21
+<?php /* Smarty version 2.6.26, created on 2017-01-24 19:07:58
          compiled from simpla/delivery/adddeliverycar.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/adddeliverycar.html', 14, false),)), $this); ?>
@@ -15,7 +15,7 @@ unset($_smarty_tpl_vars);
 <div id="main-content">
     <h2>欢迎您 <?php echo $this->_tpl_vars['_adminname']; ?>
 </h2>
-    <p id="page-intro">待指派任务 > 选择车辆</p>
+    <p id="page-intro">添加送货 > 选择车辆</p>
     <div class="clear"></div>
     <div class="content-box">
       <div class="content-box-header">
@@ -40,7 +40,6 @@ unset($_smarty_tpl_vars);
               <tr>
               	<th>选择</th>
                 <th>车牌号</th>
-                <th>准驾车型</th>
                 <th>型号</th>
                 <th>牌照类型</th>
                 <th>容量</th>
@@ -78,12 +77,9 @@ $this->_sections['i']['first']      = ($this->_sections['i']['iteration'] == 1);
 $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $this->_sections['i']['total']);
 ?>
                 <tr>
-                  <td><input class="row-radio" type="radio" data-mold="<?php echo $this->_tpl_vars['carList'][$this->_sections['i']['index']]['moldKey']; ?>
-" name="car_id" value="<?php echo $this->_tpl_vars['carList'][$this->_sections['i']['index']]['car_id']; ?>
+                  <td><input class="row-radio" type="radio" name="car_id" value="<?php echo $this->_tpl_vars['carList'][$this->_sections['i']['index']]['car_id']; ?>
 "></td>
                   <td><?php echo $this->_tpl_vars['carList'][$this->_sections['i']['index']]['car_license']; ?>
-</td>
-                  <td><?php echo $this->_tpl_vars['carList'][$this->_sections['i']['index']]['mold']; ?>
 </td>
                   <td><?php echo $this->_tpl_vars['carList'][$this->_sections['i']['index']]['model']; ?>
 </td>
@@ -101,8 +97,6 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
            </div>       
           <input type="hidden" name="qoids" id="qoids" value="<?php echo $this->_tpl_vars['qoids']; ?>
 " />
-          <input type="hidden" name="mold" id="mold" value="<?php echo $this->_tpl_vars['mold']; ?>
-" />
           <input type="hidden" name="qoids_for_goods" id="qoids_for_goods" value="<?php echo $this->_tpl_vars['qoids_for_goods']; ?>
 " />
           <input type="hidden" name="quantity" id="quantity" value="<?php echo $this->_tpl_vars['quantity']; ?>
@@ -111,13 +105,12 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
         </div>
       </div>
     </div>
-    <script language="JavaScript">
+    <script>
 		function donext(){
 			if($("input:radio[class='row-radio'][checked]").length < 1 ){
 				alert('请选择数据');
 				return;
 			}
-			$('#mold').val($("input:radio[class='row-radio'][checked]").data('mold'));
 			$("#js-form").submit();
 		}	
 		

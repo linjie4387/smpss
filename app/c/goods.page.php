@@ -81,14 +81,42 @@ class c_goods extends base_c {
 		$sheet['name'] = "全部商品信息_".date('Y-m-d');
 		$sheet['sheet'] = array("商品信息");
 		$goodsObj = new m_goodsmeta();
-		$sql = "select a.* from smpss_goodsmeta a left join smpss_officegoods b on a.goods_no = b.goods_id where 1=1";
-		if($_GET){
-			$office_id = $_GET['officeid'];
-			if($office_id){
-				 $sql=$sql." and b.office_id = ".$office_id;	
-			}
+		$office_id = $_GET['officeid'];
+		if(!$office_id){
+			$office_id = $_POST['officeid'];
 		}
 		
+		if($office_id){ //表示在科室中查看商品，并导出。
+			$officegoodsObj = new m_officegoods ();
+			$list  = $officegoodsObj->getGoodsList ( $office_id )->items;
+			//echo json_encode($list);
+			if ($list) {
+				for($i = 0; $i < count ( $list ); $i ++) {
+					//echo "goods_no = '".$list[$i]['goods_id']."'";
+					$goodsMsg = $goodsObj->selectOne ( "goods_no = '".$list[$i]['goods_id']."'" );
+					$goods[$i] ['goods_no'] = $goodsMsg ['goods_no'];
+					$goods[$i] ['name'] = $goodsMsg ['name'];
+					$goods[$i] ['specification'] = $goodsMsg ['specification'];
+					$goods[$i] ['unit'] = $goodsMsg ['unit'];
+					$goods[$i] ['testnum'] = $goodsMsg ['testnum'];
+					$goods[$i] ['manu'] = $goodsMsg ['manu'];
+					$goods[$i] ['machine'] = $goodsMsg ['machine'];
+					$goods[$i] ['category'] = $goodsMsg ['category'];
+					$goods[$i] ['is_20l'] = $goodsMsg ['is_20l'];
+					$goods[$i] ['volume'] = $goodsMsg ['volume'];
+					$goods[$i] ['colorcode'] = $goodsMsg ['colorcode'];
+					$goods[$i] ['remark'] = $goodsMsg ['remark'];
+					$goods[$i] ['price'] = $goodsMsg ['price'];
+				}
+			}
+		}else{
+			$sql = "select a.* from smpss_goodsmeta a  ";
+			$sql=$sql." order by goods_no";	
+			//echo $sql;
+			//exit;
+			$rsgoods = $goodsObj->query($sql);
+			$goods = $rsgoods->items;
+		}
 		/*
 		if($_POST){
 			$office_id = $_POST['officeid'];
@@ -109,10 +137,8 @@ class c_goods extends base_c {
 			}
 		}
 		*/
-		//echo $sql;
+		//echo json_encode($goods);
 		//exit();
-		$rsgoods = $goodsObj->query($sql);
-		$goods = $rsgoods->items;
 		$exc_goods = array ();
     	foreach ( $goods as $ed ) {
 			$e ['goods_no'] = $ed ['goods_no'];
@@ -127,6 +153,7 @@ class c_goods extends base_c {
 			$e ['volume'] = $ed ['volume'];
 			$e ['colorcode'] = $ed ['colorcode'];
 			$e ['remark'] = $ed ['remark'];
+			$e ['price'] = $ed ['price'];
 			$exc_goods[] = $e;
     	}
 		$goods_title = array (
@@ -141,7 +168,8 @@ class c_goods extends base_c {
     			"I:10"=>'是否大包装',
     			"J:10"=>'容积',
     			"K:10"=>'色标',
-    			"L:10"=>'备注'
+    			"L:10"=>'备注',
+    			"M:10"=>'价格'
     	);
 		$sheet['title'][] = $goods_title;
 		$sheet['lists']['s0'] = $exc_goods;
@@ -189,7 +217,6 @@ class c_goods extends base_c {
 			
             $sheet = $PHPExcel->getSheet(0);
             $highestRow = $sheet->getHighestRow(); // 取得总行数
-            //$this->ajax_res ( "导入字段数不够.".$highestRow,-1);exit;
             $highestColumn = $sheet->getHighestColumn();
             $highestColumnIdx = PHPExcel_Cell::columnIndexFromString($highestColumn); // 取得总列数
             if ($highestColumnIdx != 12) {
@@ -240,8 +267,6 @@ class c_goods extends base_c {
 		if(empty($goods_id)){
 			$goods_id=$_GET['gid'];
 		}
-		//echo $goods_id;
-		//exit();
 		$goodsObj = new m_goods();   //原生的goods表，主键为goods_id
 		$goodsmetaObj = new m_goodsmeta();  //已将goods_no转成主键
 		$goodsinfo = $goodsObj->selectOne("goods_id='".$goods_id."'");
@@ -281,16 +306,17 @@ class c_goods extends base_c {
 				$post['labelimg'] = "http://" . base_Constant::DOMAIN_NAME . base_Constant::ROOT_DIR . "/app" . base_Constant::UPLOAD_DATA_DIR. "/commodity/".$file_name;
 				$flag =$goods_imgObj->create(['labelimg'=>$post['labelimg'],'goods_no'=>$goodsinfo['goods_no'],'id'=>$goods_imgs['id']]);
 			}
-			if ($flag) {
-				$this->ShowMsg( "操作成功！", $this->createUrl("/goods/addgoods?gid={$goods_id}" ), 2, 1);
-			}
-			//if ($goodsmetaObj->create($post, "TRUE")) {
+			//if ($flag) {
 			//	$this->ShowMsg( "操作成功！", $this->createUrl("/goods/addgoods?gid={$goods_id}" ), 2, 1);
 			//}
+			if ($goodsmetaObj->update($post, "TRUE")) {
+				$this->ShowMsg( "操作成功！", $this->createUrl("/goods/addgoods?gid={$goods_id}" ), 2, 1);
+			}
 			$this->ShowMsg("操作失败" . $goodsObj->getError());
 		}
 		
 		$this->params['goods'] = $goodsObj->selectOne("goods_id='".$goods_id."'");
+		//echo json_encode($this->params['goods']);
 		//$this->params['goods']['img'] = $goods_imgObj->selectOne("id=".$goods_imgs['id']);
 		$this->params['goods']['img'] = $goods_imgObj->selectOne("goods_no='".$goods_id."'");
 		return $this->render('goods/addgoods.html', $this->params);

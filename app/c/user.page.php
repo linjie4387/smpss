@@ -106,13 +106,30 @@ class c_user extends base_c {
             $post = base_Utils::shtmlspecialchars($_POST);
             
             if ($weichatuserObj->createHospitalUser($post, "TRUE")) {
-                $this->ShowMsg("操作成功！", $this->createUrl("/user/hospitalindex"), 2, 1);
+				//继续完善司机/送货员信息
+				$weichatuserObj = new m_weichatuser();
+				$weichatuser = $weichatuserObj->selectOne("open_id = '".$post['open_id']."' and is_valid = 1 and status = 2");
+				if($weichatuser['level']==m_weichatuser::USER_LEVEL_DRIVER and $weichatuser['status']==m_weichatuser::USER_STATUS_PASSED and $weichatuser['is_valid']==m_weichatuser::USER_VALID){
+					$deliveryman['name']= $weichatuser['name'];
+					$deliveryman['name']= $weichatuser['name'];
+					$deliveryman['open_id']= $weichatuser['open_id'];
+					$deliveryman['mobile']= $weichatuser['mobile'];
+					$deliveryman['weichatuser_id']= $weichatuser['weichatuser_id'];
+					$datadictObj = new m_datadict();
+					$this->params['driverlicensetypeList'] = $datadictObj->getOrderType(base_Constant::KEY_DRIVERLICENSE_TYPE);
+					$this->params['weichatuserList'] = $weichatuserObj->getHospitalOptionList();        		
+					$this->params['deliveryman'] = $deliveryman;
+					return $this->render('delivery/adddeliveryman.html', $this->params);
+				}else{
+					$this->ShowMsg("操作成功！", $this->createUrl("/user/hospitalindex"), 2, 1);
+				}
             }
             $this->ShowMsg("操作失败" . $weichatuserObj->getError());
         }
         
         $datadictObj = new m_datadict();
         $this->params['userstatusList'] = $datadictObj->getOrderType(base_Constant::KEY_USER_STATUS);
+        $this->params['levelList'] = $datadictObj->getOrderType(base_Constant::KEY_USER_LEVEL);
         $this->params['orderCompanyList'] = $datadictObj->getOrderType(base_Constant::KEY_ORDER_COMPANY);
         
         $this->params['weichatuser'] = $weichatuserObj->selectOne("weichatuser_id = {$weichatuser_id}");

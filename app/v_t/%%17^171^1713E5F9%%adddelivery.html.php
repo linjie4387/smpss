@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-06-21 15:54:09
+<?php /* Smarty version 2.6.26, created on 2017-09-24 11:01:49
          compiled from simpla/delivery/adddelivery.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/adddelivery.html', 49, false),array('function', 'cycle', 'simpla/delivery/adddelivery.html', 97, false),)), $this); ?>
@@ -354,9 +354,11 @@ $this->_sections['k']['last']       = ($this->_sections['k']['iteration'] == $th
 		    			var postdata = {
 		    				id:order_id,details:order_details
 		    			};
+
 		    			$.ajax({type:'POST',url:'<?php echo smarty_function_get_url(array('rule' => '/delivery/excreteorder'), $this);?>
 ',data:postdata,dataType:'json',timeout:30000,success:function(msg,textStatus){
-		    				layer.msg(msg.msg);
+		    				//alert(msg.msg);
+							layer.msg(msg.msg);
 		    				if(msg.code == 1){
 		    					window.location.reload();
 		    				}

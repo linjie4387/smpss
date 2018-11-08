@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-05-10 11:28:15
+<?php /* Smarty version 2.6.26, created on 2017-11-03 16:42:50
          compiled from simpla/user/hospitalindex.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/user/hospitalindex.html', 17, false),array('modifier', 'cat', 'simpla/user/hospitalindex.html', 86, false),)), $this); ?>
@@ -95,7 +95,7 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
             <thead>
               <tr>
                 <th>微信OPENID</th>
-                <th>是否关注</th>
+                <th style="display:none">是否关注</th>
                 <th>名称</th>
                 <th>手机</th>
                 <th>类型</th>
@@ -140,7 +140,7 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
                 <tr>
                   <td><?php echo $this->_tpl_vars['weichatuserList'][$this->_sections['i']['index']]['open_id']; ?>
 </td>
-                  <td><?php echo $this->_tpl_vars['weichatuserList'][$this->_sections['i']['index']]['subscribe_name']; ?>
+                  <td style="display:none"><?php echo $this->_tpl_vars['weichatuserList'][$this->_sections['i']['index']]['subscribe_name']; ?>
 </td>
                   <td><?php echo $this->_tpl_vars['weichatuserList'][$this->_sections['i']['index']]['name']; ?>
 </td>

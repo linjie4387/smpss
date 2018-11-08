@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-06-11 07:59:32
+<?php /* Smarty version 2.6.26, created on 2017-10-24 14:34:10
          compiled from simpla/device/devicedetail.html */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/header.html", 'smarty_include_vars' => array()));
@@ -172,11 +172,8 @@ unset($_smarty_tpl_vars);
                             </tr>
                             <tr>
                               <td valign="top"><div style="margin-top:-1px;">配送信息</div></td>
-                              <td rowspan="2"><textarea style="width:100% ; border:1px solid #eee;" cols="" rows="5"><?php echo $this->_tpl_vars['device']['delivery_msg']; ?>
+                              <td><textarea style="width:100% ; border:1px solid #eee;" cols="" rows="5"><?php echo $this->_tpl_vars['device']['delivery_msg']; ?>
 </textarea></td>
-                            </tr>
-                            <tr>
-                              <td valign="top" bgcolor="#FFFFFF">&nbsp;</td>
                             </tr>
                         </tbody>
                     </table>

@@ -26,11 +26,11 @@ class m_ordergoods extends base_m {
             return false;
         }
         $where = "select * from smpss_goods as a join ";
-        $where .= "(select k2.sort, k1.goods_id from smpss_ordergoods k1 left join smpss_officegoods k2 on k1.goods_id = k2.goods_id where k1.order_id={$order_id}";
+        $where .= "(select k2.sort, k1.goods_id from smpss_ordergoods k1 left join smpss_officegoods k2 on k1.goods_id = k2.goods_id where k1.order_id={$order_id} and k2.office_id={$order['office_id']}";
         $where .= " union ";
 		$where .= "select sort , goods_id from smpss_officegoods where office_id={$order['office_id']}) b";
 		$where .=" on a.goods_id=b.goods_id order by b.sort ,manu, category, name";
-
+		//echo $where;
         $goodslist = $orderObj->query($where);
 		
         if (!empty($goodslist->items)) {
@@ -175,16 +175,17 @@ class m_ordergoods extends base_m {
             $data['goods_name'] = $goods['name'];
             $data['spec'] = $goods['specification'];
             $data['unit'] = $goods['unit'];
-            
-            $itemResult = $this->selectOne("order_id = {$data['order_id']} and goods_id = '{$data['goods_id']}'");
+			$sql = "order_id = {$data['order_id']} and goods_id = '".$data['goods_id']."'";
+            $itemResult = $this->selectOne($sql);
             if ($itemResult) {
                 $data['ordergoods_id'] = $itemResult['ordergoods_id'];
             }
             else {
                 $data['ordergoods_id'] = NULL;
             }
-            
+
             $rs = self::create($data);
+			//echo json_encode($this);
             if (!$rs) {
                 $this->setError (0, "保存数据失败" . $this->getError());
                 return false;

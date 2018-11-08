@@ -517,7 +517,7 @@ class c_order extends base_c {
         $this->params['order'] = $order;
         
         $orderpicObj = new m_orderpic();
-        $orderpic = $orderpicObj->select("order_id = {$order['hospitalorder_id']} and type = 2");
+        $orderpic = $orderpicObj->select("order_id = {$order['hospitalorder_id']} and type = 1");
         $this->params['orderpic'] = $orderpic->items;
         
         return $this->render('order/tradeprint.html', $this->params);

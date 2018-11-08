@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-06-04 13:38:36
+<?php /* Smarty version 2.6.26, created on 2017-09-24 11:01:49
          compiled from simpla/common/header_new.html */ ?>
 <html>
 <head>

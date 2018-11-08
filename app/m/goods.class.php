@@ -29,7 +29,7 @@ class m_goods extends base_m {
 		$this->setPage($page);
 		$this->setLimit(base_Constant::PAGE_SIZE);
         
-		$rs = $this->select($condition, "", "", "order by goods_id");
+		$rs = $this->select($condition, "", "", "order by goods_no");
         if ($rs) {
             return $rs;
         }

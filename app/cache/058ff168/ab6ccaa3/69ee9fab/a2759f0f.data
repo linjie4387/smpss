@@ -1,0 +1,2 @@
+-1
+a:4:{s:3:"gid";s:1:"6";s:10:"group_name";s:9:"库房组";s:11:"action_code";s:358:"a:4:{s:3:"all";i:0;s:6:"action";a:3:{i:0;s:20:"hospital_officeindex";i:1;s:17:"account_modifypwd";i:2;s:12:"system_index";}s:4:"menu";a:3:{s:8:"hospital";a:1:{s:11:"officeindex";s:12:"科室管理";}s:7:"account";a:1:{s:9:"modifypwd";s:12:"密码修改";}s:6:"system";a:1:{s:5:"index";s:12:"系统信息";}}s:3:"btn";a:1:{s:22:"hospital_preorderprint";i:1;}}";s:5:"state";s:1:"1";}

@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.26, created on 2017-05-10 11:19:46
+<?php /* Smarty version 2.6.26, created on 2017-11-28 21:26:34
          compiled from simpla/hospital/addofficegoods.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/hospital/addofficegoods.html', 14, false),array('modifier', 'cat', 'simpla/hospital/addofficegoods.html', 32, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/hospital/addofficegoods.html', 14, false),array('modifier', 'cat', 'simpla/hospital/addofficegoods.html', 33, false),)), $this); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/header.html", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -41,15 +41,16 @@ unset($_smarty_tpl_vars);
 " name="office_id" /> 
 							<input type="hidden" value="<?php echo $this->_tpl_vars['order_id']; ?>
 " name="order_id" />
-							<p>厂商：
-								<input type="text" class="small-input" id="manu" name="manu" value="<?php echo $this->_tpl_vars['manu']; ?>
+							<p>
+                            	厂商：
+								<input type="text" class="text-input small-input" id="manu" name="manu" value="<?php echo $this->_tpl_vars['manu']; ?>
 "/>
-								&nbsp;&nbsp;适用机型:
-								<input type="text" class="small-input" id="machine" name="machine" value="<?php echo $this->_tpl_vars['machine']; ?>
+								&nbsp;&nbsp;项目品类:
+								<input type="text" class="text-input small-input" id="category" name="category" value="<?php echo $this->_tpl_vars['category']; ?>
 "/> 
-							    &nbsp;&nbsp;商品名称：
-								<input type="text" class="small-input" id="name" name="name" value="<?php echo $this->_tpl_vars['name']; ?>
-"/> 
+                                &nbsp;&nbsp;关键字：
+                                <input type="text" value="<?php echo $this->_tpl_vars['key']; ?>
+" placeholder="编码，名称，备注" class="text-input small-input" name="key" />
 								<input type="submit" class="button" formaction="<?php echo smarty_function_get_url(array('rule' => '/hospital/addofficegoods','data' => ((is_array($_tmp=((is_array($_tmp=((is_array($_tmp='oid=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['office']['office_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['office']['office_id'])))) ? $this->_run_mod_handler('cat', true, $_tmp, '&orderid=') : smarty_modifier_cat($_tmp, '&orderid=')))) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['order_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['order_id']))), $this);?>
 " value="查询" />
 							</p>
@@ -160,4 +161,4 @@ unset($_smarty_tpl_vars);
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/footer.html", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
- ?>
+ ?>

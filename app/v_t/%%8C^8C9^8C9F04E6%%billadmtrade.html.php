@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-06-06 15:23:32
+<?php /* Smarty version 2.6.26, created on 2017-11-20 07:05:38
          compiled from simpla/order/billadmtrade.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/order/billadmtrade.html', 18, false),)), $this); ?>
@@ -54,8 +54,10 @@ unset($_smarty_tpl_vars);
                 <span></span> </p>
               <dt>
                 <input type="submit" name="" id="button" class="button" value="生成配送任务" /> &nbsp;&nbsp;
+                <?php if (1 == 2): ?>
                 <button type="button" id="overBtn" data-order_id="<?php echo $this->_tpl_vars['order']['order_id']; ?>
 " class="button">结束订单</button>
+                <?php endif; ?>
               </dt>
             </fieldset>
           </form>

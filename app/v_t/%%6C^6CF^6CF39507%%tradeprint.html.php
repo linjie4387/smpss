@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-05-18 15:09:35
+<?php /* Smarty version 2.6.26, created on 2018-10-09 15:42:04
          compiled from simpla/order/tradeprint.html */ ?>
 <!doctype html>
 <html class="no-js">

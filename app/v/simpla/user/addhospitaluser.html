@@ -52,6 +52,20 @@
                 </select>
                 <span></span> </p>
               {//if/}
+              {/if $weichatuser.type eq 3 /}
+              <p>
+                <label><font class="red"> * </font>用户类型：</label>
+                <select id="one" name="level">
+                    <option value="0">-----选择类型----</option>
+                    {/section name=i loop=$levelList/}
+                    <option value="{/$levelList[i].value/}" {/if $levelList[i].value eq $weichatuser.level/}selected="selected"{//if/}>
+                        {/$levelList[i].name/}
+                    </option>
+                    {//section/}
+                </select>
+                <span></span> 
+              </p>
+              {//if/}
               <p>
                 <label><font class="red"> * </font>状态：</label>
                 <select id="one" name="status">
@@ -62,7 +76,8 @@
                     </option>
                     {//section/}
                 </select>
-                <span></span> </p>
+                <span></span> 
+              </p>
               <dt>
                 <input type="submit" name="" id="button" class="button" value="编辑" />
               </dt>

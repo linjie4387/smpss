@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-05-10 11:19:43
+<?php /* Smarty version 2.6.26, created on 2017-10-13 16:04:04
          compiled from simpla/hospital/setofficegoods.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/hospital/setofficegoods.html', 32, false),array('modifier', 'cat', 'simpla/hospital/setofficegoods.html', 32, false),)), $this); ?>
@@ -52,10 +52,10 @@ unset($_smarty_tpl_vars);
 						<p>科室名称：<?php echo $this->_tpl_vars['office']['hospital_name']; ?>
 _<?php echo $this->_tpl_vars['office']['name']; ?>
 </p>
-						<div>科室库存安全倍数：
+						<div style="display:none">科室库存安全倍数：
 							<input type="text" value="<?php echo $this->_tpl_vars['office']['safe_stock_ratio']; ?>
 " id="safe_stock_ratio" />
-							<a class="button" href="#" onclick="changeRatio();">
+                                <a class="button" href="#" onclick="changeRatio();">
 								<i class="icon-edit"></i>修改
 							</a>
 						</div>
@@ -131,15 +131,15 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
 " data="<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['goods_id']; ?>
 " value="<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['remark']; ?>
 " class="remark edit-label small-input"/>
-											<i class="icon-edit" onclick="editremark(<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['goods_id']; ?>
-)"></i>
+											<i class="icon-edit" onclick="editremark('<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['goods_id']; ?>
+')"></i>
 										</td>
 										<td><input type="text" readonly id="s_<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['goods_id']; ?>
 " data="<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['goods_id']; ?>
 " value="<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['safe_stock']; ?>
 " class="safe-stock edit-label small-input"/>
-											<i class="icon-edit" onclick="editsafestock(<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['goods_id']; ?>
-)"></i>
+											<i class="icon-edit" onclick="editsafestock('<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['goods_id']; ?>
+')"></i>
 										</td>
 									</tr>
 									<?php endfor; endif; ?>
@@ -148,7 +148,9 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
 							<div style="padding:10px 0px;">
 								<input type="button" onclick="del();" id="button" class="button" value="删除商品" /> 
 								<input type="button" onclick="addgoods();" name="" id="button" class="button" value="添加商品" />
-								<input type="button" onclick="showupload();" name="" id="btnupload" class="button" value="批量导入" />
+								<input type="button" onclick="showupload();" name="" id="btnupload" class="button" value="导入商品" />
+								<input type="button" onclick="exportgoods('<?php echo $this->_tpl_vars['office']['office_id']; ?>
+');" name="" id="button" class="button" value="导出商品" />
 								<input type="button" onclick="download();" name="" id="btndownload" class="button" value="模板下载" />
 								<input type="button" onclick="goback();" name="" id="button" class="button" value="返回" />
 							</div>
@@ -278,6 +280,11 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
 			window.location="<?php echo smarty_function_get_url(array('rule' => '/order/addrecord','data' => ((is_array($_tmp='oid=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['order_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['order_id']))), $this);?>
 ";
 			<?php endif; ?>
+		}
+		
+		function exportgoods(officeid){
+			window.open('<?php echo smarty_function_get_url(array('rule' => "/goods/export"), $this);?>
+?officeid='+officeid);
 		}
 		
 		function download(){

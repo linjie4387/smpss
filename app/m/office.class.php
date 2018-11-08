@@ -97,8 +97,14 @@ class m_office extends base_m {
             $this->set("create_time", date('Y-m-d H:i:s'));
         }
         $this->set("admin_id", $_COOKIE['admin_id']);
-        $rs = $this->save($data['office_id']);
-
+		
+        $rs = $this->save($data['office_id'])."<br/>";
+		//if(!$rs){
+		//	echo 'error'.  json_encode($this);
+		//}
+		//echo  json_encode($this);
+		//exit;
+		
         if ($rs) {
             if ($with_log) {
                 $content = $data['office_id'] ? "修改科室： {$hospital['name']}_{$data['name']}" : "新增科室：{$hospital['name']}_{$data['name']}";

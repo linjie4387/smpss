@@ -78,9 +78,14 @@
                 <label>备注：</label>
                 <input type="text" value="{/$goods.remark/}" class="text-input medium-input" name="remark" id="remark" />
                 <span></span> </p>
+                <p><label><font class="red"> 以下属性可编辑 </font></label></p>
+                <p>
+                <label><font class="red"> 价格： </font></label>
+                <input type="text" value="{/$goods.price/}" class="text-input small-input" name="price" id="price" />
+                <span>单位：RMB</span></p>
                 
               	<p>
-                <label>商品注册证图片：</label>
+                <label><font class="red"> 商品注册证图片： </font></label>
                 <span>{/if $goods.img.regimg ==''/}暂无图片{/else/}<img src="{/$goods.img.regimg/}" width="48"style="vertical-align: middle;display:none" />{//if/}</span>
                 <input type="file" class="text-input medium-input" name="regimg" />
                 {/ if !empty($goods.img.regimg) /}
@@ -88,7 +93,7 @@
                 {//if/}
                  </p>
                 <p>
-                <label>说明书图片：</label>
+                <label><font class="red"> 说明书图片： </font></label>
                 <span>{/if $goods.img.noticeimg ==''/}暂无图片{/else/}<img src="{/$goods.img.noticeimg/}" width="48"style="vertical-align: middle;display:none" />{//if/}</span>
                 <input type="file" class="text-input medium-input" name="noticeimg" />
                 {/ if !empty($goods.img.noticeimg) /}
@@ -96,7 +101,7 @@
                 {//if/}
                 </p>
                 <p>
-                <label>商品标签图片：</label>
+                <label><font class="red"> 商品标签图片： </font></label>
                 <span>{/if $goods.img.labelimg ==''/}暂无图片{/else/}<img src="{/$goods.img.labelimg/}" width="48"style="vertical-align: middle;display:none" />{//if/}</span>
                 <input type="file" class="text-input medium-input" name="labelimg" />
                 {/ if !empty($goods.img.labelimg) /}

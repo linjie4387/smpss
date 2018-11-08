@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.26, created on 2017-06-11 12:19:36
+<?php /* Smarty version 2.6.26, created on 2017-11-03 16:52:00
          compiled from simpla/order/index.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/order/index.html', 26, false),array('modifier', 'cat', 'simpla/order/index.html', 91, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/order/index.html', 26, false),array('modifier', 'cat', 'simpla/order/index.html', 107, false),)), $this); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/header.html", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -81,8 +81,8 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
                             <option value="1" <?php if ($this->_tpl_vars['is_agent'] == 1): ?>selected="selected"<?php endif; ?>>否</option>
                             <option value="2" <?php if ($this->_tpl_vars['is_agent'] == 2): ?>selected="selected"<?php endif; ?>>是</option>
                         </select>
-                    <input type="checkbox" name="showDel" id="showDel"  <?php if ($this->_tpl_vars['showDel']): ?>checked<?php endif; ?> />
-                    <label style="display: -webkit-inline-box;font-weight: normal;" for="stockempty">显示已删除预订单</label></span>
+                    <!--input type="checkbox" name="showDel" id="showDel"  <?php if ($this->_tpl_vars['showDel']): ?>checked<?php endif; ?> />
+                    <label style="display: -webkit-inline-box;font-weight: normal;" for="stockempty">显示已删除预订单</label--></span>
                     <input type="submit" name="" id="button" class="button" value="查询" /></span></p>
             </fieldset>
         </div>
@@ -135,8 +135,17 @@ $this->_sections['i']['first']      = ($this->_sections['i']['iteration'] == 1);
 $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $this->_sections['i']['total']);
 ?>
                 <tr>
-                  <td><?php echo $this->_tpl_vars['hospitalorderList'][$this->_sections['i']['index']]['hospitalorder_id']; ?>
-</td>
+                  <td>
+                       <?php if ($this->_tpl_vars['hospitalorderList'][$this->_sections['i']['index']]['status'] == 5): ?>
+                  			<span style="font-weight:bold; color:#999;text-decoration:line-through;">
+                            <?php echo $this->_tpl_vars['hospitalorderList'][$this->_sections['i']['index']]['hospitalorder_id']; ?>
+
+                            </span>
+                       <?php else: ?>
+                       		<a style="font-weight:bold"><?php echo $this->_tpl_vars['hospitalorderList'][$this->_sections['i']['index']]['hospitalorder_id']; ?>
+</a>
+                       <?php endif; ?>
+                  </td>
                   <td><?php echo $this->_tpl_vars['hospitalorderList'][$this->_sections['i']['index']]['hospital_name']; ?>
 </td>
                   <td><?php echo $this->_tpl_vars['hospitalorderList'][$this->_sections['i']['index']]['office_name']; ?>
@@ -146,8 +155,17 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
 </td>
                   <td><?php echo $this->_tpl_vars['hospitalorderList'][$this->_sections['i']['index']]['preapply_time']; ?>
 </td>
-                  <td><?php echo $this->_tpl_vars['hospitalorderList'][$this->_sections['i']['index']]['status_name']; ?>
-</td>
+                  <td>
+                       <?php if ($this->_tpl_vars['hospitalorderList'][$this->_sections['i']['index']]['status'] == 5): ?>
+                  			<span style="font-weight:bold; color:#999;text-decoration:line-through;">
+                            <?php echo $this->_tpl_vars['hospitalorderList'][$this->_sections['i']['index']]['status_name']; ?>
+
+                            </span>
+                       <?php else: ?>
+                       		<a style="font-weight:bold"><?php echo $this->_tpl_vars['hospitalorderList'][$this->_sections['i']['index']]['status_name']; ?>
+</a>
+                       <?php endif; ?>
+                  </td>
                   <?php if ($this->_tpl_vars['hospitalorderList'][$this->_sections['i']['index']]['is_agent'] == 1): ?>
                   <td>否</td>
                   <?php else: ?>
@@ -219,6 +237,12 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
 		if(!confirm("确定要删除该预订单吗？")){
 			return;
 		}
+		var url = "<?php echo smarty_function_get_url(array('rule' => '/order/delhospitalorder'), $this);?>
+-oid-"+orderId+".html";;
+		//alert(url);
+		window.location.href=url;
+		//window.location.href="/order/delhospitalorder?hospitalorder_id="+orderId;
+		/*
 		$.post("<?php echo smarty_function_get_url(array('rule' => '/order/delhospitalorder'), $this);?>
 ",{
 			hospitalorder_id : orderId
@@ -232,6 +256,7 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
 				jQuery.facebox(res.msg);
 			}
 		},'json');
+		*/
 	}
 	
 	function updatehospitalorder(obj,hospitalorderid){

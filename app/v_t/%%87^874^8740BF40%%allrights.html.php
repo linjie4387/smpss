@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-05-19 14:03:01
+<?php /* Smarty version 2.6.26, created on 2017-09-24 11:02:41
          compiled from simpla/system/allrights.html */ ?>
 <div class="rights">
 	<p>
@@ -42,9 +42,9 @@
 			<?php if ($this->_tpl_vars['action']['menu']['user']['hospitalindex']): ?>checked="checked" <?php endif; ?> />
 			医院用户管理</li>
 		<li><input type="checkbox" name="user[]"
-			value="工程部用户管理:engineerindex"
+			value="内部用户管理:engineerindex"
 			<?php if ($this->_tpl_vars['action']['menu']['user']['engineerindex']): ?>checked="checked" <?php endif; ?> />
-			工程部用户管理</li>
+			内部用户管理</li>
 		<li><input type="checkbox" name="user[]"
 			value="删除用户:deluser:button"
 			<?php if ($this->_tpl_vars['action']['btn']['user_deluser']): ?>checked="checked" <?php endif; ?> /> 删除用户</li>
@@ -81,6 +81,7 @@
 			<?php if ($this->_tpl_vars['action']['menu']['device']['logindex']): ?>checked="checked" <?php endif; ?> /> 更新记录</li>
 	</ul>
 </div>
+<!--
 <div class="rights">
 	<p>
 		<a href="javascript:void(0)">试剂管理权限</a>
@@ -96,6 +97,7 @@
 			<?php if ($this->_tpl_vars['action']['menu']['reagent']['logindex']): ?>checked="checked" <?php endif; ?> /> 更新记录</li>
 	</ul>
 </div>
+-->
 <div class="rights">
     <p>
     <a href="javascript:void(0)">商品管理权限</a>
@@ -103,10 +105,18 @@
     <ul>
         <li><input type="checkbox" name="goods[]" value="商品管理:index"
             <?php if ($this->_tpl_vars['action']['menu']['goods']['index']): ?>checked="checked" <?php endif; ?> /> 商品管理</li>
-        <li><input type="checkbox" name="goods[]"
+        <!--li>
+        	<input type="checkbox" name="goods[]"
             value="新增商品:addgoods"
             <?php if ($this->_tpl_vars['action']['menu']['goods']['addgoods']): ?>checked="checked" <?php endif; ?> />
-            新增商品</li>
+            新增商品
+        </li-->
+        <li>
+        	<input type="checkbox" name="goods[]"
+            value="导入导出商品:importandexport"
+            <?php if ($this->_tpl_vars['action']['menu']['goods']['importandexport']): ?>checked="checked" <?php endif; ?> />
+            导入导出商品
+        </li>
     </ul>
 </div>
 <div class="rights">

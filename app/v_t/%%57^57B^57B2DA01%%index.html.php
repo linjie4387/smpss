@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-05-19 14:04:13
+<?php /* Smarty version 2.6.26, created on 2017-02-06 14:06:22
          compiled from simpla/reagent/index.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/reagent/index.html', 12, false),)), $this); ?>

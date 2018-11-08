@@ -11,9 +11,5 @@
 ;default 是默认的数据库配置，如果没有找到你获取的zone，比如要在这个文件里找SDb::getConfig("friends")，
 ;由于friends没有配置，就读取default里的
 [default]
-;main   =   host:127.0.0.1,port:35306,user:smp73D,database:smpss,password:wPBGC4uJ6CvT7OIe,charset:utf8
-;query  =   host:127.0.0.1,port:35306,user:smp73D,database:smpss,password:wPBGC4uJ6CvT7OIe,charset:utf8
-;main   =   host:127.0.0.1,port:3306,user:root,database:smpss_mk,password:,charset:utf8,engine:mysql
-;query  =   host:127.0.0.1,port:3306,user:root,database:smpss_mk,password:,charset:utf8,engine:mysql
-main   =   host:adminmk.chens.mobi,port:25306,user:root,database:smpss_mk,password:w16eqwED,charset:utf8,engine:mysql
-query  =   host:adminmk.chens.mobi,port:25306,user:root,database:smpss_mk,password:w16eqwED,charset:utf8,engine:mysql
+main   =   host:127.0.0.1,port:35306,user:smp73D,database:smpss,password:wPBGC4uJ6CvT7OIe,charset:utf8,engine:mysql
+query  =   host:127.0.0.1,port:35306,user:smp73D,database:smpss,password:wPBGC4uJ6CvT7OIe,charset:utf8,engine:mysql

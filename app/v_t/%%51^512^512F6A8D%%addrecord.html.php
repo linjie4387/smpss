@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.26, created on 2017-05-10 11:30:01
+<?php /* Smarty version 2.6.26, created on 2017-11-20 06:35:13
          compiled from simpla/order/addrecord.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/order/addrecord.html', 15, false),array('modifier', 'cat', 'simpla/order/addrecord.html', 17, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/order/addrecord.html', 15, false),array('modifier', 'cat', 'simpla/order/addrecord.html', 21, false),)), $this); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/header.html", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -29,12 +29,18 @@ unset($_smarty_tpl_vars);
                     <form action="<?php echo smarty_function_get_url(array('rule' => '/order/addrecord'), $this);?>
 " method="post" id="js-form" AUTOCOMPLETE="OFF">
                         <fieldset class="clearfix">
-                            <p><span><?php echo $this->_tpl_vars['order']['hospital_name']; ?>
+                            <p><span>
+                            <?php echo $this->_tpl_vars['order']['hospital_name']; ?>
 _<?php echo $this->_tpl_vars['order']['office_name']; ?>
- <?php if ($this->_tpl_vars['readonly'] == 0): ?>&nbsp; <a class="btn btn-success btn-xs" href="<?php echo smarty_function_get_url(array('rule' => '/hospital/setofficegoods','data' => ((is_array($_tmp=((is_array($_tmp=((is_array($_tmp='oid=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['order']['office_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['order']['office_id'])))) ? $this->_run_mod_handler('cat', true, $_tmp, '&orderid=') : smarty_modifier_cat($_tmp, '&orderid=')))) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['order']['order_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['order']['order_id']))), $this);?>
+ 
+                            <?php if ($this->_tpl_vars['readonly'] == 0): ?>
+                            	<?php if (1 == 2): ?>
+                                    <a class="btn btn-success btn-xs" href="<?php echo smarty_function_get_url(array('rule' => '/hospital/setofficegoods','data' => ((is_array($_tmp=((is_array($_tmp=((is_array($_tmp='oid=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['order']['office_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['order']['office_id'])))) ? $this->_run_mod_handler('cat', true, $_tmp, '&orderid=') : smarty_modifier_cat($_tmp, '&orderid=')))) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['order']['order_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['order']['order_id']))), $this);?>
 ">
-                                商品配置
-                            </a><?php endif; ?>&nbsp; <a class="btn btn-success btn-xs" href="<?php echo smarty_function_get_url(array('rule' => '/order/exportordergoods','data' => ((is_array($_tmp='oid=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['order']['order_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['order']['order_id']))), $this);?>
+                                        商品配置
+                                    </a>
+                                 <?php endif; ?>
+                            <?php endif; ?>&nbsp; <a class="btn btn-success btn-xs" href="<?php echo smarty_function_get_url(array('rule' => '/order/exportordergoods','data' => ((is_array($_tmp='oid=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['order']['order_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['order']['order_id']))), $this);?>
 ">
                                 数据导出
                             </a></span></p>
@@ -50,7 +56,7 @@ _<?php echo $this->_tpl_vars['order']['office_name']; ?>
                                             <th>规格</th>
                                             <th>单位</th>
                                             <th>数量</th>
-                                            <th>厂商全名</th>
+                                            <th>厂商</th>
                                             <th>适用机型</th>
                                             <th>项目品类</th>
                                         </tr>
@@ -91,7 +97,7 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
 </td>
                                             <td><?php echo $this->_tpl_vars['ordergoodsList'][$this->_sections['i']['index']]['unit']; ?>
 </td>
-                                            <td><?php if ($this->_tpl_vars['readonly'] == 0): ?><input type="text" value="<?php echo $this->_tpl_vars['ordergoodsList'][$this->_sections['i']['index']]['quantity']; ?>
+                                            <td><?php if ($this->_tpl_vars['readonly'] == 0): ?><input type="text"  value="<?php echo $this->_tpl_vars['ordergoodsList'][$this->_sections['i']['index']]['quantity']; ?>
 " class="text-input small-input" name="goodslist[quantity][]" <?php if ($this->_tpl_vars['ordergoodsList'][$this->_sections['i']['index']]['is_exist'] == 0): ?>readonly="true"<?php endif; ?> /><?php elseif ($this->_tpl_vars['readonly'] == 1): ?><?php echo $this->_tpl_vars['ordergoodsList'][$this->_sections['i']['index']]['quantity']; ?>
 <?php endif; ?></td>
                                             <td><?php echo $this->_tpl_vars['ordergoodsList'][$this->_sections['i']['index']]['manu']; ?>
@@ -106,7 +112,7 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
                                 </table>
                             </ul>
                             <dt>
-                                <?php if ($this->_tpl_vars['readonly'] == 0): ?><input type="submit" name="" id="button" class="button" value="保存" /><?php endif; ?>
+                                <?php if ($this->_tpl_vars['readonly'] == 0): ?><input type="submit" name="" id="button" class="button" value="&nbsp;保&nbsp;&nbsp;存&nbsp;" /><?php endif; ?>
                             </dt>
                         </fieldset>
                     </form>

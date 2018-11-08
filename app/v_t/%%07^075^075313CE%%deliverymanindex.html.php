@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.26, created on 2017-05-13 09:44:41
+<?php /* Smarty version 2.6.26, created on 2017-01-24 19:08:08
          compiled from simpla/delivery/deliverymanindex.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/deliverymanindex.html', 12, false),array('modifier', 'cat', 'simpla/delivery/deliverymanindex.html', 66, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/deliverymanindex.html', 12, false),array('modifier', 'cat', 'simpla/delivery/deliverymanindex.html', 64, false),)), $this); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/header.html", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -51,7 +51,6 @@ unset($_smarty_tpl_vars);
                 <th>驾照类型</th>
                 <th>添加时间</th>
                 <th>添加人</th>
-                <th>是否占用</th>
                 <th>管理</th>
               </tr>
             </thead>
@@ -108,7 +107,6 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
 </td>
                   <td><?php echo $this->_tpl_vars['deliverymanList'][$this->_sections['i']['index']]['admin_name']; ?>
 </td>
-                  <td><?php if ($this->_tpl_vars['deliverymanList'][$this->_sections['i']['index']]['isrun'] == 0): ?>空闲<?php else: ?> <span style="color: #FF0000;">占用</span> <?php endif; ?></td>
                   <td>
                     <a style="margin:10px;" href="<?php echo smarty_function_get_url(array('rule' => '/delivery/adddeliveryman','data' => ((is_array($_tmp='did=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['deliverymanList'][$this->_sections['i']['index']]['deliveryman_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['deliverymanList'][$this->_sections['i']['index']]['deliveryman_id']))), $this);?>
 " title="编辑">

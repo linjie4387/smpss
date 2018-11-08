@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-06-05 20:31:48
+<?php /* Smarty version 2.6.26, created on 2018-01-02 11:57:23
          compiled from simpla/goods/addgoods.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/goods/addgoods.html', 12, false),)), $this); ?>
@@ -36,6 +36,8 @@ unset($_smarty_tpl_vars);
             <fieldset class="clearfix">
               <input type="hidden" value="<?php echo $this->_tpl_vars['goods']['goods_id']; ?>
 " name="goods_id" />
+              <input type="hidden" value="<?php echo $this->_tpl_vars['goods']['goods_key']; ?>
+" name="goods_key" />
               <p>
               <label><font class="red"> * </font>编码(唯一)：</label>
               <input type="text" value="<?php echo $this->_tpl_vars['goods']['goods_no']; ?>
@@ -62,17 +64,22 @@ unset($_smarty_tpl_vars);
                 <label><font class="red"> * </font>单位：</label>
                 <input type="text" value="<?php echo $this->_tpl_vars['goods']['unit']; ?>
 " class="text-input small-input" name="unit" id="unit" />
-                <span></span><br/><small>比如: 桶</small></p>
+                <span>比如: 桶</span></p>
               <p>
                 <label><font class="red"> * </font>规格：</label>
                 <input type="text" value="<?php echo $this->_tpl_vars['goods']['specification']; ?>
 " class="text-input small-input" name="specification" id="specification" />
-                <span></span><br/><small>比如: 20L</small></p>
+                <span>比如: 20L</span></p>
+              <p>
+                <label><font class="red"> * </font>测试数：</label>
+                <input type="text" value="<?php echo $this->_tpl_vars['goods']['testnum']; ?>
+" class="text-input small-input" name="testnum" id="testnum" />
+                <span></span><br/></p>
               <p>
                 <label><font class="red"> * </font>容积：</label>
                 <input type="text" value="<?php echo $this->_tpl_vars['goods']['volume']; ?>
 " class="text-input small-input" name="volume" id="volume" />
-                <span></span><br/><small>比如: 20ML</small></p>
+                <span>比如: 20ML</span></p>
                 
               <p>
                 <label>适用机型：</label>
@@ -100,11 +107,17 @@ unset($_smarty_tpl_vars);
                 <input type="text" value="<?php echo $this->_tpl_vars['goods']['remark']; ?>
 " class="text-input medium-input" name="remark" id="remark" />
                 <span></span> </p>
+                <p><label><font class="red"> 以下属性可编辑 </font></label></p>
+                <p>
+                <label><font class="red"> 价格： </font></label>
+                <input type="text" value="<?php echo $this->_tpl_vars['goods']['price']; ?>
+" class="text-input small-input" name="price" id="price" />
+                <span>单位：RMB</span></p>
                 
               	<p>
-                <label>商品注册证图片：</label>
+                <label><font class="red"> 商品注册证图片： </font></label>
                 <span><?php if ($this->_tpl_vars['goods']['img']['regimg'] == ''): ?>暂无图片<?php else: ?><img src="<?php echo $this->_tpl_vars['goods']['img']['regimg']; ?>
-" width="48"style="vertical-align: middle;" /><?php endif; ?></span>
+" width="48"style="vertical-align: middle;display:none" /><?php endif; ?></span>
                 <input type="file" class="text-input medium-input" name="regimg" />
                 <?php if (! empty ( $this->_tpl_vars['goods']['img']['regimg'] )): ?>
                 <a href="<?php echo $this->_tpl_vars['goods']['img']['regimg']; ?>
@@ -112,9 +125,9 @@ unset($_smarty_tpl_vars);
                 <?php endif; ?>
                  </p>
                 <p>
-                <label>说明书图片：</label>
+                <label><font class="red"> 说明书图片： </font></label>
                 <span><?php if ($this->_tpl_vars['goods']['img']['noticeimg'] == ''): ?>暂无图片<?php else: ?><img src="<?php echo $this->_tpl_vars['goods']['img']['noticeimg']; ?>
-" width="48"style="vertical-align: middle;" /><?php endif; ?></span>
+" width="48"style="vertical-align: middle;display:none" /><?php endif; ?></span>
                 <input type="file" class="text-input medium-input" name="noticeimg" />
                 <?php if (! empty ( $this->_tpl_vars['goods']['img']['noticeimg'] )): ?>
                 <a href="<?php echo $this->_tpl_vars['goods']['img']['noticeimg']; ?>
@@ -122,9 +135,9 @@ unset($_smarty_tpl_vars);
                 <?php endif; ?>
                 </p>
                 <p>
-                <label>商品标签图片：</label>
+                <label><font class="red"> 商品标签图片： </font></label>
                 <span><?php if ($this->_tpl_vars['goods']['img']['labelimg'] == ''): ?>暂无图片<?php else: ?><img src="<?php echo $this->_tpl_vars['goods']['img']['labelimg']; ?>
-" width="48"style="vertical-align: middle;" /><?php endif; ?></span>
+" width="48"style="vertical-align: middle;display:none" /><?php endif; ?></span>
                 <input type="file" class="text-input medium-input" name="labelimg" />
                 <?php if (! empty ( $this->_tpl_vars['goods']['img']['labelimg'] )): ?>
                 <a href="<?php echo $this->_tpl_vars['goods']['img']['labelimg']; ?>
@@ -134,11 +147,13 @@ unset($_smarty_tpl_vars);
               <dt>
               	<input name="token" type="hidden" value="<?php echo $this->_tpl_vars['upload_token']; ?>
 ">
-                <input type="submit" name="" id="button" class="button" value="<?php if ($this->_tpl_vars['goods']['goods_id']): ?>编辑<?php else: ?>添加<?php endif; ?>" />
-                
+               
+                <input type="submit" name="" id="button" class="button" value="<?php if ($this->_tpl_vars['goods']['goods_id']): ?>编 辑<?php else: ?>添 加<?php endif; ?>" />
+                <?php if (1 == 2): ?>
                 <input type="button" class="button" value="打印图片" onclick="window.open('<?php echo smarty_function_get_url(array('rule' => '/goods/goodsimgprint'), $this);?>
 -gid-<?php echo $this->_tpl_vars['goods']['goods_no']; ?>
 ');" />
+              	 <?php endif; ?>
               </dt>
             </fieldset>
           </form>

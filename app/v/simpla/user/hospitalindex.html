@@ -54,7 +54,7 @@
             <thead>
               <tr>
                 <th>微信OPENID</th>
-                <th>是否关注</th>
+                <th style="display:none">是否关注</th>
                 <th>名称</th>
                 <th>手机</th>
                 <th>类型</th>
@@ -74,7 +74,7 @@
                 {/section name=i loop=$weichatuserList/}
                 <tr>
                   <td>{/$weichatuserList[i].open_id/}</td>
-                  <td>{/$weichatuserList[i].subscribe_name/}</td>
+                  <td style="display:none">{/$weichatuserList[i].subscribe_name/}</td>
                   <td>{/$weichatuserList[i].name/}</td>
                   <td>{/$weichatuserList[i].mobile/}</td>
                   <td>{/$weichatuserList[i].type_name/}</td>

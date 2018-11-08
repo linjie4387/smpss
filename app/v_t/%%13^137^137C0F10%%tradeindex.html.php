@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-07-04 11:39:46
+<?php /* Smarty version 2.6.26, created on 2017-11-20 06:33:40
          compiled from simpla/order/tradeindex.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/order/tradeindex.html', 85, false),array('modifier', 'cat', 'simpla/order/tradeindex.html', 182, false),)), $this); ?>
@@ -294,10 +294,16 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
                   <?php elseif ($this->_tpl_vars['orderList'][$this->_sections['i']['index']]['is_valid'] == 0): ?>
                   	<span style="font-weight:bold; color:#999;">已结束</span>
                   <?php else: ?>
-                      <?php echo $this->_tpl_vars['orderList'][$this->_sections['i']['index']]['status_name']; ?>
+                      <?php if ($this->_tpl_vars['orderList'][$this->_sections['i']['index']]['status'] == 3): ?>
+                      <span style="font-weight:bold; color:#090;">
+                      <?php else: ?>
+                      <span style="font-weight:bold; color:#f00;">
+                      <?php endif; ?>
+                      	<?php echo $this->_tpl_vars['orderList'][$this->_sections['i']['index']]['status_name']; ?>
 
+                      </span>
                       <?php if ($this->_tpl_vars['orderList'][$this->_sections['i']['index']]['sign_status'] == 4): ?>
-                      	<br/><span style="color:red;">(部分签收)</span>
+                      <br/><span style="color:red;">(部分签收)</span>
                       <?php endif; ?>
                   <?php endif; ?>
                   </td>
@@ -324,8 +330,10 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
                       <div align="center">
                        <!--a class="btn btn-danger btn-xs" class="btn btn-danger btn-xs"  href="tradeindex?parent_order_id=<?php echo $this->_tpl_vars['orderList'][$this->_sections['i']['index']]['order_id']; ?>
 "-->
-                      <a class="btn btn-success btn-xs" class="btn btn-danger btn-xs"  href="<?php echo smarty_function_get_url(array('rule' => '/delivery/deliverygoodsbo','data' => ((is_array($_tmp='did=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['orderList'][$this->_sections['i']['index']]['order_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['orderList'][$this->_sections['i']['index']]['order_id']))), $this);?>
+                      	<?php if ($this->_tpl_vars['orderList'][$this->_sections['i']['index']]['delivery_cnt'] > 0): ?>
+                      		<a class="btn btn-success btn-xs" class="btn btn-danger btn-xs"  href="<?php echo smarty_function_get_url(array('rule' => '/delivery/deliverygoodsbo','data' => ((is_array($_tmp='did=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['orderList'][$this->_sections['i']['index']]['order_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['orderList'][$this->_sections['i']['index']]['order_id']))), $this);?>
 ">查看配送单</a>
+                      	<?php endif; ?>
                       </div>
                       <?php endif; ?>
                   </td>
@@ -341,19 +349,19 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
                       </a>
 
                       <?php endif; ?>
-
-                      <?php if ($this->_tpl_vars['orderList'][$this->_sections['i']['index']]['status'] == 3 && $this->_tpl_vars['orderList'][$this->_sections['i']['index']]['hospitalorder_id'] != null): ?>
+					  
+                      
+                      <!--if $orderList[i].status eq 3 && $orderList[i].hospitalorder_id neq null
 
                       </br>
 
-                      <a href="<?php echo smarty_function_get_url(array('rule' => '/order/deliveryprint','data' => ((is_array($_tmp='oid=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['orderList'][$this->_sections['i']['index']]['order_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['orderList'][$this->_sections['i']['index']]['order_id']))), $this);?>
-" title="出库单凭证">
+                      <a href="{get_url rule='/order/deliveryprint' data='oid='|cat:$orderList[i].order_id}" title="出库单凭证">
 
                           出库单
 
                       </a>
 
-                      <?php endif; ?>
+                      if-->
 
                   </td>
 

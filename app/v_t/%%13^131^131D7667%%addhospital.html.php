@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-06-02 14:43:54
+<?php /* Smarty version 2.6.26, created on 2017-01-25 14:27:37
          compiled from simpla/hospital/addhospital.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/hospital/addhospital.html', 12, false),)), $this); ?>

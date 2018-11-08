@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.26, created on 2017-06-27 14:58:27
+<?php /* Smarty version 2.6.26, created on 2017-09-24 11:52:26
          compiled from simpla/goods/index.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/goods/index.html', 14, false),array('modifier', 'cat', 'simpla/goods/index.html', 87, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/goods/index.html', 14, false),array('modifier', 'cat', 'simpla/goods/index.html', 86, false),)), $this); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/header.html", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -47,17 +47,15 @@ unset($_smarty_tpl_vars);
                <?php if (2 == 1): ?>
                <input type="button" class="button" onclick="gotoadd();" value="添加商品" />&nbsp;
                <?php endif; ?>
-            	<input type="button" id="exportBtn" class="button" value="导出" title="导出所有商品信息。" />&nbsp; 
+               
+               <?php if ($this->_tpl_vars['importandexport'] == 1): ?>
+               <input type="button" id="exportBtn" class="button" value="导出" title="导出所有商品信息。" />&nbsp; 
                <input type="button" id="importBtn" class="button" onclick="$('#uploadxls input[type=file]').click();" value="导入" title="导入所有商品信息。" />
-            	</form>
+               <input type="button" id="downloadBtn" class="button" value="模板下载" title="模板下载。" />
+               <?php endif; ?>	
             	</p>
             </fieldset>
             
-            <form id="uploadxls" style="display:none;" tabindex="-1" action="<?php echo smarty_function_get_url(array('rule' => "/goods/import"), $this);?>
-" method="post" enctype="multipart/form-data" target="upiframe">
-			    <input type="file" id="file" name="file"><input type="hidden" name="upload" id="upload" value="" />
-			    <iframe src="about:blank" tabindex="-1" style="display:none;"  name="upiframe"></iframe>
-			</form>
         </div>
         <hr />
           <table>
@@ -137,11 +135,17 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
                   <td><?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['remark']; ?>
 </td>
                   <td>
-                    <a style="margin:10px;" href="<?php echo smarty_function_get_url(array('rule' => '/goods/addgoods','data' => ((is_array($_tmp='gid=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['goods_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['goods_id']))), $this);?>
+                    <!--a style="margin:10px;" href="<?php echo smarty_function_get_url(array('rule' => '/goods/addgoods','data' => ((is_array($_tmp='gid=')) ? $this->_run_mod_handler('cat', true, $_tmp, $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['goods_id']) : smarty_modifier_cat($_tmp, $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['goods_id']))), $this);?>
 " title="编辑">
                   		<img src="<?php echo $this->_tpl_vars['root_dir']; ?>
 /assets/simpla/images/icons/edit.png" alt="编辑" />
+                  	</a-->
+                    <a style="margin:10px;" href="javascript:gotoedit('<?php echo $this->_tpl_vars['goodsList'][$this->_sections['i']['index']]['goods_id']; ?>
+')" title="编辑">
+                  		<img src="<?php echo $this->_tpl_vars['root_dir']; ?>
+/assets/simpla/images/icons/edit.png" alt="编辑" />
                   	</a>
+                    
                     </td>
                 </tr>
                 <?php endfor; endif; ?>
@@ -150,12 +154,21 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
         </div>
       </div>
       </form>
+        <form id="uploadxls" style="display:none;" tabindex="-1" action="<?php echo smarty_function_get_url(array('rule' => "/goods/import"), $this);?>
+" method="post" enctype="multipart/form-data" target="upiframe">
+            <input type="file" id="file" name="file"><input type="hidden" name="upload" id="upload" value="" />
+            <iframe src="about:blank" tabindex="-1" style="display:none;"  name="upiframe"></iframe>
+        </form>
     </div>
     <script language="JavaScript">
     	
     	$(function(){
     		$('#exportBtn').click(function(){
     			window.open('<?php echo smarty_function_get_url(array('rule' => "/goods/export"), $this);?>
+');
+    		});
+    		$('#downloadBtn').click(function(){
+    			window.open('<?php echo $this->_tpl_vars['demofile']; ?>
 ');
     		});
     		$('#uploadxls input[type=file]').change(function(){
@@ -185,6 +198,12 @@ $this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $th
 			window.location.href = '<?php echo smarty_function_get_url(array('rule' => "/goods/addgoods"), $this);?>
 ';
 		}
+		
+		function gotoedit(gid){
+			window.location.href = '<?php echo smarty_function_get_url(array('rule' => "/goods/addgoods"), $this);?>
+'+"?gid="+gid;
+		}
+
 	</script>
     <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "simpla/common/copy.html", 'smarty_include_vars' => array()));

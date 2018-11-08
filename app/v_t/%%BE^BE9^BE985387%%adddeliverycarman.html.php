@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-05-10 11:25:24
+<?php /* Smarty version 2.6.26, created on 2017-01-24 19:08:02
          compiled from simpla/delivery/adddeliverycarman.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'get_url', 'simpla/delivery/adddeliverycarman.html', 9, false),)), $this); ?>
@@ -15,7 +15,7 @@ unset($_smarty_tpl_vars);
 <div id="main-content">
     <h2>欢迎您 <?php echo $this->_tpl_vars['_adminname']; ?>
 </h2>
-    <p id="page-intro">待指派任务 > 选择司机</p>
+    <p id="page-intro">添加送货 > 选择司机</p>
     <div class="clear"></div>
     
     	
@@ -30,14 +30,12 @@ unset($_smarty_tpl_vars);
                     <fieldset>
                         <p>关键字：<input type="text" value="<?php echo $this->_tpl_vars['driverkey']; ?>
 " class="text-input small-input" id="driverkey" name="driverkey" />
-                        <input type="hidden" name="mold" id="mold" value="<?php echo $this->_tpl_vars['mold']; ?>
-" />
                         <span>（姓名，手机号）<span>
                             </span><input type="button" name="" id="button" class="button" value="查询" onclick="getDriver(1)" /></span>
                     </fieldset>
                 </div>
             	<hr />
-                <table style="overflow-x: auto;max-height:480px;display: block;">
+                <table>
                     <thead>
                       <tr>
                         <th>选择</th>
@@ -72,7 +70,7 @@ unset($_smarty_tpl_vars);
                     </fieldset>
                 </div>
             	<hr />
-                <table style="overflow-x: auto;max-height:480px;display: block;">
+                <table>
                     <thead>
                       <tr>
                         <th>选择<!--<input type="checkbox" name="checkall" id="check_all">--></th>
@@ -104,7 +102,6 @@ unset($_smarty_tpl_vars);
 " />            
             <input type="hidden" name="car_id" id="car_id" value="<?php echo $this->_tpl_vars['car_id']; ?>
 " />
-            
             <input type="button" onclick="javascript:history.go(-1);" name="" id="button" class="button" value="上一步" />&nbsp;         
             <input type="button" onclick="donext();" name="" id="button" class="button" value="提 交" />
        </div> 
@@ -129,7 +126,6 @@ unset($_smarty_tpl_vars);
 ',
 				page : curpage,
 				keyid : "driverkey",
-				mold :$('#mold').val()||0,
 				callback : "getDriverCallback",
 				listbar : $("#driverlist"),
 				pagebar : $("#driverlist_page"),
@@ -144,7 +140,7 @@ unset($_smarty_tpl_vars);
 			return htm;
 		}
 		
-		function getDeliveryMan(curpage){	
+		function getDeliveryMan(curpage){			
 			getListByAjax({
 				main : "getDeliveryMan",
 				url : '<?php echo smarty_function_get_url(array('rule' => "/delivery/getdeliverymanlist"), $this);?>

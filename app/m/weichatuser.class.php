@@ -10,6 +10,24 @@ class m_weichatuser extends base_m {
 	const USER_TYPE_DEPARTMENT = 2;
 	//用户类型-代理用户
 	const USER_TYPE_AGENT = 3;
+
+	//用户级别
+	const USER_LEVEL_NORMAL = 1;   //普通用户
+	const USER_LEVEL_DRIVER = 101;   //司机
+	const USER_LEVEL_ADMIN = 2;		//管理员
+	
+	//用户状态
+	const USER_STATUS_UNPASS = 1;   //待审核
+	const USER_STATUS_PASSED = 2;   //审核通过
+	const USER_STATUS_BLOCK = 3;   //审核不通过
+	const USER_STATUS_CLOSE = 4;   //关闭权限
+	
+	//用户是否有效
+	const USER_VALID = 1;   //普通用户
+	const USER_UNVLID = 0;   //司机
+
+
+	
 	public function primarykey() {
 		return 'weichatuser_id';
 	}
@@ -70,7 +88,9 @@ class m_weichatuser extends base_m {
 	
     //查询送货员
     public function getDeliveryUser(){
-    	$values = $this->select("is_valid = 1 and status = 2 and (type = 3 or type=2)", "weichatuser_id, name", "", "order by weichatuser_id");
+    	//$values = $this->select("is_valid = 1 and status = 2 and (type = 3 or type=2)", "weichatuser_id, name", "", "order by weichatuser_id");
+		//edit by linj, type=3为内部用户 level=101为司机或送货员, status = 2为已审核， is_valid=1 为有效（没被删除）
+		$values = $this->select("is_valid = 1 and status = 2 and type = 3 and level = 101", "weichatuser_id, name", "", "order by weichatuser_id");
     	$values = $values->items;
     	
     	return $values;
@@ -120,7 +140,7 @@ class m_weichatuser extends base_m {
         $this->set("status", $data['status']);
         $this->set("order_company", $data['order_company']);
         $this->set("type", $weichatuser['type']);
-        $this->set("level", $weichatuser['level']);
+        $this->set("level", $data['level']);
         $this->set("apply_time", $weichatuser['apply_time']);
         $this->set("verify_time", $weichatuser['verify_time']);
         $this->set("verify_admin_id", $weichatuser['verify_admin_id']);
