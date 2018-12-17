@@ -50,7 +50,8 @@ class c_user extends base_c {
 			$condition = $condition ? $condition." and status = {$status}" : "status = {$status}";
 			$this->params['status'] = $status;
 		}
-
+		//var_dump($condition);
+		//return;
         $rs = $weichatuserObj->getWeichatuserList($condition, $page);
         $this->params['weichatuserList'] = $rs->items;
         

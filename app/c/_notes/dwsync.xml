@@ -62,4 +62,24 @@
 <file name="test.page.php" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131430232989670000" remote="131430232980000000" Dst="0" />
 <file name="user.page.php" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131436125752526009" remote="131436125750000000" Dst="0" />
 <file name="v.page.php" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131430232989700000" remote="131430232980000000" Dst="0" />
+<file name="account.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131436125750000000" remote="131436125750000000" Dst="0" />
+<file name="ajax.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131436125750000000" remote="131436125750000000" Dst="0" />
+<file name="delivery.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634490000000" remote="131859634490000000" Dst="0" />
+<file name="delivery.page.php.bak" server="114.55.27.112//root/websites/jchx/smpss/" local="131436131780000000" remote="131436131780000000" Dst="0" />
+<file name="deliverycommit.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131436125750000000" remote="131436125750000000" Dst="0" />
+<file name="device.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131861145230000000" remote="131861145230000000" Dst="0" />
+<file name="device.page.php.bak" server="114.55.27.112//root/websites/jchx/smpss/" local="131297812130000000" remote="131873416410000000" Dst="0" />
+<file name="district.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131436125750000000" remote="131436125750000000" Dst="0" />
+<file name="goods.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131860624180000000" remote="131860624180000000" Dst="0" />
+<file name="hospital.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634500000000" remote="131859634500000000" Dst="0" />
+<file name="main.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131436125750000000" remote="131436125750000000" Dst="0" />
+<file name="order.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131842293090000000" remote="131842293090000000" Dst="0" />
+<file name="reagent.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131436125750000000" remote="131436125750000000" Dst="0" />
+<file name="report.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131430232980000000" remote="131430232980000000" Dst="0" />
+<file name="stock.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131436125750000000" remote="131436125750000000" Dst="0" />
+<file name="supplier.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131436125750000000" remote="131436125750000000" Dst="0" />
+<file name="system.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634500000000" remote="131859634500000000" Dst="0" />
+<file name="test.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131430232980000000" remote="131430232980000000" Dst="0" />
+<file name="user.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131873420477653421" remote="131873420510000000" Dst="0" />
+<file name="v.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131430232980000000" remote="131430232980000000" Dst="0" />
 </dwsync>

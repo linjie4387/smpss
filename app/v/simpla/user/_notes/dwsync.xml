@@ -15,4 +15,9 @@
 <file name="dispatchengineer.html" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131436125759276009" remote="131436125750000000" Dst="0" />
 <file name="engineerindex.html" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131436125759286009" remote="131436125750000000" Dst="0" />
 <file name="hospitalindex.html" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131436125759306009" remote="131436125750000000" Dst="0" />
+<file name="addengineer.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634950000000" remote="131859634950000000" Dst="0" />
+<file name="addhospitaluser.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634960000000" remote="131859634960000000" Dst="0" />
+<file name="dispatchengineer.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634960000000" remote="131859634960000000" Dst="0" />
+<file name="engineerindex.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634960000000" remote="131859634960000000" Dst="0" />
+<file name="hospitalindex.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634960000000" remote="131859634960000000" Dst="0" />
 </dwsync>

@@ -39,7 +39,6 @@
                 <th>科室</th>
                 <th>供应商</th>
                 <th>型号</th>
-                <th>仪器编号</th>
                 <th>联系人</th>
                 <th>联系电话</th>
                 <th>管理</th>
@@ -59,7 +58,6 @@
                   <td>{/$deviceList[i].office_name/}</td>
                   <td>{/$deviceList[i].supplier_code/}</td>
                   <td>{/$deviceList[i].model_name/}</td>
-                  <td>{/$deviceList[i].code/}</td>
                   <td>{/$deviceList[i].contact_name/}</td>
                   <td>{/$deviceList[i].contact_phone/}</td>
                   <td><a href="{/get_url rule='/device/devicedetail' data='did='|cat:$deviceList[i].device_id/}" title="查询详情"><img src="{/$root_dir/}/assets/simpla/images/icons/info.png" alt="查询详情" /></a></td>

@@ -47,4 +47,22 @@
 <file name="print.html" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131436125758636009" remote="131436125750000000" Dst="0" />
 <file name="tradeprint.html" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131436125758966009" remote="131436125750000000" Dst="0" />
 <file name="verifytradeorder.html" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131436125758976009" remote="131436125750000000" Dst="0" />
+<file name="addhospitalorder.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634840000000" remote="131859634840000000" Dst="0" />
+<file name="addorder.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634840000000" remote="131859634840000000" Dst="0" />
+<file name="addrecord.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634840000000" remote="131859634840000000" Dst="0" />
+<file name="billadmtrade.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634840000000" remote="131859634840000000" Dst="0" />
+<file name="deliveryprint.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634850000000" remote="131859634850000000" Dst="0" />
+<file name="deliverytradeorder.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634850000000" remote="131859634850000000" Dst="0" />
+<file name="editorderremark.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634850000000" remote="131859634850000000" Dst="0" />
+<file name="hospitalorderdetail.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634850000000" remote="131859634850000000" Dst="0" />
+<file name="index.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131842268400000000" remote="131842268400000000" Dst="0" />
+<file name="orderdetail.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634860000000" remote="131859634860000000" Dst="0" />
+<file name="print.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634860000000" remote="131859634860000000" Dst="0" />
+<file name="tradeindex - ¿½±´ [2].html" server="114.55.27.112//root/websites/jchx/smpss/" local="131443251440000000" remote="131443251440000000" Dst="0" />
+<file name="tradeindex - ¿½±´.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131443251450000000" remote="131443251450000000" Dst="0" />
+<file name="tradeindex - 拷贝 [2].html" server="114.55.27.112//root/websites/jchx/smpss/" local="131443251450000000" remote="131443251450000000" Dst="0" />
+<file name="tradeindex - 拷贝.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131443251450000000" remote="131443251450000000" Dst="0" />
+<file name="tradeindex.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131842268350000000" remote="131842268350000000" Dst="0" />
+<file name="tradeprint.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634860000000" remote="131859634860000000" Dst="0" />
+<file name="verifytradeorder.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634860000000" remote="131859634860000000" Dst="0" />
 </dwsync>

@@ -1,7 +1,7 @@
 <?php
 class base_Constant {
         const PAGE_SIZE = 30;
-    const DOMAIN_NAME = "adminjchx.xicp.io";
+    const DOMAIN_NAME = "adminjchx.chens.mobi";
         const ROOT_DIR = "";
         const TABLE_PREFIX = "smpss_";
         const URL_SUFFIX = "html";
