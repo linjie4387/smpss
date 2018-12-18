@@ -63,7 +63,7 @@ class m_officegoods extends base_m {
 	 * @param unknown $remark        	
 	 */
 	public function modifyRemark($office_id, $goods_id, $remark) {
-		$officeGoods = $this->selectOne ( "office_id={$office_id} and goods_id={$goods_id}" );
+		$officeGoods = $this->selectOne ( "office_id={$office_id} and goods_id='{$goods_id}'" );
 		if (! $officeGoods) {
 			$this->setError ( 0, "找不到科室商品。" );
 			return false;
@@ -92,7 +92,7 @@ class m_officegoods extends base_m {
 	 * @param unknown $remark
 	 */
 	public function modifySafeStock($office_id, $goods_id, $safe_stock) {
-		$officeGoods = $this->selectOne ( "office_id={$office_id} and goods_id={$goods_id}" );
+		$officeGoods = $this->selectOne ( "office_id={$office_id} and goods_id='{$goods_id}'" );
 		if (! $officeGoods) {
 			$this->setError ( 0, "找不到科室商品。" );
 			return false;
@@ -114,12 +114,13 @@ class m_officegoods extends base_m {
 	}
 	
 	public function delOfficeGoods($office_id, $goods_id) {
-		$officeGoods = $this->selectOne ( "office_id={$office_id} and goods_id={$goods_id}" );
+		$officeGoods = $this->selectOne ( "office_id={$office_id} and goods_id='{$goods_id}'" );
 		if (! $officeGoods) {
-			$this->setError ( 0, "找不到科室商品。" );
+			$this->setError ( 0, "找不到科室商品。".$office_id.','.$goods_id );
 			return false;
 		}
-		return $this->delete ( "office_id={$office_id} and goods_id={$goods_id}" );
+		$res = $this->delete (  "office_id={$office_id} and goods_id='{$goods_id}'" );
+		return $res;
 	}
 	public function getGoodsList($office_id) {
 		$join = array('smpss_goods'=>'smpss_goods.goods_id = smpss_officegoods.goods_id');
@@ -161,7 +162,7 @@ class m_officegoods extends base_m {
 			foreach ( $rs->items as &$officeGoods ) {
 				$goods_id = $officeGoods ['goods_id'];
 				$where = "{$orderTable}.create_time>DATE_SUB(last_day(CURDATE()), INTERVAL 4 MONTH) and {$orderTable}.is_valid=1";
-				$where = $where . " and {$orderGoodsTable}.goods_id={$goods_id}";
+				$where = $where . " and {$orderGoodsTable}.goods_id='{$goods_id}'";
 				$join = array (
 						"{$orderTable}" => "{$orderGoodsTable}.order_id={$orderTable}.order_id"
 				);
@@ -203,7 +204,7 @@ class m_officegoods extends base_m {
 				if($officeGoods ['last_safe_stock']) {
 					$officeGoods ['percent'] = round(abs($officeGoods ['safe_stock']-$officeGoods ['last_safe_stock'])/$officeGoods ['last_safe_stock'], 4)*100;
 				}
-				$goods = $goodsObj->selectOne("goods_id={$goods_id}");
+				$goods = $goodsObj->selectOne("goods_id='{$goods_id}'");
 				$officeGoods['name'] = $goods['name'];
 				$officeGoods['specification'] = $goods['specification'];
 				$officeGoods['unit'] = $goods['unit'];
@@ -219,7 +220,7 @@ class m_officegoods extends base_m {
 			$list = $rs;
 			
 			for($i = 0; $i < count ( $list ); $i ++) {
-				$officegoods = $this->selectOne ( "office_id = {$office_id} and goods_id = {$list[$i]['goods_id']}" );
+				$officegoods = $this->selectOne ( "office_id = {$office_id} and goods_id = '{$list[$i]['goods_id']}'" );
 				if ($officegoods) {
 					$list [$i] ['is_checked'] = 1;
 				} else {

@@ -932,6 +932,7 @@ class c_hospital extends base_c {
 				if($officegoodsObj->selectOne("office_id={$office_id} and goods_id={$goods_id}")){
 					continue;
 				}
+				
 				$res = $officegoodsObj->createOne ( $office_id, $goods_id, $data['index'],$data['safe_stock'],$data['remark'] );
 				
 				if (!$res ) {

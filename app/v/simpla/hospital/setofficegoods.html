@@ -190,6 +190,7 @@ file="simpla/common/left.html"/}
 				var gid = this.value;
 				goods_list.push(gid);
 			});
+			//alert(goods_list.join(","));
 			$.post("{/get_url rule='/hospital/delofficegoods'/}",{
 				office_id : "{/$office.office_id/}",
 				goods_list:goods_list
