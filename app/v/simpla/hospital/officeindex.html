@@ -27,9 +27,15 @@
       <div class="content-box-content">
         <div class="tab-content default-tab" id="tab1">
             
-        <div class="form">
+        
+        	<form id="uploadxls" style="display:none;" tabindex="-1" action="{/get_url rule="/hospital/importOfficeGoods"/}" method="post" enctype="multipart/form-data" target="upiframe">
+			    <input type="file" id="file" name="file"><input type="hidden" name="upload" id="upload" value="" />
+			    <iframe src="about:blank" tabindex="-1" style="display:none;"  name="upiframe"></iframe>
+			</form>
+            <form action="{/get_url rule='/hospital/officeindex'/}" method="post" id="js-form">
+            <div class="form">
             <fieldset>
-                <p><form action="{/get_url rule='/hospital/officeindex'/}" method="post" id="js-form">
+                <p>
                 	医院： <span>
                     <select id="one" name="hospital_id">
                         <option value="0">-----选择医院-----</option>
@@ -50,13 +56,10 @@
                     <input type="button" id="exportBtn" class="button" value="导出" title="导出所有科室信息。" />&nbsp; 
                		<input type="button" id="importBtn" class="button" onclick="$('#uploadxls input[type=file]').click();" value="导入" title="导入所有科室商品信息。" />
                     {//if/}
-               </p></form>
+               </p>
             </fieldset>
             
-            <form id="uploadxls" style="display:none;" tabindex="-1" action="{/get_url rule="/hospital/importOfficeGoods"/}" method="post" enctype="multipart/form-data" target="upiframe">
-			    <input type="file" id="file" name="file"><input type="hidden" name="upload" id="upload" value="" />
-			    <iframe src="about:blank" tabindex="-1" style="display:none;"  name="upiframe"></iframe>
-			</form>
+            
         </div>
         <hr />
           <table>
