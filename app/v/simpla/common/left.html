@@ -165,7 +165,6 @@
 <script>
 $(function(){
 	refreshCounter();
-	setTimeout('refreshCounter()',6000);
 });
 
 function refreshCounter(){
@@ -190,5 +189,7 @@ function refreshCounter(){
 			//jQuery.facebox(res.msg);
 		}
 	},'json');
+	
+	setTimeout('refreshCounter()',6000);
 }
 </script>
