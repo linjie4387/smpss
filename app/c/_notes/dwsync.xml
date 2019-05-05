@@ -73,13 +73,15 @@
 <file name="goods.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131860624180000000" remote="131860624180000000" Dst="0" />
 <file name="hospital.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131895896008155094" remote="131895896890000000" Dst="0" />
 <file name="main.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131436125750000000" remote="131436125750000000" Dst="0" />
-<file name="order.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131842293090000000" remote="131842293090000000" Dst="0" />
+<file name="order.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="132011716713888225" remote="132011716740000000" Dst="0" />
 <file name="reagent.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131436125750000000" remote="131436125750000000" Dst="0" />
 <file name="report.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131430232980000000" remote="131430232980000000" Dst="0" />
 <file name="stock.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131436125750000000" remote="131436125750000000" Dst="0" />
 <file name="supplier.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131436125750000000" remote="131436125750000000" Dst="0" />
-<file name="system.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634500000000" remote="131859634500000000" Dst="0" />
+<file name="system.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="132011715418235339" remote="132011715590000000" Dst="0" />
 <file name="test.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131430232980000000" remote="131430232980000000" Dst="0" />
 <file name="user.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131873420477653421" remote="131873420510000000" Dst="0" />
 <file name="v.page.php" server="114.55.27.112//root/websites/jchx/smpss/" local="131430232980000000" remote="131430232980000000" Dst="0" />
+<file name="system.page.php" server="114.55.27.112//root/websites/test/smpss/" local="132011715418235339" remote="132011719500000000" Dst="0" />
+<file name="order.page.php" server="114.55.27.112//root/websites/test/smpss/" local="132011716713888225" remote="132011719540000000" Dst="0" />
 </dwsync>

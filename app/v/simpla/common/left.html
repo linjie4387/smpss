@@ -165,10 +165,10 @@
 <script>
 $(function(){
 	refreshCounter();
-	setTimeout('refreshCounter()',6000);
 });
 
 function refreshCounter(){
+
 	$.post("{/get_url rule='/system/reminder'/}",{},
 	function(res){
 		if(res.code == 0){
@@ -190,5 +190,7 @@ function refreshCounter(){
 			//jQuery.facebox(res.msg);
 		}
 	},'json');
+	
+	setTimeout('refreshCounter()',6000);
 }
 </script>

@@ -105,7 +105,7 @@ class c_order extends base_c {
         $page = $url ['page'] ? (int)$url ['page'] : 1;
         
         $status = $url ['status'] ? (int)$url ['status'] : '';
-        $is_valid = $url ['is_valid'] ? (int)$url ['is_valid'] : '';
+        $is_valid = $url ['is_valid'] ? (int)$url ['is_valid'] : '1';
         
         $adminObj = new m_admin();
         $admin = $adminObj->selectOne("admin_id = {$_COOKIE['admin_id']}");

@@ -272,7 +272,7 @@ class c_system extends base_c {
 		$preOrderCount = $modelObj->_db->select(base_Constant::TABLE_PREFIX . "hospitalorder", "status = 1", "count(1) as num" )->items; //待处理订单总数
 		$arr['preordercount'] = $preOrderCount[0]['num'];
 
-        $tradeOrderCount = $modelObj->_db->select(base_Constant::TABLE_PREFIX . "order", "status = 1", "count(1) as num" )->items; //正式订单总数
+        $tradeOrderCount = $modelObj->_db->select(base_Constant::TABLE_PREFIX . "order", "status = 1 and is_valid = 1", "count(1) as num" )->items; //正式订单总数
         $arr['tradeordercount'] = $tradeOrderCount[0]['num'];
         
 		$this->ajax_res("操作成功",0,array(
