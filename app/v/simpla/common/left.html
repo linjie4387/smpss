@@ -101,6 +101,15 @@
         </ul>
     </li>
     {//if/}
+    {/if $menu.price/}
+    <li> <a href="javascript:;" class="nav-top-item {/if $inpath[1] eq "delivery"/}current{//if/}">送货价格</a>
+        <ul>
+            {/foreach from=$menu.price item=items key=k/}
+            <li><a href="{/get_url rule='/price/'/}{/$k/}" class="{/if $inpath[2] eq $k/}current{//if/}">{/$items/}</a></li>
+            {//foreach/}
+        </ul>
+    </li>
+    {//if/}
     {/if $menu.device/}
     <li> <a href="javascript:;" class="nav-top-item {/if $inpath[1] eq "device"/}current{//if/}">仪器管理</a>
         <ul>

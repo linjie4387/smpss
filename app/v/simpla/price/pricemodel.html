@@ -1,0 +1,49 @@
+{/include file="simpla/common/header.html"/}
+{/include file="simpla/common/left.html"/}
+<div id="main-content">
+    <h2>欢迎您 {/$_adminname/}</h2>
+    <p id="page-intro">查看和管理价格模板。</p>
+    <div class="clear"></div>
+    <div class="content-box">
+      <div class="content-box-header">
+        <h3>价格模板查询</h3>
+        <ul class="content-box-tabs">
+        <li><a href="#tab1" class="default-tab">查询模板</a></li>
+        <li><a href="{/get_url rule="/price/addmodel"/}">导入模板</a></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+        <div class="form">
+        </div>
+        <hr />
+          <table width="100%">
+            <thead>
+              <tr>
+                <th>文件名</th>
+                <th width="120">下载</th>
+                <th width="220">上传日期</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td colspan="6">{/$pagebar/}</td>
+              </tr>
+            </tfoot>
+            <tbody>
+                {/section name=i loop=$list/}
+                <tr>
+                  <td>{/$list[i].file_name/}</td>
+                  <td><a href="{/$list[i].file_url/}">下载</a></td>
+                  <td>{/$list[i].upload_datetime/}</td>
+                </tr>
+                {//section/}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {/include file="simpla/common/copy.html"/}
+  </div>
+{/include file="simpla/common/footer.html"/}

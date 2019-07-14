@@ -86,6 +86,88 @@ class c_goods extends base_c {
 			$office_id = $_POST['officeid'];
 		}
 		
+		if($office_id){ //表示在科室中查看商品，并导出
+			$officeObj = new m_office ();
+			$office = $officeObj->selectOne ( "office_id = {$office_id}" );
+			$officegoodsObj = new m_officegoods();
+			$list  = $officegoodsObj->getGoodsList ( $office_id )->items;
+			$idx =0;
+			//echo json_encode($office);
+			if ($list) {
+				for($i = 0; $i < count ( $list ); $i ++) {
+					$idx = $idx + 1;
+					$row = $list[$i];
+					//echo "goods_no = '".$list[$i]['goods_id']."'";
+					$goodsMsg = $goodsObj->selectOne ( "goods_no = '".$list[$i]['goods_id']."'" );
+					$goods[$i] ['goods_no'] = $idx;									//序号
+					$goods[$i] ['name'] = $goodsMsg ['name'];						//名称
+					$goods[$i] ['specification'] = $goodsMsg ['specification'];   	//规格
+					$goods[$i] ['unit'] = $goodsMsg ['unit'];						//单位
+					$goods[$i] ['safe_stock'] = $row['safe_stock'];			//安全库存
+					$goods[$i] ['fact_stock'] = '';									//实际库存
+					$goods[$i] ['fact_num'] = '';									//确认数量
+					$is_201 = (int)$goodsMsg['is_20l'];
+					$goods[$i] ['remark'] = $office ['remark'];					//备注
+					if($is_201 == 1){
+						if($goods[$i] ['remark']){
+							$goods[$i] ['remark'] = $goods[$i] ['remark'] . '<br/>库存空间:' . $office['space'].'L';
+						}else{
+							$goods[$i] ['remark'] = '库存空间:' . $office['space'].'L';
+						}
+					}
+				}
+			}
+		}else{
+			$sql = "select a.* from smpss_goodsmeta a  ";
+			$sql=$sql." order by goods_no";	
+			//echo $sql;
+			//exit;
+			$rsgoods = $goodsObj->query($sql);
+			$goods = $rsgoods->items;
+		}
+		
+		//echo json_encode($goods);
+		//exit();
+		$exc_goods = array ();
+    	foreach ( $goods as $ed ) {
+			$e ['goods_no'] = $ed ['goods_no'];
+			$e ['name'] = $ed ['name'];
+			$e ['specification'] = $ed ['specification'];
+			$e ['unit'] = $ed ['unit'];
+			$e ['safe_stock'] = $ed ['safe_stock'];
+			$e ['fact_stock'] = $ed ['fact_stock'];
+			$e ['fact_num'] = $ed ['fact_num'];
+			$e ['remark'] = $ed ['remark'];
+			$exc_goods[] = $e;
+    	}
+		$goods_title = array (
+    			"A:20"=>'序号',
+    			"B:20"=>'商品名称',
+    			"C:10"=>'规格',
+    			"D:10"=>'单位',
+    			"E:10"=>'安全库存',
+    			"F:10"=>'实际库存',
+    			"G:10"=>'确认数量',
+    			"H:10"=>'备注'
+    	);
+		$sheet['title'][] = $goods_title;
+		$sheet['lists']['s0'] = $exc_goods;
+    	$excelObj->pushmore ( $sheet );
+	}
+	
+	//旧的 导出所有商品到excel表格
+	function pageexport_old($inPath) {
+		$excel = array ();
+    	$excelObj = new m_excel ();
+
+		$sheet['name'] = "全部商品信息_".date('Y-m-d');
+		$sheet['sheet'] = array("商品信息");
+		$goodsObj = new m_goodsmeta();
+		$office_id = $_GET['officeid'];
+		if(!$office_id){
+			$office_id = $_POST['officeid'];
+		}
+		
 		if($office_id){ //表示在科室中查看商品，并导出。
 			$officegoodsObj = new m_officegoods ();
 			$list  = $officegoodsObj->getGoodsList ( $office_id )->items;

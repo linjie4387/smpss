@@ -138,7 +138,21 @@
             送货员管理</li>        
     </ul>
 </div>
-
+<div class="rights">
+    <p>
+    <a href="javascript:void(0)">发货价格</a>
+    </p>
+    <ul>
+    	<li><input type="checkbox" name="price[]"
+            value="上传价格模板:addmodel"
+            {/if $action.menu.price.addmodel/}checked="checked" {//if/} />
+            上传价格模板</li>
+    	<li><input type="checkbox" name="price[]"
+            value="价格模板列表:pricemodel"
+            {/if $action.menu.price.pricemodel/}checked="checked" {//if/} />
+            价格模板列表</li>
+    </ul>
+</div>
 <div class="rights">
 	<p>
 		<a href="javascript:void(0)">数据报表管理权限</a>

@@ -99,6 +99,7 @@ class c_system extends base_c {
 				if ($gid) {
 					$this->params ['rights'] = $groupObj->selectOne ( "gid = {$gid}" );
 					$this->params ['action'] = unserialize ( $this->params ['rights'] ['action_code'] );
+					//var_dump(json_encode($this->params ['action']));
 					return $this->render ( 'system/rightsshow.html', $this->params );
 				}
 				$this->ShowMsg ( "用户组不存在！" );
@@ -197,7 +198,7 @@ class c_system extends base_c {
 		$post = (array)base_Utils::shtmlspecialchars($post);
 		$action = $menu = $btn = array();
 		foreach ( $post as $key => $val ) {
-			if (in_array ( $key, array ('report', 'system', 'account', 'district', 'supplier', 'hospital', 'order', 'member', 'category', 'shop', 'user', 'device', 'reagent', 'goods', 'consume', 'apply', 'purchase', 'dispatch', 'statistics', 'delivery' ) )) {
+			if (in_array ( $key, array ('report', 'system', 'account', 'district', 'supplier', 'hospital', 'order', 'member', 'category', 'shop', 'user', 'device', 'reagent', 'goods', 'consume', 'apply', 'purchase', 'dispatch', 'statistics','price', 'delivery' ) )) {
 				$_temp = array ();
 				foreach ( $val as $v ) {
 					$vArr = explode ( ':', $v );
