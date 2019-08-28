@@ -38,4 +38,18 @@
 <file name="print_forecast.html" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131436125758406009" remote="131436125750000000" Dst="0" />
 <file name="sales_forecast.html" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131436125758416009" remote="131436125750000000" Dst="0" />
 <file name="sync_result.html" server="114.55.27.112//data1/sci/apps/websites/smpss_mk/" local="131436125758446009" remote="131436125750000000" Dst="0" />
+<file name="addhospital.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634790000000" remote="131859634790000000" Dst="0" />
+<file name="addoffice.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634790000000" remote="131859634790000000" Dst="0" />
+<file name="addofficegoods.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634790000000" remote="131859634790000000" Dst="0" />
+<file name="add_forecast.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634790000000" remote="131859634790000000" Dst="0" />
+<file name="forecast_detail.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634800000000" remote="131859634800000000" Dst="0" />
+<file name="index.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634800000000" remote="131859634800000000" Dst="0" />
+<file name="officeindex.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131985793880838018" remote="131985793910000000" Dst="0" />
+<file name="print.html" server="114.55.27.112//root/websites/jchx/smpss/" local="132114478384536313" remote="132114478390000000" Dst="0" />
+<file name="print_forecast.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634810000000" remote="131859634810000000" Dst="0" />
+<file name="sales_forecast.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634810000000" remote="131859634810000000" Dst="0" />
+<file name="setofficegoods.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131895878645978825" remote="131895878660000000" Dst="0" />
+<file name="sync_result.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634810000000" remote="131859634810000000" Dst="0" />
+<file name="print.html" server="114.55.27.112//root/websites/test/smpss/" local="132114478384536313" remote="132114479030000000" Dst="0" />
+<file name="print.html" server="114.55.27.112//root/websites/smpss/" local="132114479390000000" remote="132114479390000000" Dst="0" />
 </dwsync>

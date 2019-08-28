@@ -14,9 +14,9 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-title" content="订单打印">
 	<meta name="msapplication-TileColor" content="#0e90d2">
-
-	<link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.4.2/css/amazeui.min.css">
-	<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="{/$root_dir/}/assets/Font-Awesome-3.2.1/css/font-awesome.min.css" type="text/css" />
+	<link rel="stylesheet" href="{/$root_dir/}/assets/simpla/css/amazeui.min.css" type="text/css" />
+	<script type="text/javascript" src="{/$root_dir/}/assets/js/jquery.js"></script>
 	<style>
 		body { max-width:1024px;background-color:#FFFFFF;margin:0 auto;color:#333;}
 		
@@ -29,7 +29,7 @@
 		.info div { padding:5px 30px 5px 0;display: inline-block;}
 		
 		.pic-box { position:relative;display:inline-block;max-width:100%;}
-		.pic-box .pic-btn-obj { display:none;position: absolute;top: 10px;left: 10px;}
+		.pic-box .pic-btn-obj { display:block;position: absolute;top: 10px;left: 10px;}
 		.pic-box:hover .pic-btn-obj{ display:block !important;}
 		
 		.PageNext{page-break-after: always;}
@@ -71,6 +71,18 @@
 
 <div class="blank-1"></div>
 <script>
+	/*
+	$(function(){
+		$('.pic-obj').mouseover(function(){
+			f_mouseover(this);
+		});
+	});
+	function f_mouseover(obj){
+		$('.pic-obj').removeClass('img-source');
+		$(obj).addClass('img-source');
+		$('.pic-btn-obj').css('display','none');
+	}
+	*/
 	var initrotate = -90;
 	function rotate_left(obj){
 		var parent = $(obj).parent();
