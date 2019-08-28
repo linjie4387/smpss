@@ -57,7 +57,7 @@
 <file name="hospitalorderdetail.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634850000000" remote="131859634850000000" Dst="0" />
 <file name="index.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131842268400000000" remote="131842268400000000" Dst="0" />
 <file name="orderdetail.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634860000000" remote="131859634860000000" Dst="0" />
-<file name="print.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634860000000" remote="131859634860000000" Dst="0" />
+<file name="print.html" server="114.55.27.112//root/websites/jchx/smpss/" local="132114461835622565" remote="132114461890000000" Dst="0" />
 <file name="tradeindex - ¿½±´ [2].html" server="114.55.27.112//root/websites/jchx/smpss/" local="131443251440000000" remote="131443251440000000" Dst="0" />
 <file name="tradeindex - ¿½±´.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131443251450000000" remote="131443251450000000" Dst="0" />
 <file name="tradeindex - 拷贝 [2].html" server="114.55.27.112//root/websites/jchx/smpss/" local="131443251450000000" remote="131443251450000000" Dst="0" />
@@ -65,4 +65,6 @@
 <file name="tradeindex.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131842268350000000" remote="131842268350000000" Dst="0" />
 <file name="tradeprint.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634860000000" remote="131859634860000000" Dst="0" />
 <file name="verifytradeorder.html" server="114.55.27.112//root/websites/jchx/smpss/" local="131859634860000000" remote="131859634860000000" Dst="0" />
+<file name="print.html" server="114.55.27.112//root/websites/test/smpss/" local="132114461835622565" remote="132114463770000000" Dst="0" />
+<file name="print.html" server="114.55.27.112//root/websites/smpss/" local="132114461835622565" remote="132114464120000000" Dst="0" />
 </dwsync>
