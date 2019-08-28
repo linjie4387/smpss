@@ -45,6 +45,7 @@ class c_price extends base_c {
     }
 
     function pageimppricemodel($inPath) {
+
         $url = $this->getUrlParams($inPath);
 
         if($_POST){
@@ -83,6 +84,9 @@ class c_price extends base_c {
                 $this->ShowMsg("操作失败: " . "文件加载错误");
             }
             
+			$regionObj = new m_priceregion();
+			$regionObj->delete();
+			
             $sheet = $PHPExcel->getSheet(0);
 			$this->impair($sheet);
 			
@@ -129,15 +133,15 @@ class c_price extends base_c {
 			//echo $highestColumn ;
             $highestColumnIdx = PHPExcel_Cell::columnIndexFromString($highestColumn); // 取得总列数
 
-            if ($highestColumnIdx < 7 ) {
+            if ($highestColumnIdx < 8 ) {
                 $this->ShowMsg("操作失败: " . "航空价格字段数不够".$highestColumn."  ".$highestColumnIdx."   ".$highestRow);
             }
-            $highestColumnIdx = 7;
+            $highestColumnIdx = 8;
 			
             $priceObj = new m_priceair();
-			
             //删除现有数据
             $priceObj->delete();
+
 
             for ($row = 3; $row <= $highestRow; $row++){//行数是以第1行开始
 			    //echo  $row."   ";
@@ -170,6 +174,7 @@ class c_price extends base_c {
                         case 4: $data['col3'] = $value; break;
                         case 5: $data['col4'] = $value; break;
                         case 6: $data['col5'] = $value; break;
+                        case 7: $data['duration'] = $value; break;
                     }
                 }
 				//var_dump(json_encode($data));
@@ -192,10 +197,10 @@ class c_price extends base_c {
 			//echo $highestColumn ;
             $highestColumnIdx = PHPExcel_Cell::columnIndexFromString($highestColumn); // 取得总列数
 
-            if ($highestColumnIdx < 4 ) {
+            if ($highestColumnIdx < 5 ) {
                 $this->ShowMsg("操作失败: " . "快递价格字段数不够".$highestColumn."  ".$highestColumnIdx."   ".$highestRow);
             }
-            $highestColumnIdx = 4;
+            $highestColumnIdx = 5;
 			
             $priceObj = new m_priceexpress();
 			
@@ -231,6 +236,7 @@ class c_price extends base_c {
 							break;
                         case 2: $data['first_weight'] = $value; break;
                         case 3: $data['next_weight'] = $value; break;
+                        case 4: $data['duration'] = $value; break;
                     }
                 }
                 if (!$priceObj->create($data)) {
@@ -251,10 +257,10 @@ class c_price extends base_c {
 			//echo $highestColumn ;
             $highestColumnIdx = PHPExcel_Cell::columnIndexFromString($highestColumn); // 取得总列数
 
-            if ($highestColumnIdx < 5 ) {
+            if ($highestColumnIdx < 6 ) {
                 $this->ShowMsg("操作失败: " . "快递价格字段数不够".$highestColumn."  ".$highestColumnIdx."   ".$highestRow);
             }
-            $highestColumnIdx = 5;
+            $highestColumnIdx = 6;
 			
             $priceObj = new m_pricefreight();
 			
@@ -291,6 +297,7 @@ class c_price extends base_c {
                         case 2: $data['m3'] = $value; break;
                         case 3: $data['kg'] = $value; break;
                         case 4: $data['t'] = $value; break;
+                        case 5: $data['duration'] = $value; break;
                     }
                 }
                 if (!$priceObj->create($data)) {
@@ -311,10 +318,10 @@ class c_price extends base_c {
 			//echo $highestColumn ;
             $highestColumnIdx = PHPExcel_Cell::columnIndexFromString($highestColumn); // 取得总列数
 
-            if ($highestColumnIdx < 7 ) {
+            if ($highestColumnIdx < 8 ) {
                 $this->ShowMsg("操作失败: " . "快递价格字段数不够".$highestColumn."  ".$highestColumnIdx."   ".$highestRow);
             }
-            $highestColumnIdx = 7;
+            $highestColumnIdx = 8;
 			
             $priceObj = new m_pricetrain();
 			
@@ -351,8 +358,9 @@ class c_price extends base_c {
                         case 2: $data['train_number'] = $value; break;
                         case 3: $data['min_price'] = $value; break;
                         case 4: $data['unit_price'] = $value; break;
-                        case 5: $data['begin_time'] = $value; break;
-                        case 6: $data['end_time'] = $value; break;
+						case 5: $data['duration'] = $value; break;
+                        case 6: $data['begin_time'] = $value; break;
+                        case 7: $data['end_time'] = $value; break;
                     }
                 }
                 if (!$priceObj->create($data)) {

@@ -30,6 +30,7 @@ class m_pricetrain extends base_m {
         $this->set("unit_price", $data['unit_price']);
         $this->set("begin_time", $data['begin_time']);
         $this->set("end_time", $data['end_time']);
+        $this->set("duration", $data['duration']);
 		        
         $rs = $this->save(false);
         if ($rs) {

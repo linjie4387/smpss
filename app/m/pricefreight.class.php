@@ -28,6 +28,7 @@ class m_pricefreight extends base_m {
         $this->set("m3", $data['m3']);
         $this->set("kg", $data['kg']);
         $this->set("t", $data['t']);
+        $this->set("duration", $data['duration']);
 		        
         $rs = $this->save(false);
         if ($rs) {

@@ -27,6 +27,7 @@ class m_priceexpress extends base_m {
 		$this->set("city_name", $data['city_name']);
         $this->set("first_weight", $data['first_weight']);
         $this->set("next_weight", $data['next_weight']);
+        $this->set("duration", $data['duration']);
 		
         $rs = $this->save(false);
 		//var_dump(json_encode($this));

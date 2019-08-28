@@ -126,12 +126,12 @@
 <file name="unsendorder.class.php" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131430232993420000" remote="131430232990000000" Dst="0" />
 <file name="uploadlog.class.php" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131436125753616009" remote="131436125750000000" Dst="0" />
 <file name="weichatuser.class.php" server="114.55.27.112//data1/sci/apps/websites/jchx/smpss/" local="131436125753626009" remote="131436125750000000" Dst="0" />
-<file name="priceair.class.php" server="114.55.27.112//root/websites/test/smpss/" local="132072428561130684" remote="132072429130000000" Dst="0" />
-<file name="priceexpress.class.php" server="114.55.27.112//root/websites/test/smpss/" local="132072428809462264" remote="132072429130000000" Dst="0" />
-<file name="pricefreight.class.php" server="114.55.27.112//root/websites/test/smpss/" local="132072428869696044" remote="132072429130000000" Dst="0" />
+<file name="priceair.class.php" server="114.55.27.112//root/websites/test/smpss/" local="132075429833560048" remote="132075431150000000" Dst="0" />
+<file name="priceexpress.class.php" server="114.55.27.112//root/websites/test/smpss/" local="132075429955783848" remote="132075431180000000" Dst="0" />
+<file name="pricefreight.class.php" server="114.55.27.112//root/websites/test/smpss/" local="132075430110039739" remote="132075431210000000" Dst="0" />
 <file name="pricemodels.class.php" server="114.55.27.112//root/websites/test/smpss/" local="132072428921991074" remote="132072429130000000" Dst="0" />
 <file name="pricemeta.class.php" server="114.55.27.112//root/websites/test/smpss/" local="132072201898955990" remote="132072218560000000" Dst="0" />
-<file name="pricetrain.class.php" server="114.55.27.112//root/websites/test/smpss/" local="132072428971184197" remote="132072429140000000" Dst="0" />
+<file name="pricetrain.class.php" server="114.55.27.112//root/websites/test/smpss/" local="132075430235102260" remote="132075431240000000" Dst="0" />
 <file name="region.class.php" server="114.55.27.112//root/websites/test/smpss/" local="132072238419298288" remote="132072238460000000" Dst="0" />
-<file name="priceregion.class.php" server="114.55.27.112//root/websites/test/smpss/" local="132072482186318503" remote="132072482270000000" Dst="0" />
+<file name="priceregion.class.php" server="114.55.27.112//root/websites/test/smpss/" local="132075438158201478" remote="132075438410000000" Dst="0" />
 </dwsync>

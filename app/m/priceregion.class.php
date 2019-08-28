@@ -60,6 +60,40 @@ class m_priceregion extends base_m {
     }
 	
     public function createProvince($region_name, $with_log = NULL) {
+		
+		$regionsort["北京"]=1;
+		$regionsort["重庆"]=2;
+		$regionsort["上海"]=3;
+		$regionsort["天津"]=4;
+		$regionsort["安徽"]=5;
+		$regionsort["福建"]=6;
+		$regionsort["广东"]=7;
+		$regionsort["甘肃"]=8;
+		$regionsort["广西"]=9;
+		$regionsort["贵州"]=10;
+		$regionsort["湖北"]=11;
+		$regionsort["河北"]=12;
+		$regionsort["黑龙江"]=13;
+		$regionsort["海南"]=14;
+		$regionsort["河南"]=15;
+		$regionsort["湖南"]=16;
+		$regionsort["吉林"]=17;
+		$regionsort["江苏"]=18;
+		$regionsort["江西"]=19;
+		$regionsort["辽宁"]=20;
+		$regionsort["宁夏"]=21;
+		$regionsort["内蒙古"]=22;
+		$regionsort["青海"]=23;
+		$regionsort["四川"]=24;
+		$regionsort["山东"]=25;
+		$regionsort["山西"]=26;
+		$regionsort["陕西"]=27;
+		$regionsort["新疆"]=28;
+		$regionsort["西藏"]=29;
+		$regionsort["香港"]=30;
+		$regionsort["云南"]=31;
+		$regionsort["浙江"]=32;
+		
         if (!$region_name) {
             $this->setError (0, "缺少省份名称");
             return false;
@@ -71,10 +105,11 @@ class m_priceregion extends base_m {
 			return true;
 		}
 		
-		$sort='100';
+		
+		$sort=$regionsort[$region_name];
 		$all='0';
-		if($region_name=='香港' || $region_name=='澳门'){
-			$sort='101';
+		if(empty($sort)){
+			$sort='99';
 		}
 				                
         $this->set("region_name", $region_name);
@@ -108,9 +143,6 @@ class m_priceregion extends base_m {
 		
 		$sort='100';
 		$all='0';
-		if($region_name=='香港' || $region_name=='澳门' || $region_name=='香港全境' || $region_name=='澳门全境'){
-			$sort='101';
-		}
 		
 		if(strpos($region_name,'全境')!=false){
 			$sort='99';

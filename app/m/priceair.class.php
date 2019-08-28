@@ -30,6 +30,7 @@ class m_priceair extends base_m {
         $this->set("col3", $data['col3']);
         $this->set("col4", $data['col4']);
         $this->set("col5", $data['col5']);
+        $this->set("duration", $data['duration']);
 		
         $rs = $this->save(false);
 		
